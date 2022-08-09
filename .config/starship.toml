@@ -1,0 +1,82 @@
+add_newline = false
+
+format = """
+$time\
+$username\
+$directory\
+$git_branch\
+$git_state\
+$git_metrics\
+$git_status\
+$docker_context\
+$elm\
+$nodejs\
+$rust\
+$custom\
+$python\
+$conda\
+$cmd_duration\
+$line_break\
+$character"""
+
+[time]
+disabled = true
+format = "[$time]($style) [❯](bright-red) "
+style = "bold bright-yellow"
+time_format = "%H:%M"
+
+[username]
+format = "[$user]($style) [❯](bright-red) "
+style_user = "bold bright-green"
+show_always = true
+
+[directory]
+style = "bold blue"
+truncation_length = 3
+truncation_symbol = ".../"
+read_only = " ro"
+read_only_style	= "bright-red"
+
+[git_branch]
+format = "[❯](bright-red) [$branch]($style) "
+style = "bold fg:#C678DD"
+
+[git_status]
+style = "bold fg:#D19A66"
+
+[git_metrics]
+disabled = false
+
+[docker_context]
+format = "[❯](bright-red) [$context]($style) "
+
+[nodejs]
+format = "[❯](bright-red) [($version )]($style)"
+version_format = "${raw}"
+
+[python]
+format = "[❯](bright-red) [(${version}) ]($style)$conda"
+style = "bold bright-green"
+version_format = "${raw}"
+
+[rust]
+format = '[❯](bright-red) [$symbol]($style)'
+symbol = "rust"
+style = "bold fg:#ff8800"
+
+[conda]
+format = '[\($environment\)]($style) '
+style = "bold bright-green"
+
+[custom.haskell]
+files = ["stack.yaml"]
+format = "[❯](bright-red) [haskell](bold purple) "
+
+[cmd_duration]
+format = "[❯](bright-red) [$duration]($style) "
+style = "bold bright-yellow"
+min_time = 1_000
+
+[character]
+success_symbol = "[❯❯](bold bright-blue)"
+error_symbol = "[❯❯](bold red)"
