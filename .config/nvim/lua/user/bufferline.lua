@@ -9,7 +9,7 @@ bufferline.setup({
     right_mouse_command  = nil,
     left_mouse_command   = nil,
     middle_mouse_command = nil,
-    indicator_icon = "▎",
+    indicator = { icon = "▎" },
     modified_icon = "",
     max_name_length = 18,
     max_prefix_length = 6,
@@ -33,50 +33,50 @@ bufferline.setup({
   },
   highlights = {
 		fill = {
-			guibg = { attribute = "bg", highlight = "lualine_c_normal" },
+			bg = { attribute = "bg", highlight = "lualine_c_normal" },
 		},
 		background = {
-			guibg = { attribute = "bg", highlight = "lualine_c_normal" },
+			bg = { attribute = "bg", highlight = "lualine_c_normal" },
 		},
     tab_selected = {
-			guifg = { attribute = "fg", highlight = "Function" },
+			fg = { attribute = "fg", highlight = "Function" },
 		},
 
 		buffer_selected = {
-			guibg = { attribute = "bg", highlight = "lualine_b_normal" },
-			guifg = { attribute = "fg", highlight = "Function" },
-			gui = "bold"
+			bg = { attribute = "bg", highlight = "lualine_b_normal" },
+			fg = { attribute = "fg", highlight = "Function" },
+			bold = true
 		},
     indicator_selected = {
-			guibg = { attribute = "bg", highlight = "lualine_b_normal" },
-			guifg = { attribute = "fg", highlight = "Function" },
+			bg = { attribute = "bg", highlight = "lualine_b_normal" },
+			fg = { attribute = "fg", highlight = "Function" },
     },
     modified_selected = {
-			guibg = { attribute = "bg", highlight = "lualine_b_normal" },
-      guifg = { attribute = "fg", highlight = "Type" },
+			bg = { attribute = "bg", highlight = "lualine_b_normal" },
+      fg = { attribute = "fg", highlight = "Type" },
     },
 
 		buffer_visible = {
-			guibg = { attribute = "bg", highlight = "lualine_c_normal" },
+			bg = { attribute = "bg", highlight = "lualine_c_normal" },
 		},
 		indicator_visible = {
-			guibg = { attribute = "bg", highlight = "lualine_c_normal" },
+			bg = { attribute = "bg", highlight = "lualine_c_normal" },
 		},
     modified_visible = {
-			guibg = { attribute = "bg", highlight = "lualine_c_normal" },
-      guifg = { attribute = "fg", highlight = "Type" },
+			bg = { attribute = "bg", highlight = "lualine_c_normal" },
+      fg = { attribute = "fg", highlight = "Type" },
     },
 
     modified = {
-			guibg = { attribute = "bg", highlight = "lualine_c_normal" },
-      guifg = { attribute = "fg", highlight = "Type" },
+			bg = { attribute = "bg", highlight = "lualine_c_normal" },
+      fg = { attribute = "fg", highlight = "Type" },
     },
 
     separator = {
-			guibg = { attribute = "bg", highlight = "lualine_c_normal" },
+			bg = { attribute = "bg", highlight = "lualine_c_normal" },
     },
     separator_selected = {
-			guibg = { attribute = "bg", highlight = "lualine_c_normal" },
+			bg = { attribute = "bg", highlight = "lualine_c_normal" },
     },
   },
 })

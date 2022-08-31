@@ -60,9 +60,8 @@ style = "bold bright-green"
 version_format = "${raw}"
 
 [rust]
-format = '[❯](bright-red) [$symbol]($style)'
-symbol = "rust"
-style = "bold fg:#ff8800"
+format = '[❯](bright-red) [$symbol($version )]($style)'
+style = "bold fg:#e07000"
 
 [conda]
 format = '[\($environment\)]($style) '
