@@ -43,7 +43,3 @@ telescope:
 
 bufferline:
 	- <leader>b sort buffers
-
-copilot:
-	- <leader>co toggle copilot
-	- <leader>cp copilot panel

@@ -113,13 +113,6 @@ return require("packer").startup(
 		-- project
 		use "ahmedkhalf/project.nvim"
 
-		-- copilot
-		use {
-			"github/copilot.vim",
-			opt = true,
-			cmd = { "Copilot" }
-		}
-
 		if packer_bootstrap then
 			require("packer").sync()
 		end

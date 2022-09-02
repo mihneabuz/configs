@@ -93,22 +93,5 @@ keymap("n", "<leader>b", ":BufferLineSortByExtension<CR>", silent)
 keymap("n", "<S-l>", ":BufferLineCycleNext<CR>", silent)
 keymap("n", "<S-h>", ":BufferLineCyclePrev<CR>", silent)
 
--- copilot
-local active = false
-local copilot = function()
-	if active then
-		vim.notify("copilot stoped")
-		vim.cmd("Copilot disable")
-		active = false
-	else
-		vim.notify("copilot started")
-		vim.cmd("Copilot enable")
-		active = true
-	end
-end
-command("ToggleCopilot", copilot, { nargs = 0 })
-
-keymap("n", "<leader>co", ":ToggleCopilot<CR>", silent)
-keymap("n", "<leader>cp", ":Copilot panel<CR>", silent)
 
 command("Keybinds", ":e ~/.config/nvim/keybinds", { nargs = 0 })

@@ -44,18 +44,20 @@ handlers.setup = function()
 end
 
 local function lsp_highlight_document(client)
-  if client.resolved_capabilities.document_highlight then
-    vim.api.nvim_exec(
-      [[
-      augroup lsp_document_highlight
-        autocmd! * <buffer>
-        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-      augroup END
-      ]],
-      false
-    )
-  end
+  local group = vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
+  vim.api.nvim_create_autocmd("CursorHold", {
+    callback = function()
+      if not client.is_stopped() then
+        vim.lsp.buf.document_highlight()
+      end
+    end,
+    group = group
+  })
+
+  vim.api.nvim_create_autocmd("CursorMoved", {
+    callback = vim.lsp.buf.clear_references,
+    group = group
+  })
 end
 
 local function lsp_keymaps(bufnr)
@@ -75,7 +77,7 @@ end
 
 handlers.on_attach = function(client, bufnr)
   lsp_keymaps(bufnr)
-  lsp_highlight_document(client)
+  --[[ lsp_highlight_document(client) ]]
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
