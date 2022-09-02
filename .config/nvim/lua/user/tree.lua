@@ -13,7 +13,7 @@ local tree_cb = config.nvim_tree_callback
 nvim_tree.setup({
 	disable_netrw = true,
 	view = {
-		width = 48,
+		width = 42,
 		mappings = {
 			custom_only = false,
 			list = {

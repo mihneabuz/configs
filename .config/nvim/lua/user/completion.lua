@@ -44,9 +44,7 @@ local kind_icons = {
 }
 
 local cmd_enabled = function()
-	-- disable completion in comments
-	local context = require 'cmp.config.context'
-	-- keep command mode completion enabled when cursor is in a comment
+	local context = require('cmp.config.context')
 	if vim.api.nvim_get_mode().mode == 'c' then
 		return true
 	else
@@ -81,6 +79,21 @@ if success_lspkind then
 			return vim_item
 		end
 	})
+end
+
+local types = require('cmp.types')
+local compare_kind = function(entry1, entry2)
+  local kind1 = entry1:get_kind()
+  local kind2 = entry2:get_kind()
+  if kind1 ~= kind2 then
+    if kind1 == types.lsp.CompletionItemKind.Snippet then
+      return false
+    end
+
+    if kind2 == types.lsp.CompletionItemKind.Snippet then
+      return true
+    end
+  end
 end
 
 local cmp_options = {
@@ -154,6 +167,15 @@ local cmp_options = {
   experimental = {
     ghost_text = true,
     native_menu = false,
+  },
+
+  sorting = {
+    comparators = {
+      compare_kind,
+      cmp.config.compare.offset,
+      cmp.config.compare.exact,
+      cmp.config.compare.length,
+    },
   },
 }
 
