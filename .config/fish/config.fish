@@ -9,7 +9,7 @@ set SHELL "fish"
 set -x EDITOR "nvim"
 
 # alias
-alias vi="nvim --clean"
+alias vi="NVIM_CLEAN=1 nvim"
 alias vim="nvim"
 alias rr="ranger"
 
