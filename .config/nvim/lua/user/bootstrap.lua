@@ -95,7 +95,7 @@ return packer.startup(
       tag = "nightly",
       opt = true,
       cmd = { "NvimTreeToggle", "NvimTreeFocus" },
-      config = require "user.filetree"
+      config = function() require "user.filetree" end
     }
 
     -- git
@@ -116,7 +116,7 @@ return packer.startup(
       "nvim-telescope/telescope.nvim",
       opt = true,
       cmd = { "Telescope", "Cheatsheet" },
-      config = require "user.telescope"
+      config = function() require "user.telescope" end
     }
 
     -- terminal
@@ -125,7 +125,7 @@ return packer.startup(
       tag = "*",
       opt = true,
       cmd = { "ToggleTerm" },
-      config = require "user.terminal"
+      config = function() require "user.terminal" end
     }
 
     -- project
