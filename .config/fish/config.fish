@@ -13,6 +13,9 @@ alias vi="NVIM_CLEAN=1 nvim"
 alias vim="nvim"
 alias rr="ranger"
 
+alias gs="git status"
+alias gd="git diff"
+
 # colors
 set -Ux LSCOLORS ExFxdxdxCxagababagacax
 
