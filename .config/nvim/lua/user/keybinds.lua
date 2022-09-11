@@ -15,6 +15,10 @@ keymap("n", "<C-h>", "<C-w>h", silent)
 keymap("n", "<C-j>", "<C-w>j", silent)
 keymap("n", "<C-k>", "<C-w>k", silent)
 keymap("n", "<C-l>", "<C-w>l", silent)
+keymap('t', '<C-h>', "<Cmd>wincmd h<CR>", silent)
+keymap('t', '<C-j>', "<Cmd>wincmd j<CR>", silent)
+keymap('t', '<C-k>', "<Cmd>wincmd k<CR>", silent)
+keymap('t', '<C-l>', "<Cmd>wincmd l<CR>", silent)
 
 -- window resizing
 keymap("n", "<C-Up>", ":resize -2<CR>", silent)
@@ -31,8 +35,12 @@ keymap("n", "<leader>q", ":Bdelete<CR>", silent)
 -- close window
 keymap("n", "<leader>w", ":close<CR>", silent)
 
--- jk to leave insert mode
+-- jk to leave insert mode and terminal mode
 keymap("i", "jk", "<Esc>", silent)
+keymap("t", "jk", [[<C-\><C-n>]], silent)
+
+-- esc to leave terminal mode
+keymap("t", "<Esc>", [[<C-\><C-n>]], silent)
 
 -- clear highligh
 keymap("n", "<leader>h", ":noh<CR>", silent)
@@ -93,5 +101,12 @@ keymap("n", "<leader>b", ":BufferLineSortByExtension<CR>", silent)
 keymap("n", "<S-l>", ":BufferLineCycleNext<CR>", silent)
 keymap("n", "<S-h>", ":BufferLineCyclePrev<CR>", silent)
 
+-- terminal
+keymap("n", [[<C-\>]], "<Cmd>ToggleTerm direction=float<CR>", silent)
+keymap("t", [[<C-\>]], "<Cmd>ToggleTerm direction=float<CR>", silent)
+keymap("n", [[<C-]>]], "<Cmd>ToggleTerm size=16 direction=horizontal<CR>", silent)
+keymap("t", [[<C-]>]], "<Cmd>ToggleTerm size=16 direction=horizontal<CR>", silent)
+keymap("t", "ZZ", "<Cmd>:q<CR>", silent)
 
+-- keybinds help
 command("Keybinds", ":e ~/.config/nvim/keybinds", { nargs = 0 })

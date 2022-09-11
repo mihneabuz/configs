@@ -13,11 +13,8 @@ if not clean then
   require 'user.autopairs'
   require 'user.comment'
   require 'user.git'
-  require 'user.filetree'
   require 'user.lualine'
   require 'user.bufferline'
-  require 'user.terminal'
-  require 'user.telescope'
   require 'user.autocommands'
   require 'user.neovide'
 end

@@ -17,7 +17,7 @@ packer.init({
   }
 })
 
-return require("packer").startup(
+return packer.startup(
   function(use)
     -- packer
     use "wbthomason/packer.nvim"
@@ -92,7 +92,10 @@ return require("packer").startup(
     -- file tree
     use {
       "kyazdani42/nvim-tree.lua",
-      tag = "nightly"
+      tag = "nightly",
+      opt = true,
+      cmd = { "NvimTreeToggle", "NvimTreeFocus" },
+      config = require "user.filetree"
     }
 
     -- git
@@ -109,10 +112,21 @@ return require("packer").startup(
     use "nvim-lualine/lualine.nvim"
 
     -- telescpope
-    use "nvim-telescope/telescope.nvim"
+    use {
+      "nvim-telescope/telescope.nvim",
+      opt = true,
+      cmd = { "Telescope", "Cheatsheet" },
+      config = require "user.telescope"
+    }
 
     -- terminal
-    use { "akinsho/toggleterm.nvim", tag = "*" }
+    use {
+      "akinsho/toggleterm.nvim",
+      tag = "*",
+      opt = true,
+      cmd = { "ToggleTerm" },
+      config = require "user.terminal"
+    }
 
     -- project
     use "ahmedkhalf/project.nvim"

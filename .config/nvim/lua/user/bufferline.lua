@@ -11,7 +11,7 @@ bufferline.setup({
     middle_mouse_command = nil,
     indicator = { icon = "▎" },
     modified_icon = "",
-    max_name_length = 18,
+    max_name_length = 20,
     max_prefix_length = 6,
 		enforce_regular_tabs = false,
     diagnostics = false,

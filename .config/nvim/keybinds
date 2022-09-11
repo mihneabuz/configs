@@ -43,3 +43,7 @@ telescope:
 
 bufferline:
 	- <leader>b sort buffers
+
+terminal:
+  - <C-\> toggle float term
+  - <C-]> toggle bottom term
