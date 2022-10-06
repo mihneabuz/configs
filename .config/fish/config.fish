@@ -44,4 +44,6 @@ set fish_greeting ""
 # prompt
 starship init fish | source
 
+fish_add_path /home/mihnea/.local/bin
+fish_add_path /home/mihnea/.ghcup/bin
 fish_add_path /usr/lib/ruby/gems/3.0.0

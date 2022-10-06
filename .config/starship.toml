@@ -68,8 +68,11 @@ format = '[\($environment\)]($style) '
 style = "bold bright-green"
 
 [custom.haskell]
-files = ["stack.yaml"]
-format = "[❯](bright-red) [haskell](bold purple) "
+format = "[❯](bright-red) [$symbol($snapshot)]($style)"
+detect_files = ["stack.yaml"]
+detect_extensions	= ["hs"]
+symbol = "λ "
+style	= "bold purple"
 
 [cmd_duration]
 format = "[❯](bright-red) [$duration]($style) "

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-Targets="nvim ranger kitty fish starship.toml"
+Targets="nvim ranger kitty fish xmonad starship.toml"
 
 rm -rf .config
 

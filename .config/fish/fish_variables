@@ -34,7 +34,7 @@ SETUVAR fish_pager_color_description:c678dd
 SETUVAR fish_pager_color_prefix:cyan\x1e\x2d\x2ditalics
 SETUVAR fish_pager_color_progress:blue
 SETUVAR fish_pager_color_selected_background:\x2dr
-SETUVAR fish_user_paths:/usr/lib/ruby/gems/3\x2e0\x2e0\x1e/home/mihnea/\x2elocal/share/gem/ruby/3\x2e0\x2e0/bin\x1e/Users/metaminds/\x2elocal/bin
+SETUVAR fish_user_paths:/home/mihnea/\x2eghcup/bin\x1e/home/mihnea/\x2econfig/xmonad\x1e/home/mihnea/\x2elocal/bin\x1e/usr/lib/ruby/gems/3\x2e0\x2e0\x1e/home/mihnea/\x2elocal/share/gem/ruby/3\x2e0\x2e0/bin\x1e/Users/metaminds/\x2elocal/bin
 SETUVAR tide_character_bg_color:normal
 SETUVAR tide_character_color:brgreen
 SETUVAR tide_character_color_failure:brred
