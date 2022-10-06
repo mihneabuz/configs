@@ -1,0 +1,13 @@
+name: xmonad-config
+version: 0.1.0
+
+ghc-options: -funfolding-use-threshold=16 -O2 -optc-O3
+
+dependencies:
+  - base
+  - xmonad
+  - xmonad-contrib
+
+executables:
+  xmonad:
+    main: xmonad.hs
