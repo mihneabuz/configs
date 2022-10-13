@@ -16,6 +16,8 @@ alias rr="ranger"
 alias gs="git status"
 alias gd="git diff"
 
+alias venv="python -m venv"
+
 # colors
 set -Ux LSCOLORS ExFxdxdxCxagababagacax
 

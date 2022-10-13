@@ -14,7 +14,6 @@ $nodejs\
 $rust\
 $custom\
 $python\
-$conda\
 $cmd_duration\
 $line_break\
 $character"""
@@ -55,17 +54,14 @@ format = "[❯](bright-red) [($version )]($style)"
 version_format = "${raw}"
 
 [python]
-format = "[❯](bright-red) [(${version}) ]($style)$conda"
+format = "[❯](bright-red) [${symbol}${version} ]($style)"
+symbol = " "
 style = "bold bright-green"
 version_format = "${raw}"
 
 [rust]
 format = '[❯](bright-red) [$symbol($version )]($style)'
 style = "bold fg:#e07000"
-
-[conda]
-format = '[\($environment\)]($style) '
-style = "bold bright-green"
 
 [custom.haskell]
 format = "[❯](bright-red) [$symbol($snapshot)]($style)"
