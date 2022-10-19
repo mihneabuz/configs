@@ -9,6 +9,8 @@ set SHELL "fish"
 set -x EDITOR "nvim"
 
 # alias
+alias ls="ls --group-directories-first"
+
 alias vi="NVIM_CLEAN=1 nvim"
 alias vim="nvim"
 alias rr="ranger"
@@ -17,6 +19,9 @@ alias gs="git status"
 alias gd="git diff"
 
 alias venv="python -m venv"
+
+# ls additions
+source ~/.config/fish/ls.fish
 
 # colors
 set -Ux LSCOLORS ExFxdxdxCxagababagacax
