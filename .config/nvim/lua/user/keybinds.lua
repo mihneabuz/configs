@@ -80,7 +80,7 @@ keymap("n", "<leader>o", ":NvimTreeToggle<CR>", silent)
 keymap("n", "<leader>e", ":NvimTreeFocus<CR>", silent)
 
 -- formatting
-keymap("n", "<leader>f", ":lua vim.lsp.buf.formatting_sync()<CR>", silent)
+keymap("n", "<leader>f", ":lua vim.lsp.buf.format()<CR>", silent)
 
 -- code actions
 keymap("n", "<leader>ca", ":CodeActionMenu<CR>", silent)
