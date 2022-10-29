@@ -6,10 +6,10 @@ npm
 python
 neovim
 neovide
-ranger
 fish
 starship
 kitty
 ruby
 stack
-rust
+rustup
+lf
