@@ -108,5 +108,17 @@ keymap("n", [[<C-]>]], "<Cmd>ToggleTerm size=16 direction=horizontal<CR>", silen
 keymap("t", [[<C-]>]], "<Cmd>ToggleTerm size=16 direction=horizontal<CR>", silent)
 keymap("t", "ZZ", "<Cmd>:q<CR>", silent)
 
+-- tab size
+local function long_tab()
+  vim.opt.tabstop = 4
+  vim.opt.shiftwidth = 4
+end
+local function short_tab()
+  vim.opt.tabstop = 2
+  vim.opt.shiftwidth = 2
+end
+command("TabLong", long_tab, { nargs = 0 })
+command("TabShort", short_tab, { nargs = 0 })
+
 -- keybinds help
 command("Keybinds", ":e ~/.config/nvim/keybinds", { nargs = 0 })
