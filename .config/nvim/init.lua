@@ -9,6 +9,7 @@ if not clean then
   require 'user.misc'
   require 'user.completion'
   require 'user.lsp'
+  require 'user.debugger'
   require 'user.treesitter'
   require 'user.autopairs'
   require 'user.comment'

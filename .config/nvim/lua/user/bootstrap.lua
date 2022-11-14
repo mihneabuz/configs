@@ -34,6 +34,7 @@ return packer.startup(
     -- mason
     use "williamboman/mason.nvim"
     use "williamboman/mason-lspconfig.nvim"
+    use "jayp0521/mason-nvim-dap.nvim"
 
     -- general
     use "kyazdani42/nvim-web-devicons"
@@ -102,6 +103,10 @@ return packer.startup(
       cmd = { "TestNearest", "TestSuite", "TestFile" },
       config = function() require "user.tests" end
     }
+
+    -- debugging
+    use "mfussenegger/nvim-dap"
+    use "rcarriga/nvim-dap-ui"
 
     -- file tree
     use {
