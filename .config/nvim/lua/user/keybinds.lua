@@ -126,4 +126,4 @@ command("TabLong", long_tab, { nargs = 0 })
 command("TabShort", short_tab, { nargs = 0 })
 
 -- keybinds help
-command("Keybinds", ":e ~/.config/nvim/keybinds", { nargs = 0 })
+command("Keybinds", ":view ~/.config/nvim/keybinds", { nargs = 0 })

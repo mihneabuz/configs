@@ -22,14 +22,18 @@ return packer.startup(
     -- packer
     use "wbthomason/packer.nvim"
 
+    -- impacient
+    use "lewis6991/impatient.nvim"
+
     -- dependencies
     use "antoinemadec/FixCursorHold.nvim"
     use "winston0410/cmd-parser.nvim"
     use "nvim-lua/popup.nvim"
     use "nvim-lua/plenary.nvim"
 
-    -- impacient
-    use "lewis6991/impatient.nvim"
+    -- mason
+    use "williamboman/mason.nvim"
+    use "williamboman/mason-lspconfig.nvim"
 
     -- general
     use "kyazdani42/nvim-web-devicons"
@@ -69,7 +73,6 @@ return packer.startup(
     -- lsp
     use "neovim/nvim-lspconfig"
     use "jose-elias-alvarez/null-ls.nvim"
-    use "williamboman/nvim-lsp-installer"
     use "kosayoda/nvim-lightbulb"
     use "ray-x/lsp_signature.nvim"
     use "onsails/lspkind.nvim"
@@ -88,6 +91,9 @@ return packer.startup(
       cmd = { "Trouble", "TroubleToggle" },
       config = function() require('trouble').setup() end
     }
+
+    -- language specific
+    use "simrat39/rust-tools.nvim"
 
     -- tests
     use {

@@ -28,9 +28,10 @@ dashboard.section.buttons.val = {
     dashboard.button("f", "    Find file", ":Telescope find_files<CR>"),
     dashboard.button("r", "    Recent"   , ":Telescope oldfiles<CR>"),
     dashboard.button("p", "    Projects" , ":Telescope projects<CR>"),
-    dashboard.button("s", "    Settings" , ":e $MYVIMRC | :cd %:p:h | split . | wincmd k | pwd<CR>"),
+    dashboard.button("s", "    Settings" , ":e $MYVIMRC<CR>"),
+    dashboard.button("k", "    Keybinds" , ":Keybinds<CR>"),
     dashboard.button("u", "    Update"   , ":PackerSync<CR>"),
-    dashboard.button("q", "    Quit", ":qa<CR>"),
+    dashboard.button("q", "    Quit"     , ":qa<CR>"),
 }
 
 alpha.setup(dashboard.opts)

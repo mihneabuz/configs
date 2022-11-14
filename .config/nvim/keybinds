@@ -32,6 +32,7 @@ lsp:
 	- <leader>d diagnostics
 	- <leader>f format
 	- <leader>ca coda action
+  - <leader>cl code lens
 
 tests:
   - <leader>A run all tests

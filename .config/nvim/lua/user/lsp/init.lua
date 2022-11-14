@@ -1,31 +1,59 @@
-local success_lsp, _ = pcall(require, "lspconfig")
+local success_lsp, lspconfig = pcall(require, "lspconfig")
 if not success_lsp then
   return
 end
 
-local success_signature, signature = pcall(require, "lsp_signature")
-if success_signature then
-  signature.setup({
-    hint_enable = false,
-    doc_lines = 0,
-    transparency = 10,
-    timer_interval = 300,
-    handler_opts = { border = "rounded" }
-  })
+local success_mason, mason = pcall(require, "mason")
+if not success_mason then
+  return
 end
 
-local success_lightbulb, lightbulb = pcall(require, "nvim-lightbulb")
-if success_lightbulb then
-  lightbulb.setup({
-    ignore = { "null-ls" },
-    autocmd = { enabled = true },
-    sign = {
-      enabled = true,
-      priority = 50
+mason.setup()
+
+local success_mason_lsp, mason_lsp = pcall(require, "mason-lspconfig")
+if not success_mason_lsp then
+  return
+end
+
+mason_lsp.setup({
+  ensure_installed = { "sumneko_lua", "rust_analyzer", "gopls", "tsserver" },
+  automatic_installation = true,
+})
+
+mason_lsp.setup_handlers({
+  function(server_name)
+    local opts = {
+      on_attach = require("user.lsp.handlers").on_attach,
+      capabilities = require("user.lsp.handlers").capabilities,
     }
-  })
-end
 
-require("user.lsp.lsp-installer")
+    if server_name == "jsonls" then
+      local jsonls_opts = require("user.lsp.settings.jsonls")
+      opts = vim.tbl_deep_extend("force", jsonls_opts, opts)
+    end
+
+    if server_name == "sumneko_lua" then
+      local sumneko_opts = require("user.lsp.settings.sumneko")
+      opts = vim.tbl_deep_extend("force", sumneko_opts, opts)
+    end
+
+    if server_name == "rust_analyzer" then
+      local success, rt = pcall(require, "rust-tools")
+      if success then
+        return rt.setup({
+          tools = {
+            runnables = { use_telescope = true },
+            inlay_hints = { only_current_line = true },
+          },
+          server = opts
+        })
+      end
+    end
+
+    lspconfig[server_name].setup(opts)
+  end,
+})
+
 require("user.lsp.null-ls")
 require("user.lsp.handlers").setup()
+require("user.lsp.misc")

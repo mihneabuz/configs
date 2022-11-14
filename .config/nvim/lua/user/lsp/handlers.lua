@@ -53,6 +53,7 @@ local function lsp_keymaps(bufnr)
   keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
   keymap(bufnr, "n", "[d", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
   keymap(bufnr, "n", "]d", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
+  keymap(bufnr, "n", "<leader>cl", '<cmd>lua vim.lsp.codelens.run() vim.lsp.codelens.refresh()<CR>', opts)
   keymap(bufnr, "n", "<leader>d", ":Trouble<CR>", opts)
 end
 
