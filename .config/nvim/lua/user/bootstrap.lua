@@ -49,6 +49,10 @@ return packer.startup(
     use "numToStr/Comment.nvim"
     use "JoosepAlviste/nvim-ts-context-commentstring"
 
+    -- treesitter
+    use "nvim-treesitter/nvim-treesitter"
+    use "nvim-treesitter/nvim-treesitter-refactor"
+
     -- completion
     use "hrsh7th/nvim-cmp" -- completion plugin
     use "hrsh7th/cmp-buffer" -- buffer completions
@@ -85,9 +89,13 @@ return packer.startup(
       config = function() require('trouble').setup() end
     }
 
-    -- treesitter
-    use "nvim-treesitter/nvim-treesitter"
-    use "nvim-treesitter/nvim-treesitter-refactor"
+    -- tests
+    use {
+      "klen/nvim-test",
+      opt = false,
+      cmd = { "TestNearest", "TestSuite", "TestFile" },
+      config = function() require "user.tests" end
+    }
 
     -- file tree
     use {
@@ -130,6 +138,9 @@ return packer.startup(
 
     -- project
     use "ahmedkhalf/project.nvim"
+
+    -- dashboard
+    use 'goolord/alpha-nvim'
 
     if packer_bootstrap then
       require("packer").sync()

@@ -16,5 +16,6 @@ if not clean then
   require 'user.lualine'
   require 'user.bufferline'
   require 'user.autocommands'
+  require 'user.dashboard'
   require 'user.neovide'
 end

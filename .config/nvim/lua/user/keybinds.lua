@@ -85,6 +85,11 @@ keymap("n", "<leader>f", ":lua vim.lsp.buf.format()<CR>", silent)
 -- code actions
 keymap("n", "<leader>ca", ":CodeActionMenu<CR>", silent)
 
+-- testing
+keymap("n", "<leader>A", ":TestSuite<CR>", silent)
+keymap("n", "<leader>F", ":TestFile<CR>", silent)
+keymap("n", "<leader>T", ":TestNearest<CR>", silent)
+
 -- fold cycle
 keymap("n", "zz", ":lua require('fold-cycle').toggle_all()<CR>", silent)
 

@@ -33,6 +33,11 @@ lsp:
 	- <leader>f format
 	- <leader>ca coda action
 
+tests:
+  - <leader>A run all tests
+  - <leader>F run all tests in file
+  - <leader>T run closest test
+
 telescope:
 	- <leader>tt Telescope
 	- <leader>tf Telescope files

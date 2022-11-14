@@ -12,6 +12,12 @@ local tree_cb = config.nvim_tree_callback
 
 nvim_tree.setup({
 	disable_netrw = true,
+  sync_root_with_cwd = true,
+  respect_buf_cwd = true,
+  update_focused_file = {
+    enable = true,
+    update_root = true
+  },
 	view = {
 		width = 42,
 		mappings = {
