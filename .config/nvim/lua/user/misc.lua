@@ -32,6 +32,10 @@ end
 local scroll_ok, scroll = pcall(require, "neoscroll")
 if scroll_ok then
 	scroll.setup()
+  require('neoscroll.config').set_mappings({
+    ['<C-u>'] = {'scroll', {'-vim.wo.scroll', 'true', '80'}},
+    ['<C-d>'] = {'scroll', { 'vim.wo.scroll', 'true', '80'}}
+  })
 end
 
 local fold_ok, fold_cycle = pcall(require, "fold-cycle")

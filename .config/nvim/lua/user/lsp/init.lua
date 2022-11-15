@@ -16,7 +16,7 @@ if not success_mason_lsp then
 end
 
 mason_lsp.setup({
-  ensure_installed = { "sumneko_lua", "rust_analyzer", "gopls", "tsserver", "pyright" },
+  ensure_installed = { "sumneko_lua", "jsonls", "rust_analyzer", "gopls", "tsserver", "pyright", "clangd" },
   automatic_installation = true,
 })
 

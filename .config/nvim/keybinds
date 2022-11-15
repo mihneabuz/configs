@@ -34,6 +34,10 @@ lsp:
 	- <leader>ca coda action
   - <leader>cl code lens
 
+dap:
+  - <leader>B toggle breakpoint
+  - <leader>D run debugger
+
 tests:
   - <leader>A run all tests
   - <leader>F run all tests in file

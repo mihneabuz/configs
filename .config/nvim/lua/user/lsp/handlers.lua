@@ -41,7 +41,7 @@ handlers.setup = function()
   })
 end
 
-local function lsp_keymaps(bufnr)
+handlers.on_attach = function(_, bufnr)
   local opts = { noremap = true, silent = true }
   local keymap = vim.api.nvim_buf_set_keymap
   keymap(bufnr, "n", "K",  "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
@@ -53,12 +53,10 @@ local function lsp_keymaps(bufnr)
   keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
   keymap(bufnr, "n", "[d", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
   keymap(bufnr, "n", "]d", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
+  keymap(bufnr, "n", "<leader>f", ":lua vim.lsp.buf.format()<CR>", opts)
+  keymap(bufnr, "n", "<leader>ca", ":CodeActionMenu<CR>", opts)
   keymap(bufnr, "n", "<leader>cl", '<cmd>lua vim.lsp.codelens.run() vim.lsp.codelens.refresh()<CR>', opts)
   keymap(bufnr, "n", "<leader>d", ":Trouble<CR>", opts)
-end
-
-handlers.on_attach = function(client, bufnr)
-  lsp_keymaps(bufnr)
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()

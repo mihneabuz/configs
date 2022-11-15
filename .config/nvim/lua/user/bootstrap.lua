@@ -82,7 +82,7 @@ return packer.startup(
       opt = true,
       cmd = { "CodeActionMenu" },
       config = function()
-        vim.g.code_action_menu_window_border = 'rounded'
+        vim.g.code_action_menu_window_border = "rounded"
         vim.g.code_action_menu_show_details = false
       end
     }
@@ -90,7 +90,7 @@ return packer.startup(
       "folke/trouble.nvim",
       opt = true,
       cmd = { "Trouble", "TroubleToggle" },
-      config = function() require('trouble').setup() end
+      config = function() require("trouble").setup() end
     }
 
     -- language specific
@@ -151,7 +151,7 @@ return packer.startup(
     use "ahmedkhalf/project.nvim"
 
     -- dashboard
-    use 'goolord/alpha-nvim'
+    use "goolord/alpha-nvim"
 
     if packer_bootstrap then
       require("packer").sync()

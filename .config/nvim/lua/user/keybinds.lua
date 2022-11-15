@@ -10,6 +10,8 @@ vim.g.maplocalleader = " "
 keymap("n", ";", ":", { noremap = true })
 keymap("n", ":", ";", { noremap = true })
 
+keymap("n", "q", ":q<CR>", silent)
+
 -- window navigation
 keymap("n", "<C-h>", "<C-w>h", silent)
 keymap("n", "<C-j>", "<C-w>j", silent)
@@ -81,12 +83,6 @@ keymap("n", "<leader>e", ":NvimTreeFocus<CR>", silent)
 
 -- mason
 keymap("n", "<leader>m", ":Mason<CR>", silent)
-
--- formatting
-keymap("n", "<leader>f", ":lua vim.lsp.buf.format()<CR>", silent)
-
--- code actions
-keymap("n", "<leader>ca", ":CodeActionMenu<CR>", silent)
 
 -- testing
 keymap("n", "<leader>A", ":TestSuite<CR>", silent)
