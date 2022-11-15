@@ -79,6 +79,9 @@ keymap("n", "<leader>r", ":ToggleRelative<CR>", silent)
 keymap("n", "<leader>o", ":NvimTreeToggle<CR>", silent)
 keymap("n", "<leader>e", ":NvimTreeFocus<CR>", silent)
 
+-- mason
+keymap("n", "<leader>m", ":Mason<CR>", silent)
+
 -- formatting
 keymap("n", "<leader>f", ":lua vim.lsp.buf.format()<CR>", silent)
 

@@ -9,6 +9,7 @@ if not success_mason then
 end
 
 mason.setup()
+local mason_path = vim.fn.glob(vim.fn.stdpath("data") .. "/mason/packages/codelldb/extension/")
 
 local success_mason_lsp, mason_lsp = pcall(require, "mason-lspconfig")
 if not success_mason_lsp then
@@ -16,7 +17,7 @@ if not success_mason_lsp then
 end
 
 mason_lsp.setup({
-  ensure_installed = { "sumneko_lua", "rust_analyzer", "gopls", "tsserver" },
+  ensure_installed = { "sumneko_lua", "rust_analyzer", "gopls", "tsserver", "pyright" },
   automatic_installation = true,
 })
 
@@ -40,12 +41,19 @@ mason_lsp.setup_handlers({
     if server_name == "rust_analyzer" then
       local success, rt = pcall(require, "rust-tools")
       if success then
+        local codelldb_path = mason_path .. "adapter/codelldb"
+        local liblldb_path = mason_path .. "lldb/lib/liblldb.so"
+        local dap_adapter = false
+        if vim.fn.filereadable(codelldb_path) and vim.fn.filereadable(liblldb_path) then
+          dap_adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path)
+        end
         return rt.setup({
           tools = {
             runnables = { use_telescope = true },
             inlay_hints = { only_current_line = true },
           },
-          server = opts
+          server = opts,
+          dap = { adapter = dap_adapter }
         })
       end
     end

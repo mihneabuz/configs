@@ -30,6 +30,7 @@ dashboard.section.buttons.val = {
     dashboard.button("p", "    Projects" , ":Telescope projects<CR>"),
     dashboard.button("s", "    Settings" , ":e $MYVIMRC<CR>"),
     dashboard.button("k", "    Keybinds" , ":Keybinds<CR>"),
+    dashboard.button("m", "    Mason"    , ":Mason<CR>"),
     dashboard.button("u", "    Update"   , ":PackerSync<CR>"),
     dashboard.button("q", "    Quit"     , ":qa<CR>"),
 }

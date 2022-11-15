@@ -53,3 +53,6 @@ bufferline:
 terminal:
   - <C-\> toggle float term
   - <C-]> toggle bottom term
+
+mason:
+  - <leader>m open mason
