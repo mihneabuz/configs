@@ -1,6 +1,6 @@
 #!/bin/bash
 
-Targets="lf nvim kitty fish hypr starship.toml"
+Targets="lf nvim kitty fish hypr nemo starship.toml"
 
 rm -rf .config
 
