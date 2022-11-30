@@ -1,3 +1,18 @@
 #!/bin/bash
 
-yay -S hyprland-git waybar-hyprland-git gdm polkit polkit-gnome hyprpaper-git wofi kitty nemo firefox-nightly-bin gdm-settings libadwaita adwaita-qt5 adwaita-qt6
+yay -S hyprland-git \
+  waybar-hyprland-git \
+  hyprpaper-git \
+  gdm \
+  gdm-settings \
+  polkit \
+  polkit-gnome \
+  wofi \
+  kitty \
+  neovide-git \
+  nemo \
+  firefox-nightly-bin \
+  ttf-ubuntu-font-family \
+  nerd-fonts-cascadia-code \
+  noto-fonts-emoji \
+  wl-clipboard
