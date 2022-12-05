@@ -26,6 +26,7 @@ dashboard.section.header.val = {
 dashboard.section.buttons.val = {
     dashboard.button("e", "    New file" , ":ene<CR>"),
     dashboard.button("f", "    Find file", ":Telescope find_files<CR>"),
+    dashboard.button("t", "פּ    File Tree", ":ene<CR>:NvimTreeOpen<CR>"),
     dashboard.button("r", "    Recent"   , ":Telescope oldfiles<CR>"),
     dashboard.button("p", "    Projects" , ":Telescope projects<CR>"),
     dashboard.button("s", "    Settings" , ":e $MYVIMRC<CR>"),

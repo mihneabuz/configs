@@ -113,7 +113,7 @@ return packer.startup(
       "kyazdani42/nvim-tree.lua",
       tag = "nightly",
       opt = true,
-      cmd = { "NvimTreeToggle", "NvimTreeFocus" },
+      cmd = { "NvimTreeToggle", "NvimTreeFocus", "NvimTreeOpen" },
       config = function() require "user.filetree" end
     }
 
