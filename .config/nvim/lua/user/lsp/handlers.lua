@@ -53,10 +53,6 @@ handlers.on_attach = function(_, bufnr)
   keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
   keymap(bufnr, "n", "[d", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
   keymap(bufnr, "n", "]d", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
-  keymap(bufnr, "n", "<leader>f", ":lua vim.lsp.buf.format()<CR>", opts)
-  keymap(bufnr, "n", "<leader>ca", ":CodeActionMenu<CR>", opts)
-  keymap(bufnr, "n", "<leader>cl", '<cmd>lua vim.lsp.codelens.run() vim.lsp.codelens.refresh()<CR>', opts)
-  keymap(bufnr, "n", "<leader>d", ":Trouble<CR>", opts)
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()

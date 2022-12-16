@@ -124,5 +124,12 @@ end
 command("TabLong", long_tab, { nargs = 0 })
 command("TabShort", short_tab, { nargs = 0 })
 
+-- lsp options that are also available with null-ls
+keymap("n", "<leader>f", ":lua vim.lsp.buf.format()<CR>", silent)
+keymap("n", "<leader>ca", ":CodeActionMenu<CR>", silent)
+keymap("n", "<leader>cl", '<cmd>lua vim.lsp.codelens.run() vim.lsp.codelens.refresh()<CR>', silent)
+keymap("n", "<leader>d", ":Trouble<CR>", silent)
+
 -- keybinds help
 command("Keybinds", ":view ~/.config/nvim/keybinds", { nargs = 0 })
+
