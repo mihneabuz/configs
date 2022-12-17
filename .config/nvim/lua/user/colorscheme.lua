@@ -5,7 +5,10 @@ if not success then
 end
 
 onedark.setup({
-	transparent = true
+	transparent = true,
+  colors = {
+    fg = "#bac1ce"
+  }
 })
 
 vim.cmd([[colo onedark]])
