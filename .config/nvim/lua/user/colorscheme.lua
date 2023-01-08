@@ -7,7 +7,7 @@ end
 onedark.setup({
 	transparent = true,
   colors = {
-    fg = "#bac1ce"
+    fg = "#aeb5c2"
   }
 })
 

@@ -23,6 +23,9 @@ alias venv="python -m venv"
 # ls additions
 source ~/.config/fish/ls.fish
 
+# better clear
+bind \cl 'for i in (seq 1 $LINES); echo; end; clear; commandline -f repaint'
+
 # colors
 set -Ux LSCOLORS ExFxdxdxCxagababagacax
 
