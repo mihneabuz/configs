@@ -57,6 +57,11 @@ return packer.startup(
     -- treesitter
     use "nvim-treesitter/nvim-treesitter"
     use "nvim-treesitter/nvim-treesitter-refactor"
+    use {
+      "nvim-treesitter/playground",
+      opt = true,
+      cmd = { "TSPlaygroundToggle", "TSHighlightCapturesUnderCursor" }
+    }
 
     -- completion
     use "hrsh7th/nvim-cmp" -- completion plugin

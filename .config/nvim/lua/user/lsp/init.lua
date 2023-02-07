@@ -16,7 +16,14 @@ if not success_mason_lsp then
 end
 
 mason_lsp.setup({
-  ensure_installed = { "sumneko_lua", "jsonls", "rust_analyzer", "gopls", "tsserver", "pyright", "clangd" },
+  ensure_installed = {
+    "sumneko_lua",
+    "rust_analyzer",
+    "gopls",
+    "clangd",
+    "pyright",
+    "tsserver", "emmet_ls", "jsonls", "tailwindcss"
+  },
   automatic_installation = true,
 })
 
@@ -39,6 +46,10 @@ mason_lsp.setup_handlers({
 
     if server_name == "rust_analyzer" then
       require("user.lang.rust").setup(opts)
+    end
+
+    if server_name == "emmet_ls" then
+      require("user.lsp.settings.emmet")
     end
 
     lspconfig[server_name].setup(opts)
