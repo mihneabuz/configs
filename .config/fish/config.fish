@@ -9,8 +9,6 @@ set SHELL "fish"
 set -x EDITOR "nvim"
 
 # alias
-alias ls="ls --group-directories-first"
-
 alias vi="NVIM_CLEAN=1 nvim"
 alias vim="nvim"
 alias rr="ranger"
@@ -58,3 +56,11 @@ fish_add_path ~/.local/bin
 fish_add_path ~/.ghcup/bin
 fish_add_path ~/.cargo/bin
 fish_add_path /usr/lib/ruby/gems/3.0.0
+
+if type -q pnpm
+  alias npm="pnpm"
+end
+# pnpm
+set -gx PNPM_HOME "/home/mihnea/.local/share/pnpm"
+set -gx PATH "$PNPM_HOME" $PATH
+# pnpm end
