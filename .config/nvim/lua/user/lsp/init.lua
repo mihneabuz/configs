@@ -52,10 +52,20 @@ mason_lsp.setup_handlers({
       require("user.lsp.settings.emmet")
     end
 
+    if server_name == "tsserver" then
+      if require('user.lsp.null-ls').has_prettierd() then
+        local old = opts.on_attach
+        opts.on_attach = function(client, bufnr)
+          old(client, bufnr)
+          client.server_capabilities.documentFormattingProvider = false
+        end
+      end
+    end
+
     lspconfig[server_name].setup(opts)
   end,
 })
 
-require("user.lsp.null-ls")
+require("user.lsp.null-ls").setup()
 require("user.lsp.handlers").setup()
 require("user.lsp.misc")
