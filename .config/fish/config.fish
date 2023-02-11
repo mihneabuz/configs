@@ -57,6 +57,10 @@ fish_add_path ~/.ghcup/bin
 fish_add_path ~/.cargo/bin
 fish_add_path /usr/lib/ruby/gems/3.0.0
 
+# lf integration
+alias lf="lfcd"
+source ~/.config/fish/lfcd.fish
+
 if type -q pnpm
   alias npm="pnpm"
 end
