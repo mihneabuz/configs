@@ -9,6 +9,8 @@ vim.g.maplocalleader = " "
 -- swap ; and : in normal mode
 keymap("n", ";", ":", { noremap = true })
 keymap("n", ":", ";", { noremap = true })
+keymap("v", ";", ":", { noremap = true })
+keymap("v", ":", ";", { noremap = true })
 
 keymap("n", "q", ":q<CR>", silent)
 
@@ -27,6 +29,10 @@ keymap("n", "<C-Up>", ":resize -2<CR>", silent)
 keymap("n", "<C-Donw>", ":resize +2<CR>", silent)
 keymap("n", "<C-Left>", ":vertical resize -2<CR>", silent)
 keymap("n", "<C-Right>", ":vertical resize +2<CR>", silent)
+
+-- splits
+keymap("n", "cs", ":split<CR>", silent)
+keymap("n", "cv", ":vsplit<CR>", silent)
 
 -- cycle buffers
 keymap("n", "<S-l>", ":bnext<CR>", silent)
@@ -101,7 +107,8 @@ keymap("n", "<leader>tv", ":Cheatsheet<CR>", silent)
 keymap("n", "<leader>tp", ":Telescope projects<CR>", silent)
 
 -- bufferline
-keymap("n", "<leader>b", ":BufferLineSortByExtension<CR>", silent)
+keymap("n", "<leader>B", ":BufferLineSortByExtension<CR>", silent)
+keymap("n", "<leader>b", ":BufferLinePick<CR>", silent)
 keymap("n", "<S-l>", ":BufferLineCycleNext<CR>", silent)
 keymap("n", "<S-h>", ":BufferLineCyclePrev<CR>", silent)
 
@@ -126,4 +133,3 @@ command("TabShort", short_tab, { nargs = 0 })
 
 -- keybinds help
 command("Keybinds", ":view ~/.config/nvim/keybinds", { nargs = 0 })
-
