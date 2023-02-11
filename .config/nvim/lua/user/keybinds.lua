@@ -8,9 +8,13 @@ vim.g.maplocalleader = " "
 
 -- swap ; and : in normal mode
 keymap("n", ";", ":", { noremap = true })
-keymap("n", ":", ";", { noremap = true })
+keymap("n", ",", ";", { noremap = true })
+keymap("n", ":", ",", { noremap = true })
+
 keymap("v", ";", ":", { noremap = true })
-keymap("v", ":", ";", { noremap = true })
+keymap("v", ",", ";", { noremap = true })
+keymap("v", ":", ",", { noremap = true })
+
 
 keymap("n", "q", ":q<CR>", silent)
 
