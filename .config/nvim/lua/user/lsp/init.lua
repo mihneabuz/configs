@@ -17,7 +17,7 @@ end
 
 mason_lsp.setup({
   ensure_installed = {
-    "sumneko_lua",
+    "lua_ls",
     "rust_analyzer",
     "gopls",
     "clangd",
@@ -39,8 +39,8 @@ mason_lsp.setup_handlers({
       opts = vim.tbl_deep_extend("force", jsonls_opts, opts)
     end
 
-    if server_name == "sumneko_lua" then
-      local sumneko_opts = require("user.lsp.settings.sumneko")
+    if server_name == "lua_ls" then
+      local sumneko_opts = require("user.lsp.settings.lua")
       opts = vim.tbl_deep_extend("force", sumneko_opts, opts)
     end
 
