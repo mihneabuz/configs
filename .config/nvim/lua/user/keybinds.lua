@@ -37,6 +37,7 @@ keymap("n", "<C-Right>", ":vertical resize +2<CR>", silent)
 -- splits
 keymap("n", "cs", ":split<CR>", silent)
 keymap("n", "cv", ":vsplit<CR>", silent)
+keymap("n", "cx", ":q<CR>", silent)
 
 -- cycle buffers
 keymap("n", "<S-l>", ":bnext<CR>", silent)

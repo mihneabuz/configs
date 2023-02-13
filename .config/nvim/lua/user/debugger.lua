@@ -9,8 +9,8 @@ vim.fn.sign_define('DapStopped', { text = ' ', texthl = 'Substitute', linehl 
 local keymap = vim.api.nvim_set_keymap
 local silent = { noremap = true, silent = true }
 
-keymap("n", "<leader>B", ":lua require'dap'.toggle_breakpoint()<CR>", silent)
-keymap("n", "<leader>D", ":lua require'dap'.continue()<CR>", silent)
+keymap("n", "<leader>DB", ":lua require'dap'.toggle_breakpoint()<CR>", silent)
+keymap("n", "<leader>DD", ":lua require'dap'.continue()<CR>", silent)
 
 local success, mason_dap = pcall(require, "mason-nvim-dap")
 if success then

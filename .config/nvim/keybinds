@@ -37,8 +37,8 @@ lsp:
   - <leader>cl code lens
 
 dap:
-  - <leader>B toggle breakpoint
-  - <leader>D run debugger
+  - <leader>DB toggle breakpoint
+  - <leader>DD run debugger
 
 tests:
   - <leader>A run all tests
