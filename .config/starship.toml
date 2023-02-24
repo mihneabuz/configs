@@ -2,6 +2,7 @@ add_newline = false
 
 format = """
 $time\
+$jobs\
 $username\
 $directory\
 $git_branch\
@@ -9,20 +10,29 @@ $git_state\
 $git_metrics\
 $git_status\
 $docker_context\
-$elm\
 $nodejs\
 $rust\
-$custom\
+$golang\
+$haskell\
 $python\
 $cmd_duration\
 $line_break\
 $character"""
 
+scan_timeout = 20
+command_timeout = 60
+
 [time]
 disabled = true
 format = "[$time]($style) [❯](bright-red) "
-style = "bold bright-yellow"
+style = "bold cyan"
 time_format = "%H:%M"
+
+[jobs]
+disabled = true
+format = "[$number]($style) [❯](bright-red) "
+style = "bold yellow"
+number_threshold = 1
 
 [username]
 format = "[$user]($style) [❯](bright-red) "
@@ -41,6 +51,7 @@ format = "[❯](bright-red) [$branch]($style) "
 style = "bold fg:#C678DD"
 
 [git_status]
+disabled = true
 style = "bold fg:#D19A66"
 
 [git_metrics]
@@ -59,21 +70,23 @@ symbol = " "
 style = "bold bright-green"
 version_format = "${raw}"
 
+[golang]
+format = "[❯](bright-red) [$symbol($version )]($style)"
+symbol = " "
+
 [rust]
-format = '[❯](bright-red) [$symbol($version )]($style)'
+format = "[❯](bright-red) [$symbol($version )]($style)"
 style = "bold fg:#e07000"
 
-[custom.haskell]
-format = "[❯](bright-red) [$symbol($snapshot)]($style)"
-detect_files = ["stack.yaml"]
-detect_extensions	= ["hs"]
+[haskell]
+format = "[❯](bright-red) [$symbol($version )]($style)"
 symbol = "λ "
 style	= "bold purple"
 
 [cmd_duration]
 format = "[❯](bright-red) [$duration]($style) "
 style = "bold bright-yellow"
-min_time = 1_000
+min_time = 1000
 
 [character]
 success_symbol = "[❯❯](bold bright-blue)"

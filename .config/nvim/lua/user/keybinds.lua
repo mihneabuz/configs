@@ -93,7 +93,7 @@ keymap("n", "<leader>o", ":NvimTreeToggle<CR>", silent)
 keymap("n", "<leader>e", ":NvimTreeFocus<CR>", silent)
 
 -- mason
-keymap("n", "<leader>m", ":Mason<CR>", silent)
+keymap("n", "<leader>M", ":Mason<CR>", silent)
 
 -- testing
 keymap("n", "<leader>A", ":TestSuite<CR>", silent)
@@ -123,6 +123,9 @@ keymap("t", [[<C-\>]], "<Cmd>ToggleTerm direction=float<CR>", silent)
 keymap("n", [[<C-]>]], "<Cmd>ToggleTerm size=16 direction=horizontal<CR>", silent)
 keymap("t", [[<C-]>]], "<Cmd>ToggleTerm size=16 direction=horizontal<CR>", silent)
 keymap("t", "ZZ", "<Cmd>:q<CR>", silent)
+
+-- merge tool
+keymap("n", "<leader>mt", ":MergetoolToggle<cr>", silent)
 
 -- tab size
 local function long_tab()

@@ -1,0 +1,18 @@
+[core]
+	autocrlf = false
+
+[user]
+	email = mihneabuzatu88@gmail.com
+	name = mihneabuz
+
+[merge]
+  tool = nvimtool
+  conflictStyle = diff3
+
+[mergetool]
+  keepBackup = false
+
+[mergetool "nvimtool"]
+  cmd = nvim -c "MergetoolStart" "$MERGED" "$BASE" "$LOCAL" "$REMOTE"
+  trustExitCode = true
+  keepBackup = false

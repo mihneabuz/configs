@@ -11,10 +11,9 @@ set -x EDITOR "nvim"
 # alias
 alias vi="NVIM_CLEAN=1 nvim"
 alias vim="nvim"
-alias rr="ranger"
+alias vimdiff="nvim -d"
 
-alias gs="git status"
-alias gd="git diff"
+alias lg="lazygit"
 
 alias venv="python -m venv"
 

@@ -61,5 +61,10 @@ terminal:
   - <C-\> toggle float term
   - <C-]> toggle bottom term
 
+mergetool:
+  - <leader>mt start merge tool
+  - <leader>mg diffget
+  - <leader>mp diffput
+
 mason:
-  - <leader>m open mason
+  - <leader>M open mason

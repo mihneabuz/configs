@@ -124,6 +124,17 @@ return packer.startup(
 
     -- git
     use "lewis6991/gitsigns.nvim"
+    use {
+      "tpope/vim-fugitive",
+      opt = true,
+      cmd = { "Git", "Gdiffsplit", "Gvdiffsplit" }
+    }
+    use {
+      "samoshkin/vim-mergetool",
+      opt = true,
+      cmd = { "MergetoolStart", "MergetoolStop", "MergetoolToggle" },
+      config = function() require "user.mergetool" end
+    }
 
     -- buffers
     use "moll/vim-bbye"
