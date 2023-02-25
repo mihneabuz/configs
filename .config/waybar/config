@@ -8,7 +8,9 @@
   "modules-center": [
     "clock"
   ],
-  "modules-right": [],
+  "modules-right": [
+    "wireplumber",
+  ],
   "wlr/workspaces": {
     "format": "{icon}",
     "format-icons": {
@@ -28,4 +30,9 @@
     "format": "{:%B %d   %A %H:%M}",
     "tooltip": false,
   },
+  "wireplumber": {
+    "format": "",
+    "format-muted": "",
+    "format-icons": ["", "", ""]
+  }
 }

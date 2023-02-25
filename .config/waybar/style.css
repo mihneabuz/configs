@@ -8,7 +8,7 @@
 }
 
 window#waybar {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(20, 22, 26, 0.4);
 }
 
 
@@ -29,9 +29,9 @@ window#waybar {
 #workspaces button {
   font-size: 20px;
   padding: 0 14px 0 8px;
-  margin: 0 2px;
+  margin: 0 3px;
 
-  border-radius: 8%;
+  border-radius: 10%;
   font-weight: bold;
 
   color: @blue;
