@@ -127,6 +127,9 @@ keymap("t", "ZZ", "<Cmd>:q<CR>", silent)
 -- merge tool
 keymap("n", "<leader>mt", ":MergetoolToggle<cr>", silent)
 
+-- code actions
+keymap("n", "<leader>ca", ":CodeActionMenu<CR>", silent)
+
 -- tab size
 local function long_tab()
   vim.opt.tabstop = 4
