@@ -1,0 +1,67 @@
+@define-color foreground #dce3ff;
+@define-color background #282c34;
+
+@define-color red     #e06c75;
+@define-color green   #98c379;
+@define-color yellow  #e5c07b;
+@define-color blue    #61afef;
+@define-color magenta #c678dd;
+@define-color cyan    #56b6c2;
+@define-color gray    #3f424f;
+
+#window {
+  margin: 0px;
+  border-radius: 10px;
+  font-family: "Ubuntu";
+  font-size: 20px;
+  background: rgba(40, 44, 56, 0.8);
+}
+
+#input {
+  margin: 15px;
+  padding: 4px 12px;
+  border: 2px solid @blue;
+  border-radius: 10px;
+  background: linear-gradient(
+    90deg,
+    @background 48%,
+    @gray 100%
+  );
+}
+
+#input:focus image {
+  color: @blue;
+}
+
+#input image {
+  color: @blue;
+}
+
+#inner-box {
+  margin: 6px;
+  padding: 0 10px;
+}
+
+#text {
+  margin: 8px 16px;
+  border: none;
+}
+
+#entry {
+  padding: 4px 6px;
+  border-radius: 8px;
+}
+
+#entry:selected {
+  color: @background;
+  background: linear-gradient(
+    90deg,
+    @blue 48%,
+    @cyan 100%
+  );
+}
+
+#text:selected {
+  font-weight: bold;
+  color: @background;
+}
