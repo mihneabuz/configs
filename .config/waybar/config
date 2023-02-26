@@ -1,7 +1,7 @@
 {
-  "layer": "top",
+  "layer": "bottom",
   "position": "top",
-  "height": 28,
+  "height": 30,
   "modules-left": [
     "wlr/workspaces"
   ],
@@ -9,8 +9,11 @@
     "clock"
   ],
   "modules-right": [
-    "wireplumber",
+    "custom/volumeIcon",
+    "custom/volumeBar",
+    "tray"
   ],
+
   "wlr/workspaces": {
     "format": "{icon}",
     "format-icons": {
@@ -24,15 +27,38 @@
     "active-only": false,
     "all-outputs": true
   },
+
   "clock": {
     "interval": 30,
     "timezone": "Europe/Bucharest",
     "format": "{:%B %d   %A %H:%M}",
     "tooltip": false,
   },
-  "wireplumber": {
-    "format": "",
-    "format-muted": "",
-    "format-icons": ["", "", ""]
+
+  "custom/volumeIcon": {
+    "exec": "~/.config/waybar/provider/provider muted",
+    "return-type": "json",
+    "format": "{icon}",
+    "format-icons": {
+      "on": "󰕾",
+      "off": "󰸈",
+    },
+    "tooltip": false,
+    "signal": 7,
+    "interval": 10,
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle; pkill -RTMIN+8 waybar; pkill -RTMIN+7 waybar"
+  },
+  "custom/volumeBar": {
+    "exec": "~/.config/waybar/provider/provider volume",
+    "return-type": "json",
+    "format": "{}",
+    "tooltip": false,
+    "signal": 8,
+    "interval": 10,
+  },
+
+  "tray": {
+    "icon-size": 21,
+    "spacing": 10
   }
 }
