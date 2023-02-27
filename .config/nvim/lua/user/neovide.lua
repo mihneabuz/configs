@@ -14,7 +14,7 @@ if exists("g:neovide")
 endif
 ]])
 
-vim.g.gui_font_default_size = 14
+vim.g.gui_font_default_size = 12
 vim.g.gui_font_size = vim.g.gui_font_default_size
 vim.g.gui_font_face = "Ubuntu Mono"
 
