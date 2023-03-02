@@ -43,19 +43,18 @@ local kind_icons = {
   TypeParameter = "",
 }
 
-local cmd_enabled = function()
-  local context = require('cmp.config.context')
-  if vim.api.nvim_get_mode().mode == 'c' then
-    return true
-  else
-    return not context.in_treesitter_capture("comment")
-        and not context.in_syntax_group("Comment")
-  end
-end
-
+local cmp_enabled = function() return true end
 local success_ts, _ = pcall(require, "nvim-treesitter")
-if not success_ts then
-  cmd_enabled = true
+if success_ts then
+  cmp_enabled = function()
+    local context = require('cmp.config.context')
+    if vim.api.nvim_get_mode().mode == 'c' then
+      return true
+    else
+      return not context.in_treesitter_capture("comment")
+          and not context.in_syntax_group("Comment")
+    end
+  end
 end
 
 local format = function(entry, vim_item)
@@ -140,7 +139,7 @@ local cmp_options = {
     end, { "i", "s" }),
   },
 
-  enabled = cmd_enabled,
+  enabled = cmp_enabled,
 
   formatting = {
     fields = { "kind", "abbr", "menu" },
