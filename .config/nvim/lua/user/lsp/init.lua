@@ -22,10 +22,18 @@ mason_lsp.setup({
     "gopls",
     "clangd",
     "pyright",
-    "tsserver", "emmet_ls", "jsonls", "tailwindcss"
+    "tsserver", "emmet_ls", "jsonls", "cssls", "tailwindcss"
   },
   automatic_installation = true,
 })
+
+local function disable_formatter(opts)
+  local old_on_attach = opts.on_attach
+  opts.on_attach = function(client, bufnr)
+    old_on_attach(client, bufnr)
+    client.server_capabilities.documentFormattingProvider = false
+  end
+end
 
 mason_lsp.setup_handlers({
   function(server_name)
@@ -54,11 +62,7 @@ mason_lsp.setup_handlers({
 
     if server_name == "tsserver" then
       if require('user.lsp.null-ls').has_prettierd() then
-        local old = opts.on_attach
-        opts.on_attach = function(client, bufnr)
-          old(client, bufnr)
-          client.server_capabilities.documentFormattingProvider = false
-        end
+        disable_formatter(opts)
       end
     end
 

@@ -29,5 +29,5 @@ end
 
 return {
   setup = function() null_ls.setup(opts) end,
-  has_prettierd = has_prettierd
+  has_prettierd = has_prettierd,
 }
