@@ -66,9 +66,16 @@ mason_lsp.setup_handlers({
       end
     end
 
+    if server_name == "clangd" then
+      local clangd_opts = require("user.lsp.settings.clangd")
+      opts = vim.tbl_deep_extend("force", clangd_opts, opts)
+    end
+
     lspconfig[server_name].setup(opts)
   end,
 })
+
+vim.lsp.set_log_level("off")
 
 require("user.lsp.null-ls").setup()
 require("user.lsp.handlers").setup()
