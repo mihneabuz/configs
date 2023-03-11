@@ -49,12 +49,14 @@ set -U fish_pager_color_progress blue
 set fish_greeting ""
 
 # prompt
+export STARSHIP_LOG=error
 starship init fish | source
 
 fish_add_path ~/.local/bin
 fish_add_path ~/.ghcup/bin
 fish_add_path ~/.cargo/bin
 fish_add_path /usr/lib/ruby/gems/3.0.0
+fish_add_path /opt/homebrew/bin
 
 # lf integration
 alias lf="lfcd"

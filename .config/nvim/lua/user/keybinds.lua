@@ -23,10 +23,10 @@ keymap("n", "<C-h>", "<C-w>h", silent)
 keymap("n", "<C-j>", "<C-w>j", silent)
 keymap("n", "<C-k>", "<C-w>k", silent)
 keymap("n", "<C-l>", "<C-w>l", silent)
-keymap('t', '<C-h>', "<Cmd>wincmd h<CR>", silent)
-keymap('t', '<C-j>', "<Cmd>wincmd j<CR>", silent)
-keymap('t', '<C-k>', "<Cmd>wincmd k<CR>", silent)
-keymap('t', '<C-l>', "<Cmd>wincmd l<CR>", silent)
+keymap("t", "<C-h>", "<Cmd>wincmd h<CR>", silent)
+keymap("t", "<C-j>", "<Cmd>wincmd j<CR>", silent)
+keymap("t", "<C-k>", "<Cmd>wincmd k<CR>", silent)
+keymap("t", "<C-l>", "<Cmd>wincmd l<CR>", silent)
 
 -- window resizing
 keymap("n", "<C-Up>", ":resize -2<CR>", silent)
@@ -129,6 +129,23 @@ keymap("n", "<leader>mt", ":MergetoolToggle<cr>", silent)
 
 -- code actions
 keymap("n", "<leader>ca", ":CodeActionMenu<CR>", silent)
+
+-- debugger
+local function toggle_breakpoint()
+  require('user.debugger')
+  local success, dap = pcall(require, "dap")
+  if success then dap.toggle_breakpoint() end
+end
+local function run_debugger()
+  require('user.debugger')
+  local success, dap = pcall(require, "dap")
+  if success then dap.continue() end
+end
+command("ToggleBreakpoint", toggle_breakpoint, { nargs = 0 })
+command("RunDebugger", run_debugger, { nargs = 0 })
+
+keymap("n", "<leader>DB", ":ToggleBreakpoint<cr>", silent)
+keymap("n", "<leader>DD", ":RunDebugger<CR>", silent)
 
 -- tab size
 local function long_tab()

@@ -104,7 +104,7 @@ return packer.startup(
     -- tests
     use {
       "klen/nvim-test",
-      opt = false,
+      opt = true,
       cmd = { "TestNearest", "TestSuite", "TestFile" },
       config = function() require "user.tests" end
     }
