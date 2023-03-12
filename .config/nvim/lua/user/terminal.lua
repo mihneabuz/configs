@@ -15,7 +15,7 @@ toggleterm.setup({
   persist_mode = true,
   direction = 'float',
   close_on_exit = true,
-  shell = '/bin/fish',
+  shell = 'fish',
   auto_scroll = true,
   float_opts = {
     border = "solid",
