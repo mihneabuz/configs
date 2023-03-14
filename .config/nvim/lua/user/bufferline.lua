@@ -56,6 +56,7 @@ bufferline.setup({
       fg = { attribute = "fg", highlight = "Function" },
     },
     buffer_visible = {
+      fg = { attribute = "fg", highlight = "Function" },
       bg = { attribute = "bg", highlight = "lualine_c_normal" },
     },
     duplicate = {

@@ -52,6 +52,7 @@ set fish_greeting ""
 export STARSHIP_LOG=error
 starship init fish | source
 
+fish_add_path /usr/local/bin
 fish_add_path ~/.local/bin
 fish_add_path ~/.ghcup/bin
 fish_add_path ~/.cargo/bin

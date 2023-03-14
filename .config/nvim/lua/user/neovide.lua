@@ -22,7 +22,7 @@ vim.keymap.set({ 'n', 'i' }, "<C-+>", function() ResizeGuiFont(1) end, opts)
 vim.keymap.set({ 'n', 'i' }, "<C-->", function() ResizeGuiFont(-1) end, opts)
 
 vim.g.neovide_transparency = 0.0
-vim.g.transparency = 0.85
+vim.g.transparency = 0.90
 
 -- Helper function for transparency formatting
 local alpha = function()

@@ -15,7 +15,10 @@ keymap("v", ";", ":", { noremap = true })
 keymap("v", ",", ";", { noremap = true })
 keymap("v", ":", ",", { noremap = true })
 
+-- stupid mac tilde
+keymap("c", "±", "~", { noremap = true })
 
+-- close with q
 keymap("n", "q", ":q<CR>", silent)
 
 -- window navigation
