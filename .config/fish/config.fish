@@ -17,6 +17,8 @@ alias lg="lazygit"
 
 alias venv="python -m venv"
 
+alias dockerstart="sudo systemctl start docker"
+
 # ls additions
 source ~/.config/fish/ls.fish
 
