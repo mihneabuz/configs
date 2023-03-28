@@ -76,14 +76,12 @@ keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", silent)
 keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", silent)
 
 -- toggle realtive number
-local relative = false
+local relative = true
 local toggle_relative = function()
 	if relative then
-		vim.opt.number = true
 		vim.opt.relativenumber = false
 		relative = false
 	else
-		vim.opt.number = false
 		vim.opt.relativenumber = true
 		relative = true
 	end

@@ -22,6 +22,7 @@ vim.opt.foldmethod = "expr"
 vim.opt.foldlevel = 99
 vim.opt.pumheight = 12
 vim.opt.undofile = true
+vim.opt.relativenumber = true
 
 vim.opt.shell = "/bin/bash"
 vim.cmd([[set noshowmode]])
