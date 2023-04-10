@@ -47,13 +47,17 @@ local cmp_enabled = function() return true end
 local success_ts, _ = pcall(require, "nvim-treesitter")
 if success_ts then
   cmp_enabled = function()
+    if vim.bo.buftype == 'prompt' then
+      return false
+    end
+
     local context = require('cmp.config.context')
     if vim.api.nvim_get_mode().mode == 'c' then
       return true
-    else
-      return not context.in_treesitter_capture("comment")
-          and not context.in_syntax_group("Comment")
     end
+
+    return not context.in_treesitter_capture("comment")
+        and not context.in_syntax_group("Comment")
   end
 end
 
@@ -101,7 +105,6 @@ local cmp_options = {
       luasnip.lsp_expand(args.body)
     end,
   },
-
   mapping = {
     ["<C-k>"] = cmp.mapping.select_prev_item(),
     ["<C-j>"] = cmp.mapping.select_next_item(),
@@ -113,7 +116,6 @@ local cmp_options = {
       i = cmp.mapping.abort(),
       c = cmp.mapping.close(),
     },
-
     ["<CR>"] = cmp.mapping.confirm { select = true },
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
@@ -127,7 +129,6 @@ local cmp_options = {
         fallback()
       end
     end, { "i", "s" }),
-
     ["<S-Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
@@ -138,14 +139,11 @@ local cmp_options = {
       end
     end, { "i", "s" }),
   },
-
   enabled = cmp_enabled,
-
   formatting = {
     fields = { "kind", "abbr", "menu" },
     format = format,
   },
-
   sources = {
     { name = "nvim_lsp" },
     { name = "nvim_lua" },
@@ -153,22 +151,18 @@ local cmp_options = {
     { name = "buffer" },
     { name = "path" },
   },
-
   confirm_opts = {
     behavior = cmp.ConfirmBehavior.Replace,
     select = false,
   },
-
   window = {
     -- completion = cmp.config.window.bordered(),
     -- documentation = cmp.config.window.bordered(),
   },
-
   experimental = {
     ghost_text = true,
     native_menu = false,
   },
-
   sorting = {
     comparators = {
       compare_kind,

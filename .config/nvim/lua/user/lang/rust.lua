@@ -13,6 +13,14 @@ rust.setup = function(opts)
       dap_adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path)
     end
 
+    local settings = {
+      ['rust-analyzer'] = {
+        procMacro = { enable = true }
+      }
+    }
+
+    opts = vim.tbl_deep_extend("force", { settings }, opts)
+
     rt.setup({
       tools = {
         runnables = { use_telescope = true },
