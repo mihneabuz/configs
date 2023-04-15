@@ -26,20 +26,11 @@ local time = function()
 	return require("os").date("%H:%M")
 end
 
-local theme = 'auto'
-local success_theme, onedark = pcall(require, "lualine.themes.onedark")
-if success_theme then
-	local insert_bg = onedark.insert.a.bg
-	local normal_bg = onedark.normal.a.bg
-	onedark.normal.a.bg = insert_bg
-	onedark.insert.a.bg = normal_bg
-	theme = onedark
-end
 
 lualine.setup({
 	options = {
     icons_enabled = true,
-    theme = theme,
+    theme = LualineTheme,
     component_separators = { left = '', right = ''},
     section_separators = { left = '', right = ''},
     disabled_filetypes = {},
