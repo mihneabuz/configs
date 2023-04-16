@@ -17,6 +17,71 @@ if success_onedark then
       LualineTheme = theme
     end
 
+    BufferlineTheme = {
+      fill = {
+        bg = { attribute = "bg", highlight = "lualine_c_normal" },
+        fg = { attribute = "bg", highlight = "lualine_c_normal " },
+      },
+      background = {
+        bg = { attribute = "bg", highlight = "lualine_c_normal" },
+        fg = { attribute = "bg", highlight = "lualine_c_normal " },
+      },
+      buffer_selected = {
+        bg = { attribute = "bg", highlight = "lualine_b_normal" },
+        fg = { attribute = "fg", highlight = "Function" },
+        bold = true
+      },
+      duplicate_selected = {
+        bg = { attribute = "bg", highlight = "lualine_b_normal" },
+        fg = { attribute = "fg", highlight = "Function" },
+        bold = true,
+        italic = true
+      },
+      indicator_selected = {
+        bg = { attribute = "bg", highlight = "lualine_b_normal" },
+        fg = { attribute = "fg", highlight = "Function" },
+      },
+      buffer_visible = {
+        fg = { attribute = "fg", highlight = "Function" },
+        bg = { attribute = "bg", highlight = "lualine_c_normal" },
+      },
+      duplicate = {
+        bg = { attribute = "bg", highlight = "lualine_c_normal" },
+        italic = true
+      },
+      duplicate_visible = {
+        bg = { attribute = "bg", highlight = "lualine_c_normal" },
+        italic = true
+      },
+      indicator_visible = {
+        bg = { attribute = "bg", highlight = "lualine_c_normal" },
+        fg = { attribute = "fg", highlight = "Type" },
+      },
+      modified = {
+        bg = { attribute = "bg", highlight = "lualine_c_normal" },
+        fg = { attribute = "fg", highlight = "Type" },
+      },
+      modified_visible = {
+        bg = { attribute = "bg", highlight = "lualine_c_normal" },
+        fg = { attribute = "fg", highlight = "Type" },
+      },
+      modified_selected = {
+        bg = { attribute = "bg", highlight = "lualine_b_normal" },
+        fg = { attribute = "fg", highlight = "Type" },
+      },
+      tab = {
+        bg = { attribute = "bg", highlight = "lualine_c_normal" },
+      },
+      tab_selected = {
+        fg = { attribute = "fg", highlight = "Function" },
+        bg = { attribute = "bg", highlight = "lualine_b_normal" },
+        bold = true
+      },
+      tab_close = {
+        bg = { attribute = "bg", highlight = "lualine_c_normal" },
+      },
+    }
+
     vim.cmd([[colo onedark]])
 
     for _, group in ipairs(vim.fn.getcompletion("@lsp", "highlight")) do
@@ -35,27 +100,51 @@ if success_tokyonight then
       transparent = true,
       styles = {
         comments = { italic = true },
-        keywords = { italic = true },
+        keywords = {},
         functions = {},
         variables = {},
-        sidebars = "dark",
-        floats = "dark",
+        sidebars = "transparent",
       },
       day_brightness = 0.3,
-      hide_inactive_statusline = false,
-      dim_inactive = false,
+      dim_inactive = true,
       lualine_bold = false,
     })
+
+    local success_theme, theme = pcall(require, "lualine.themes.tokyonight")
+    if success_theme then
+      theme.insert.a.bg = "#73daca"
+      theme.insert.b.fg = "#73daca"
+      LualineTheme = theme
+    end
+
+    BufferlineTheme = {
+      buffer_selected = {
+        bg = { attribute = "bg", highlight = "lualine_b_normal" },
+      },
+      duplicate_selected = {
+        bg = { attribute = "bg", highlight = "lualine_b_normal" },
+      },
+      indicator_selected = {
+        bg = { attribute = "bg", highlight = "lualine_b_normal" },
+      },
+      modified_selected = {
+        bg = { attribute = "bg", highlight = "lualine_b_normal" },
+      },
+    }
 
     vim.cmd([[colo tokyonight]])
   end
 end
 
+
 LualineTheme = 'auto'
+BufferlineTheme = {}
 
 local color = os.getenv('COLORSCHEME')
-if color then
-  ActivateTokyonight()
+if color == 'tokyonight' then
+  pcall(ActivateTokyonight)
+elseif color == 'onedark' then
+  pcall(ActivateOnedark)
 else
-  ActivateOnedark()
+  pcall(ActivateOnedark)
 end

@@ -5,7 +5,7 @@ end
 
 local dashboard = require("alpha.themes.dashboard")
 
-dashboard.section.header.opts.hl = "Constant";
+dashboard.section.header.opts.hl = "@field";
 dashboard.section.header.val = {
     "                                                     ",
     "                                                     ",

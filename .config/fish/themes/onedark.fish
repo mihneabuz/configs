@@ -22,3 +22,5 @@ set -Ux fish_pager_color_prefix --bold blue
 set -Ux fish_pager_color_completion brwhite
 set -Ux fish_pager_color_description 5c6370
 set -Ux fish_pager_color_selected_background --background=43567f
+
+export COLORSCHEME=onedark

@@ -65,12 +65,12 @@ return packer.startup(
     }
 
     -- completion
-    use "hrsh7th/nvim-cmp" -- completion plugin
-    use "hrsh7th/cmp-buffer" -- buffer completions
-    use "hrsh7th/cmp-path" -- path completions
-    use "hrsh7th/cmp-cmdline" -- cmdline completions
-    use "hrsh7th/cmp-nvim-lsp" -- lsp completion
-    use "hrsh7th/cmp-nvim-lua" -- nvim lua completion
+    use "hrsh7th/nvim-cmp"         -- completion plugin
+    use "hrsh7th/cmp-buffer"       -- buffer completions
+    use "hrsh7th/cmp-path"         -- path completions
+    use "hrsh7th/cmp-cmdline"      -- cmdline completions
+    use "hrsh7th/cmp-nvim-lsp"     -- lsp completion
+    use "hrsh7th/cmp-nvim-lua"     -- nvim lua completion
     use "saadparwaiz1/cmp_luasnip" -- snippet completions
 
     -- snippets
@@ -101,6 +101,11 @@ return packer.startup(
 
     -- language specific
     use "simrat39/rust-tools.nvim"
+    use {
+      'saecki/crates.nvim',
+      ft = { "toml" },
+      config = function() require('crates').setup() end,
+    }
 
     -- tests
     use {
@@ -147,7 +152,7 @@ return packer.startup(
     -- statusline
     use "nvim-lualine/lualine.nvim"
 
-    -- telescpope
+    -- telescope
     use {
       "nvim-telescope/telescope.nvim",
       opt = true,
