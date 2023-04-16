@@ -103,6 +103,7 @@ return packer.startup(
     use "simrat39/rust-tools.nvim"
     use {
       'saecki/crates.nvim',
+      opt = true,
       ft = { "toml" },
       config = function() require('crates').setup() end,
     }
@@ -174,6 +175,9 @@ return packer.startup(
 
     -- dashboard
     use "goolord/alpha-nvim"
+
+    -- misc
+    use "petertriho/nvim-scrollbar"
 
     if packer_bootstrap then
       require("packer").sync()

@@ -1,15 +1,22 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
 SETUVAR --export LSCOLORS:ExFxdxdxCxagababagacax
+SETUVAR ZO_CMD:zo
+SETUVAR Z_CMD:z
+SETUVAR Z_DATA:/Users/mpahontu/\x2elocal/share/z/data
+SETUVAR Z_DATA_DIR:/Users/mpahontu/\x2elocal/share/z
+SETUVAR Z_EXCLUDE:\x5e/Users/mpahontu\x24
 SETUVAR __fish_initialized:3400
+SETUVAR _fisher_acomagu_2F_fish_2D_async_2D_prompt_files:\x7e/\x2econfig/fish/conf\x2ed/__async_prompt\x2efish
+SETUVAR _fisher_jethrokuan_2F_z_files:\x7e/\x2econfig/fish/functions/__z\x2efish\x1e\x7e/\x2econfig/fish/functions/__z_add\x2efish\x1e\x7e/\x2econfig/fish/functions/__z_clean\x2efish\x1e\x7e/\x2econfig/fish/functions/__z_complete\x2efish\x1e\x7e/\x2econfig/fish/conf\x2ed/z\x2efish
 SETUVAR _fisher_jorgebucaran_2F_fisher_files:\x7e/\x2econfig/fish/functions/fisher\x2efish\x1e\x7e/\x2econfig/fish/completions/fisher\x2efish
-SETUVAR _fisher_plugins:jorgebucaran/fisher\x1evitallium/tokyonight\x2dfish
+SETUVAR _fisher_plugins:jorgebucaran/fisher\x1evitallium/tokyonight\x2dfish\x1eacomagu/fish\x2dasync\x2dprompt\x1ejethrokuan/z
 SETUVAR _fisher_upgraded_to_4_4:\x1d
 SETUVAR _fisher_vitallium_2F_tokyonight_2D_fish_files:\x7e/\x2econfig/fish/themes/TokyoNight\x20Day\x2etheme\x1e\x7e/\x2econfig/fish/themes/TokyoNight\x20Moon\x2etheme\x1e\x7e/\x2econfig/fish/themes/TokyoNight\x20Night\x2etheme\x1e\x7e/\x2econfig/fish/themes/TokyoNight\x20Storm\x2etheme
-SETUVAR --export fish_color_autosuggestion:5c6370
+SETUVAR --export fish_color_autosuggestion:565f89
 SETUVAR fish_color_cancel:\x1d
 SETUVAR --export fish_color_command:\x2d\x2dbold\x1eblue
-SETUVAR --export fish_color_comment:5c6370
+SETUVAR --export fish_color_comment:565f89
 SETUVAR fish_color_cwd:\x1d
 SETUVAR fish_color_cwd_root:red
 SETUVAR --export fish_color_end:\x2d\x2dbold\x1eyellow
@@ -26,21 +33,21 @@ SETUVAR fish_color_option:\x1d
 SETUVAR --export fish_color_param:cyan
 SETUVAR --export fish_color_quote:green
 SETUVAR --export fish_color_redirection:\x2d\x2dbold\x1eyellow
-SETUVAR --export fish_color_search_match:\x2d\x2dbackground\x3d43567f
-SETUVAR --export fish_color_selection:\x2d\x2dbackground\x3d43567f
+SETUVAR --export fish_color_search_match:\x2d\x2dbackground\x3d33467c
+SETUVAR --export fish_color_selection:\x2d\x2dbackground\x3d33467c
 SETUVAR fish_color_user:\x1d
 SETUVAR --export fish_color_valid_path:cyan
 SETUVAR fish_key_bindings:fish_default_key_bindings
 SETUVAR fish_pager_color_background:\x1d
-SETUVAR --export fish_pager_color_completion:brwhite
-SETUVAR --export fish_pager_color_description:5c6370
-SETUVAR --export fish_pager_color_prefix:\x2d\x2dbold\x1eblue
+SETUVAR --export fish_pager_color_completion:c0caf5
+SETUVAR --export fish_pager_color_description:565f89
+SETUVAR --export fish_pager_color_prefix:7dcfff
 SETUVAR --export fish_pager_color_progress:565f89
 SETUVAR fish_pager_color_secondary_background:\x1d
 SETUVAR fish_pager_color_secondary_completion:\x1d
 SETUVAR fish_pager_color_secondary_description:\x1d
 SETUVAR fish_pager_color_secondary_prefix:\x1d
-SETUVAR --export fish_pager_color_selected_background:\x2d\x2dbackground\x3d43567f
+SETUVAR --export fish_pager_color_selected_background:\x2d\x2dbackground\x3d33467c
 SETUVAR fish_pager_color_selected_completion:\x1d
 SETUVAR fish_pager_color_selected_description:\x1d
 SETUVAR fish_pager_color_selected_prefix:\x1d

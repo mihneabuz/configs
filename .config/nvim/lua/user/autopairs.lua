@@ -3,7 +3,7 @@ if not success then
   return
 end
 
-autopairs.setup {
+autopairs.setup({
   check_ts = true,
   ts_config = {
     lua = { "string", "source" },
@@ -21,7 +21,7 @@ autopairs.setup {
     highlight = "PmenuSel",
     highlight_grey = "LineNr",
   },
-}
+})
 
 local cmp_autopairs = require "nvim-autopairs.completion.cmp"
 local success_cmp, cmp = pcall(require, "cmp")

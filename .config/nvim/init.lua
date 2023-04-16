@@ -6,7 +6,6 @@ require 'user.bootstrap'
 
 local clean = os.getenv('NVIM_CLEAN')
 if not clean then
-  require 'user.misc'
   require 'user.treesitter'
   require 'user.autopairs'
   require 'user.comment'
@@ -17,6 +16,7 @@ if not clean then
   require 'user.completion'
   require 'user.mason'
   require 'user.lsp'
+  require 'user.misc'
   require 'user.dashboard'
   require 'user.neovide'
 end
