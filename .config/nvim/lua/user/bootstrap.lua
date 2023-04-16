@@ -49,6 +49,7 @@ return packer.startup(
 
     -- colorscheme
     use "navarasu/onedark.nvim"
+    use 'folke/tokyonight.nvim'
 
     -- comments
     use "numToStr/Comment.nvim"

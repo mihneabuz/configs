@@ -37,7 +37,7 @@ number_threshold = 1
 
 [username]
 format = "[$user]($style) [❯](bright-red) "
-style_user = "bold bright-green"
+style_user = "bold green"
 show_always = true
 
 [directory]
@@ -49,11 +49,11 @@ read_only_style	= "bright-red"
 
 [git_branch]
 format = "[❯](bright-red) [$branch]($style) "
-style = "bold fg:#C678DD"
+style = "bold purple"
 
 [git_status]
 disabled = true
-style = "bold fg:#D19A66"
+style = "bold bright-yellow"
 
 [git_metrics]
 disabled = false
