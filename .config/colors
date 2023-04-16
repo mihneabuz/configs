@@ -1,0 +1,9 @@
+#!/bin/bash
+
+cd ~/.config/kitty
+rm -f colors.conf
+ln -s "$1.conf" colors.conf
+
+cd ~/.config/fish/themes
+rm -f current.fish
+ln -s "$1.fish" current.fish
