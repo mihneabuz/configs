@@ -20,26 +20,25 @@ if success_onedark then
     BufferlineTheme = {
       fill = {
         bg = { attribute = "bg", highlight = "lualine_c_normal" },
-        fg = { attribute = "bg", highlight = "lualine_c_normal " },
       },
       background = {
         bg = { attribute = "bg", highlight = "lualine_c_normal" },
-        fg = { attribute = "bg", highlight = "lualine_c_normal " },
+        fg = { attribute = "fg", highlight = "lualine_c_normal" },
       },
       buffer_selected = {
-        bg = { attribute = "bg", highlight = "lualine_b_normal" },
         fg = { attribute = "fg", highlight = "Function" },
+        bg = { attribute = "bg", highlight = "lualine_b_normal" },
         bold = true
       },
       duplicate_selected = {
-        bg = { attribute = "bg", highlight = "lualine_b_normal" },
         fg = { attribute = "fg", highlight = "Function" },
+        bg = { attribute = "bg", highlight = "lualine_b_normal" },
         bold = true,
         italic = true
       },
       indicator_selected = {
-        bg = { attribute = "bg", highlight = "lualine_b_normal" },
         fg = { attribute = "fg", highlight = "Function" },
+        bg = { attribute = "bg", highlight = "lualine_b_normal" },
       },
       buffer_visible = {
         fg = { attribute = "fg", highlight = "Function" },
@@ -54,20 +53,20 @@ if success_onedark then
         italic = true
       },
       indicator_visible = {
-        bg = { attribute = "bg", highlight = "lualine_c_normal" },
         fg = { attribute = "fg", highlight = "Type" },
+        bg = { attribute = "bg", highlight = "lualine_c_normal" },
       },
       modified = {
-        bg = { attribute = "bg", highlight = "lualine_c_normal" },
         fg = { attribute = "fg", highlight = "Type" },
+        bg = { attribute = "bg", highlight = "lualine_c_normal" },
       },
       modified_visible = {
-        bg = { attribute = "bg", highlight = "lualine_c_normal" },
         fg = { attribute = "fg", highlight = "Type" },
+        bg = { attribute = "bg", highlight = "lualine_c_normal" },
       },
       modified_selected = {
-        bg = { attribute = "bg", highlight = "lualine_b_normal" },
         fg = { attribute = "fg", highlight = "Type" },
+        bg = { attribute = "bg", highlight = "lualine_b_normal" },
       },
       tab = {
         bg = { attribute = "bg", highlight = "lualine_c_normal" },

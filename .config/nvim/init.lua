@@ -1,15 +1,13 @@
-require 'user.impacient'
 require 'user.base'
 require 'user.keybinds'
-require 'user.colorscheme'
 require 'user.bootstrap'
+require 'user.colorscheme'
 
 local clean = os.getenv('NVIM_CLEAN')
 if not clean then
   require 'user.treesitter'
   require 'user.autopairs'
   require 'user.comment'
-  require 'user.git'
   require 'user.lualine'
   require 'user.bufferline'
   require 'user.autocommands'

@@ -32,7 +32,7 @@ dashboard.section.buttons.val = {
     dashboard.button("s", "    Settings" , ":e $MYVIMRC<CR>"),
     dashboard.button("k", "    Keybinds" , ":Keybinds<CR>"),
     dashboard.button("m", "    Mason"    , ":Mason<CR>"),
-    dashboard.button("u", "    Update"   , ":TSUpdate<CR>:PackerSync<CR>"),
+    dashboard.button("u", "    Update"   , ":TSUpdate<CR>:Lazy sync<CR>"),
     dashboard.button("q", "    Quit"     , ":qa<CR>"),
 }
 

@@ -66,5 +66,8 @@ mergetool:
   - <leader>mg diffget
   - <leader>mp diffput
 
+lazy:
+  - <leader>L open lazy
+
 mason:
   - <leader>M open mason

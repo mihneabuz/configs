@@ -4,10 +4,11 @@ if not success then
 end
 
 local success_context, context_utils = pcall(require, "ts_context_commentstring.utils")
+local success_internal, context_internal = pcall(require, 'ts_context_commentstring.internal')
 
 comment.setup({
 	pre_hook = function (ctx)
-		if not success_context then
+		if not success_context or not success_internal then
 			return
 		end
 
@@ -20,7 +21,7 @@ comment.setup({
       location = context_utils.get_visual_start_location()
     end
 
-    return require('ts_context_commentstring.internal').calculate_commentstring {
+    return context_internal.calculate_commentstring {
       key = ctx.ctype == U.ctype.line and '__default' or '__multiline',
       location = location,
     }

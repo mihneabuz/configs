@@ -5,7 +5,7 @@ end
 
 git.setup({
   signs = {
-    add          = { hl = 'GitSignsAdd'   , text = '│', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn' },
+    add          = { hl = 'GitSignsAdd',    text = '│', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn' },
     change       = { hl = 'GitSignsChange', text = '│', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn' },
     delete       = { hl = 'GitSignsDelete', text = '_', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn' },
     topdelete    = { hl = 'GitSignsDelete', text = '‾', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn' },
@@ -28,7 +28,7 @@ git.setup({
   },
   current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
   sign_priority = 6,
-  update_debounce = 100,
+  update_debounce = 200,
   status_formatter = nil,
   max_file_length = 40000,
   preview_config = {
@@ -41,4 +41,23 @@ git.setup({
   yadm = {
     enable = false
   },
+  trouble = false
 })
+
+local scrollbar_ok, scrollbar = pcall(require, "scrollbar")
+if scrollbar_ok then
+  scrollbar.setup({
+    handle = {
+      blend = 0,
+      highlight = "lualine_c_normal"
+    },
+    handlers = {
+      cursor = false,
+      diagnostic = true,
+      gitsigns = true,
+      handle = true,
+      search = false,
+      ale = false,
+    },
+  })
+end

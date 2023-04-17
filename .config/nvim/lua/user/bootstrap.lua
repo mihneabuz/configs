@@ -1,186 +1,161 @@
-local packer_bootstrap
-local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-  packer_bootstrap = vim.fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
 end
 
-local success, packer = pcall(require, "packer")
-if not success then
-  return
-end
+vim.opt.rtp:prepend(lazypath)
 
-packer.init({
-  display = {
-    open_fn = function()
-      return require("packer.util").float { border = "rounded" }
+require('lazy').setup({
+  -- dependencies
+  "nvim-lua/popup.nvim",
+  "nvim-lua/plenary.nvim",
+  "winston0410/cmd-parser.nvim",
+
+  -- mason
+  "williamboman/mason.nvim",
+  "williamboman/mason-lspconfig.nvim",
+  "jayp0521/mason-nvim-dap.nvim",
+
+  -- general
+  "kyazdani42/nvim-web-devicons",
+  "windwp/nvim-autopairs",
+  "norcalli/nvim-colorizer.lua",
+  "folke/todo-comments.nvim",
+  "winston0410/range-highlight.nvim",
+  "jghauser/fold-cycle.nvim",
+  "karb94/neoscroll.nvim",
+  "sudormrfbin/cheatsheet.nvim",
+  "petertriho/nvim-scrollbar",
+  {
+    "dstein64/vim-startuptime",
+    cmd = "StartupTime"
+  },
+
+  -- colorscheme
+  "navarasu/onedark.nvim",
+  "folke/tokyonight.nvim",
+
+  -- comments
+  "numToStr/Comment.nvim",
+  "JoosepAlviste/nvim-ts-context-commentstring",
+
+  -- treesitter
+  "nvim-treesitter/nvim-treesitter",
+  "nvim-treesitter/nvim-treesitter-refactor",
+  {
+    "nvim-treesitter/playground",
+    cmd = { "TSPlaygroundToggle", "TSHighlightCapturesUnderCursor" }
+  },
+
+  -- completion
+  "hrsh7th/nvim-cmp",           -- completion plugin
+  "hrsh7th/cmp-buffer",         -- buffer completions
+  "hrsh7th/cmp-path",           -- path completions
+  "hrsh7th/cmp-cmdline",        -- cmdline completions
+  "hrsh7th/cmp-nvim-lsp",       -- lsp completion
+  "hrsh7th/cmp-nvim-lua",       -- nvim lua completion
+  "saadparwaiz1/cmp_luasnip",   -- snippet completions
+
+  -- snippets
+  "L3MON4D3/LuaSnip",
+  "rafamadriz/friendly-snippets",
+
+  -- lsp
+  "neovim/nvim-lspconfig",
+  "jose-elias-alvarez/null-ls.nvim",
+  "kosayoda/nvim-lightbulb",
+  "ray-x/lsp_signature.nvim",
+  "onsails/lspkind.nvim",
+  {
+    "weilbith/nvim-code-action-menu",
+    cmd = "CodeActionMenu",
+    config = function()
+      vim.g.code_action_menu_window_border = "rounded"
+      vim.g.code_action_menu_show_details = false
     end
-  }
+  },
+  {
+    "folke/trouble.nvim",
+    cmd = { "Trouble", "TroubleToggle" },
+    config = function() require("trouble").setup() end
+  },
+
+  -- language specific
+  "simrat39/rust-tools.nvim",
+  {
+    'saecki/crates.nvim',
+    ft = { "toml" },
+    config = function() require('crates').setup() end,
+  },
+
+  -- tests
+  {
+    "klen/nvim-test",
+    cmd = { "TestNearest", "TestSuite", "TestFile" },
+    config = function() require "user.tests" end
+  },
+
+  -- debugging
+  "mfussenegger/nvim-dap",
+  "rcarriga/nvim-dap-ui",
+
+  -- file tree
+  {
+    "kyazdani42/nvim-tree.lua",
+    cmd = { "NvimTreeToggle", "NvimTreeFocus", "NvimTreeOpen" },
+    config = function() require "user.filetree" end
+  },
+
+  -- git
+  {
+    "lewis6991/gitsigns.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function() require "user.git" end
+  },
+  {
+    "tpope/vim-fugitive",
+    cmd = { "Git", "Gdiffsplit", "Gvdiffsplit" }
+  },
+  {
+    "samoshkin/vim-mergetool",
+    cmd = { "MergetoolStart", "MergetoolStop", "MergetoolToggle" },
+    config = function() require "user.mergetool" end
+  },
+
+  -- buffers
+  "moll/vim-bbye",
+  {
+    "akinsho/bufferline.nvim",
+    version = "v3.*"
+  },
+
+  -- statusline
+  "nvim-lualine/lualine.nvim",
+
+  -- telescope
+  {
+    "nvim-telescope/telescope.nvim",
+    cmd = { "Telescope", "Cheatsheet" },
+    config = function() require "user.telescope" end
+  },
+
+  -- terminal
+  {
+    "akinsho/toggleterm.nvim",
+    cmd = "ToggleTerm",
+    config = function() require "user.terminal" end
+  },
+
+  -- project
+  "ahmedkhalf/project.nvim",
+
+  -- dashboard
+  "goolord/alpha-nvim",
 })
-
-return packer.startup(
-  function(use)
-    -- packer
-    use "wbthomason/packer.nvim"
-
-    -- impacient
-    use "lewis6991/impatient.nvim"
-
-    -- dependencies
-    use "antoinemadec/FixCursorHold.nvim"
-    use "winston0410/cmd-parser.nvim"
-    use "nvim-lua/popup.nvim"
-    use "nvim-lua/plenary.nvim"
-
-    -- mason
-    use "williamboman/mason.nvim"
-    use "williamboman/mason-lspconfig.nvim"
-    use "jayp0521/mason-nvim-dap.nvim"
-
-    -- general
-    use "kyazdani42/nvim-web-devicons"
-    use "windwp/nvim-autopairs"
-    use "norcalli/nvim-colorizer.lua"
-    use "folke/todo-comments.nvim"
-    use "winston0410/range-highlight.nvim"
-    use "jghauser/fold-cycle.nvim"
-    use "karb94/neoscroll.nvim"
-    use "sudormrfbin/cheatsheet.nvim"
-    use "dstein64/vim-startuptime"
-
-    -- colorscheme
-    use "navarasu/onedark.nvim"
-    use 'folke/tokyonight.nvim'
-
-    -- comments
-    use "numToStr/Comment.nvim"
-    use "JoosepAlviste/nvim-ts-context-commentstring"
-
-    -- treesitter
-    use "nvim-treesitter/nvim-treesitter"
-    use "nvim-treesitter/nvim-treesitter-refactor"
-    use {
-      "nvim-treesitter/playground",
-      opt = true,
-      cmd = { "TSPlaygroundToggle", "TSHighlightCapturesUnderCursor" }
-    }
-
-    -- completion
-    use "hrsh7th/nvim-cmp"         -- completion plugin
-    use "hrsh7th/cmp-buffer"       -- buffer completions
-    use "hrsh7th/cmp-path"         -- path completions
-    use "hrsh7th/cmp-cmdline"      -- cmdline completions
-    use "hrsh7th/cmp-nvim-lsp"     -- lsp completion
-    use "hrsh7th/cmp-nvim-lua"     -- nvim lua completion
-    use "saadparwaiz1/cmp_luasnip" -- snippet completions
-
-    -- snippets
-    use "L3MON4D3/LuaSnip"
-    use "rafamadriz/friendly-snippets"
-
-    -- lsp
-    use "neovim/nvim-lspconfig"
-    use "jose-elias-alvarez/null-ls.nvim"
-    use "kosayoda/nvim-lightbulb"
-    use "ray-x/lsp_signature.nvim"
-    use "onsails/lspkind.nvim"
-    use {
-      "weilbith/nvim-code-action-menu",
-      opt = true,
-      cmd = { "CodeActionMenu" },
-      config = function()
-        vim.g.code_action_menu_window_border = "rounded"
-        vim.g.code_action_menu_show_details = false
-      end
-    }
-    use {
-      "folke/trouble.nvim",
-      opt = true,
-      cmd = { "Trouble", "TroubleToggle" },
-      config = function() require("trouble").setup() end
-    }
-
-    -- language specific
-    use "simrat39/rust-tools.nvim"
-    use {
-      'saecki/crates.nvim',
-      opt = true,
-      ft = { "toml" },
-      config = function() require('crates').setup() end,
-    }
-
-    -- tests
-    use {
-      "klen/nvim-test",
-      opt = true,
-      cmd = { "TestNearest", "TestSuite", "TestFile" },
-      config = function() require "user.tests" end
-    }
-
-    -- debugging
-    use "mfussenegger/nvim-dap"
-    use "rcarriga/nvim-dap-ui"
-
-    -- file tree
-    use {
-      "kyazdani42/nvim-tree.lua",
-      tag = "nightly",
-      opt = true,
-      cmd = { "NvimTreeToggle", "NvimTreeFocus", "NvimTreeOpen" },
-      config = function() require "user.filetree" end
-    }
-
-    -- git
-    use "lewis6991/gitsigns.nvim"
-    use {
-      "tpope/vim-fugitive",
-      opt = true,
-      cmd = { "Git", "Gdiffsplit", "Gvdiffsplit" }
-    }
-    use {
-      "samoshkin/vim-mergetool",
-      opt = true,
-      cmd = { "MergetoolStart", "MergetoolStop", "MergetoolToggle" },
-      config = function() require "user.mergetool" end
-    }
-
-    -- buffers
-    use "moll/vim-bbye"
-    use {
-      "akinsho/bufferline.nvim",
-      tag = "v2.*"
-    }
-
-    -- statusline
-    use "nvim-lualine/lualine.nvim"
-
-    -- telescope
-    use {
-      "nvim-telescope/telescope.nvim",
-      opt = true,
-      cmd = { "Telescope", "Cheatsheet" },
-      config = function() require "user.telescope" end
-    }
-
-    -- terminal
-    use {
-      "akinsho/toggleterm.nvim",
-      tag = "*",
-      opt = true,
-      cmd = { "ToggleTerm" },
-      config = function() require "user.terminal" end
-    }
-
-    -- project
-    use "ahmedkhalf/project.nvim"
-
-    -- dashboard
-    use "goolord/alpha-nvim"
-
-    -- misc
-    use "petertriho/nvim-scrollbar"
-
-    if packer_bootstrap then
-      require("packer").sync()
-    end
-  end
-)

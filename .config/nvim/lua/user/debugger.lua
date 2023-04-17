@@ -1,24 +1,11 @@
 if not DebuggerInitialized then
-  vim.notify('in debugger.lua')
-
   local success, dap = pcall(require, "dap")
   if not success then
     return
   end
 
-  vim.notify('signs')
-
   vim.fn.sign_define('DapBreakpoint', { text = '🛑', texthl = 'ErrorMsg', linehl = '', numhl = '' })
   vim.fn.sign_define('DapStopped', { text = ' ', texthl = 'Substitute', linehl = 'Substitute', numhl = 'Substitute' })
-
-  local success_mason_dap, mason_dap = pcall(require, "mason-nvim-dap")
-  if success_mason_dap then
-    mason_dap.setup_handlers({
-      function(source_name)
-        require("mason-nvim-dap.automatic_setup")(source_name)
-      end,
-    })
-  end
 
   local success_dapui, dapui = pcall(require, "dapui")
   if success_dapui then
@@ -66,9 +53,11 @@ if not DebuggerInitialized then
     dap.listeners.after.event_initialized["dapui_config"] = function()
       dapui.open()
     end
+
     dap.listeners.before.event_terminated["dapui_config"] = function()
       dapui.close()
     end
+
     dap.listeners.before.event_exited["dapui_config"] = function()
       dapui.close()
     end

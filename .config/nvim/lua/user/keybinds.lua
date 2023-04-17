@@ -93,6 +93,9 @@ keymap("n", "<leader>r", ":ToggleRelative<CR>", silent)
 keymap("n", "<leader>o", ":NvimTreeToggle<CR>", silent)
 keymap("n", "<leader>e", ":NvimTreeFocus<CR>", silent)
 
+-- lazy
+keymap("n", "<leader>L", ":Lazy<CR>", silent)
+
 -- mason
 keymap("n", "<leader>M", ":Mason<CR>", silent)
 
@@ -111,6 +114,7 @@ keymap("n", "<leader>tg", ":Telescope live_grep<CR>", silent)
 keymap("n", "<leader>tc", ":Telescope commands<CR>", silent)
 keymap("n", "<leader>tv", ":Cheatsheet<CR>", silent)
 keymap("n", "<leader>tp", ":Telescope projects<CR>", silent)
+keymap("n", "<leader>ts", ":Telescope lsp_document_symbols<CR>", silent)
 
 -- bufferline
 keymap("n", "<leader>B", ":BufferLineSortByExtension<CR>", silent)

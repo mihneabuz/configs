@@ -24,6 +24,6 @@ local success_dap, mason_dap = pcall(require, "mason-nvim-dap")
 if success_dap then
   mason_dap.setup({
     ensure_installed = { "lldb", "delve", "python" },
-    automatic_setup = true,
+    automatic_installation = true,
   })
 end

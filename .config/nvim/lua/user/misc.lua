@@ -37,24 +37,6 @@ if scroll_ok then
   })
 end
 
-local scrollbar_ok, scrollbar = pcall(require, "scrollbar")
-if scrollbar_ok then
-  scrollbar.setup({
-    handle = {
-      blend = 0,
-      highlight = "lualine_c_normal"
-    },
-    handlers = {
-      cursor = false,
-      diagnostic = true,
-      gitsigns = true,
-      handle = true,
-      search = false,
-      ale = false,
-    },
-  })
-end
-
 local fold_ok, fold_cycle = pcall(require, "fold-cycle")
 if fold_ok then
   fold_cycle.setup()
