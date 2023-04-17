@@ -5,8 +5,7 @@ end
 
 local todo_ok, todo = pcall(require, "todo-comments")
 if todo_ok then
-  todo.setup({
-    keywords = {
+  todo.setup({ keywords = {
       FIX  = { icon = " ", color = "#ff5135", alt = { "BUG", "ISSUE" } },
       TODO = { icon = " ", color = "#ffcc66", alt = { "DO" } },
       WARN = { icon = " ", color = "#ff8800", alt = { "WARNING" } },
@@ -42,8 +41,8 @@ local scrollbar_ok, scrollbar = pcall(require, "scrollbar")
 if scrollbar_ok then
   scrollbar.setup({
     handle = {
-      blend = 40,
-      highlight = "CursorColumn"
+      blend = 0,
+      highlight = "lualine_c_normal"
     },
     handlers = {
       cursor = false,

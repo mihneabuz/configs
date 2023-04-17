@@ -26,6 +26,9 @@ local time = function()
 	return require("os").date("%H:%M")
 end
 
+local function pad(str, len)
+  return str..string.rep(' ', len - string.len(str))
+end
 
 lualine.setup({
 	options = {
@@ -35,13 +38,13 @@ lualine.setup({
     section_separators = { left = '', right = ''},
     disabled_filetypes = {},
     always_divide_middle = true,
-    globalstatus = false,
+    globalstatus = true,
   },
   sections = {
-    lualine_a = { 'mode' },
+    lualine_a = { { 'mode', fmt = function(s) return pad(s, 7) end } },
     lualine_b = { diagnostics, 'branch', 'diff' },
     lualine_c = { 'filename'},
-    lualine_x = { time, 'encoding', 'filetype'},
+    lualine_x = { time, 'encoding', 'filesize', 'filetype' },
     lualine_y = { 'location' },
     lualine_z = { progress }
   },
@@ -54,7 +57,10 @@ lualine.setup({
     lualine_z = {}
   },
   tabline = {},
+  winbar = {},
+  inactive_winbar = {},
   extensions = {
-		"nvim-tree"
+		"nvim-tree",
+    "nvim-dap-ui"
 	}
 })

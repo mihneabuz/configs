@@ -7,7 +7,7 @@ set -Ux fish_color_quote green
 set -Ux fish_color_redirection --bold yellow
 set -Ux fish_color_end --bold yellow
 set -Ux fish_color_error red
-set -Ux fish_color_param cyan
+set -Ux fish_color_param --bold brwhite
 set -Ux fish_color_valid_path cyan
 set -Ux fish_color_comment 565f89
 set -Ux fish_color_selection --background=33467c
