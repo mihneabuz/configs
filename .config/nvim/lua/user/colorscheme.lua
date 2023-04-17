@@ -4,7 +4,7 @@ if success_onedark then
     onedark.setup({
       transparent = true,
       colors = {
-        fg = "#aeb5c2"
+        fg = "#b2b9c6"
       }
     })
 
