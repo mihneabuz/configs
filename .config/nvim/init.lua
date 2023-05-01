@@ -1,20 +1,6 @@
-require 'user.base'
-require 'user.keybinds'
-require 'user.bootstrap'
-require 'user.colorscheme'
+Colorscheme = os.getenv("COLORSCHEME")
 
-local clean = os.getenv('NVIM_CLEAN')
-if not clean then
-  require 'user.treesitter'
-  require 'user.autopairs'
-  require 'user.comment'
-  require 'user.lualine'
-  require 'user.bufferline'
-  require 'user.autocommands'
-  require 'user.completion'
-  require 'user.mason'
-  require 'user.lsp'
-  require 'user.misc'
-  require 'user.dashboard'
-  require 'user.neovide'
-end
+require("config.options")
+require("config.lazy")
+require("config.keymaps")
+require("config.autocmds")
