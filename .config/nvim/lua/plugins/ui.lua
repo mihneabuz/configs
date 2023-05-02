@@ -88,7 +88,7 @@ return {
             end,
           }
         },
-        highlights = vim.deepcopy(require("themes").default.bufferline),
+        highlights = require("themes").default.bufferline,
       }
     end,
   },
@@ -127,11 +127,12 @@ return {
       }
 
       local lsp = function()
-        local clients = vim.lsp.get_active_clients()
+        local clients = vim.lsp.get_active_clients({ bufnr = 0 })
         local names = {}
         for i=#clients, 1, -1 do
           names[#names + 1] = clients[i].name
         end
+
         return string.format(" LSP [%s]", table.concat(names, ", "))
       end
 

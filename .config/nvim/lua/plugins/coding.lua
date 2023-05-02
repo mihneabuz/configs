@@ -3,6 +3,7 @@ return {
   -- snippets
   {
     "L3MON4D3/LuaSnip",
+    build = "make install_jsregexp",
     dependencies = {
       "rafamadriz/friendly-snippets",
       config = function()
@@ -17,14 +18,23 @@ return {
       {
         "<tab>",
         function()
-          return require("luasnip").jumpable(1) and "<Plug>luasnip-jump-next" or "<tab>"
+          local luasnip = require("luasnip")
+          return luasnip.locally_jumpable() and luasnip.jump(1) or "<tab>"
         end,
         expr = true,
         silent = true,
         mode = "i",
       },
-      { "<tab>",   function() require("luasnip").jump(1) end,  mode = "s" },
-      { "<s-tab>", function() require("luasnip").jump(-1) end, mode = { "i", "s" } },
+      {
+        "<s-tab>",
+        function()
+          local luasnip = require("luasnip")
+          return luasnip.locally_jumpable() and luasnip.jump(-1) or "<tab>"
+        end,
+        expr = true,
+        silent = true,
+        mode = "i",
+      },
     },
   },
 
@@ -37,16 +47,16 @@ return {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
-      "saadparwaiz1/cmp_luasnip",
       "hrsh7th/cmp-cmdline",
       "hrsh7th/cmp-nvim-lua",
+      "saadparwaiz1/cmp_luasnip",
       "onsails/lspkind.nvim"
     },
     opts = function()
       local cmp = require("cmp")
 
       local format = require("lspkind").cmp_format({
-        mode = "symbol_text",
+        mode = "symbol",
         elipsis_char = "..",
         before = function(_, item)
           item.abbr = string.sub(item.abbr, 1, 32)
@@ -82,7 +92,7 @@ return {
           { name = "nvim_lua", priority = 40 },
           { name = "luasnip",  priority = 30 },
           { name = "path",     priority = 20 },
-          { name = "buffer" },
+          { name = "buffer",   priority = 10 },
         }),
         formatting = {
           fields = { "kind", "abbr" },

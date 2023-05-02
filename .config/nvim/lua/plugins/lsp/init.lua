@@ -89,16 +89,9 @@ return {
     end,
   },
 
-  -- auto signature
-  {
-    "ray-x/lsp_signature.nvim",
-    lazy = true
-  },
-
   -- lsp additions
   {
     "glepnir/lspsaga.nvim",
-    lazy = false,
     cmd = "Lspsaga",
     opts = {
       finder = {
@@ -134,6 +127,11 @@ return {
       vim.api.nvim_set_hl(0, "Normal", {})
     end
   },
+  {
+    "ray-x/lsp_signature.nvim",
+    lazy = true
+  },
+
 
   --  formatters, linters, code actions
   {
@@ -165,17 +163,6 @@ return {
         sources = sources
       }
     end,
-  },
-
-  -- neovim
-  {
-    "folke/neodev.nvim",
-    ft = "lua",
-    opts = {
-      experimental = {
-        pathStrict = true
-      }
-    }
   },
 
   -- rust

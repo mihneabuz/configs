@@ -58,10 +58,9 @@ M.on_attach = function(client, bufnr)
 
   keymap("<leader>r", "<cmd>Lspsaga rename ++project<CR>")
 
-  keymap("<leader>F", vim.lsp.buf.format)
-  keymap("<leader>F", vim.lsp.buf.format, "v")
+  keymap("<leader>F", vim.lsp.buf.format, { "n", "v" })
 
-  keymap("<leader>ca", "<cmd>Lspsaga code_action<CR>")
+  keymap("<leader>ca", "<cmd>Lspsaga code_action<CR>", { "n", "v" })
   keymap("<leader>cl", function()
     vim.lsp.codelens.run()
     vim.lsp.codelens.refresh()
