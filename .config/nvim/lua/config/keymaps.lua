@@ -63,17 +63,29 @@ command("ToggleRelative", toggle_relative, { nargs = 0 })
 keymap("n", "<leader>R", ":ToggleRelative<CR>", silent)
 
 -- tab size
+local long = false
 local function long_tab()
   vim.opt.tabstop = 4
   vim.opt.shiftwidth = 4
+  long = true
 end
 local function short_tab()
   vim.opt.tabstop = 2
   vim.opt.shiftwidth = 2
+  long = false
+end
+local function toggle_tab()
+  if (long) then
+    short_tab()
+  else
+    long_tab()
+  end
 end
 
 command("TabLong", long_tab, { nargs = 0 })
 command("TabShort", short_tab, { nargs = 0 })
+command("TabToggle", toggle_tab, { nargs = 0 })
+keymap("n", "<leader>T", ":TabToggle<cr>", silent)
 
 -- stupid mac tilde
 keymap("c", "±", "~", { noremap = true })

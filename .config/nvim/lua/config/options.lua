@@ -34,12 +34,13 @@ opt.clipboard = "unnamedplus"
 opt.completeopt = "menu,menuone,noselect"
 opt.conceallevel = 3
 opt.confirm = false
-opt.formatoptions = "jcroqlnt"
+opt.formatoptions = "jcrqlnt"
 opt.grepformat = "%f:%l:%c:%m"
 opt.grepprg = "rg --vimgrep"
 opt.inccommand = "nosplit"
 opt.laststatus = 0
 opt.list = true
+opt.listchars = { tab = '· ', nbsp = '' }
 opt.mouse = "a"
 opt.pumblend = 0
 opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize" }

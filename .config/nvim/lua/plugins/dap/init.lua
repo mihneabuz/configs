@@ -89,16 +89,13 @@ return {
   {
     "nvim-neotest/neotest",
     dependencies = { "vim-test/vim-test" },
-    keys = function()
-      local test = require("neotest")
-      return {
-        { "<leader>z",  function() test.run.run() end },
-        { "<leader>aa", function() test.run.run(vim.fn.expand("%")) end },
-        { "<leader>ad", function() test.run.run({ strategy = "dap" }) end },
-        { "<leader>al", function() test.output.open() end },
-        { "<leader>as", function() test.summary.toggle() end },
-      }
-    end,
+    keys = {
+      { "<leader>z",  function() require("neotest").run.run() end },
+      { "<leader>aa", function() require("neotest").run.run(vim.fn.expand("%")) end },
+      { "<leader>ad", function() require("neotest").run.run({ strategy = "dap" }) end },
+      { "<leader>al", function() require("neotest").output.open() end },
+      { "<leader>as", function() require("neotest").summary.toggle() end },
+    },
     opts = function()
       return {
         adapters = {

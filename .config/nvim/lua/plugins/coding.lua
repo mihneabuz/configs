@@ -198,6 +198,14 @@ return {
         border = "rounded",
         winblend = 0,
       },
+      highlights = {
+        NormalFloat = {
+          link = 'NormalFloat'
+        },
+        FloatBorder = {
+          link = 'FloatBorder'
+        },
+      },
     }
   },
 }

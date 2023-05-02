@@ -22,10 +22,16 @@ M.on_attach = function(client, bufnr)
     vim.api.nvim_create_augroup("DocumentHighlight", { clear = true })
     vim.api.nvim_create_autocmd("CursorHold", {
       group = "DocumentHighlight",
-      callback = vim.lsp.buf.document_highlight
+      buffer = bufnr,
+      callback = function()
+        if vim.api.nvim_buf_line_count(0) < 10000 then
+          vim.lsp.buf.document_highlight()
+        end
+      end
     })
     vim.api.nvim_create_autocmd("CursorMoved", {
       group = "DocumentHighlight",
+      buffer = bufnr,
       callback = vim.lsp.buf.clear_references
     })
   end

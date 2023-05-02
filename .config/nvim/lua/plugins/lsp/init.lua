@@ -98,17 +98,24 @@ return {
   -- lsp additions
   {
     "glepnir/lspsaga.nvim",
+    lazy = false,
     cmd = "Lspsaga",
     opts = {
       finder = {
-        max_height = 0.4,
-        min_width = 10
+        max_height = 0.5,
+        min_width = 10,
+         keys = {
+          expand_or_jump = 'l',
+        },
       },
       outline = {
         min_width = 16
       },
-      lightbuild = {
+      lightbulb = {
         enable = false,
+        enable_in_insert = false,
+        sign = false,
+        virtual_text = false,
       },
       symbol_in_winbar = {
         enable = false,
