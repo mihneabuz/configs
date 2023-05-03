@@ -5,13 +5,14 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     opts = {
       signs = {
-        add          = { text = "▎" },
-        change       = { text = "▎" },
+        add          = { text = "🭲" },
+        change       = { text = "🭲" },
         delete       = { text = "" },
         topdelete    = { text = "" },
-        changedelete = { text = "▎" },
-        untracked    = { text = "▎" },
+        changedelete = { text = "🭲" },
+        untracked    = { text = "🭲" },
       },
+      sign_priority = 10,
       on_attach = function(buffer)
         local gs = package.loaded.gitsigns
 
@@ -19,12 +20,12 @@ return {
           vim.keymap.set(mode, l, r, { buffer = buffer, desc = desc })
         end
 
-        keymap("n", "]h", gs.next_hunk, "Next Hunk")
-        keymap("n", "[h", gs.prev_hunk, "Prev Hunk")
-        keymap("n", "<leader>ghs", ":Gitsigns stage_hunk<CR>", "Stage Hunk")
-        keymap("n", "<leader>ghr", ":Gitsigns reset_hunk<CR>", "Reset Hunk")
-        keymap("n", "<leader>gb", function() gs.blame_line({ full = true }) end, "Blame Line")
-        keymap("n", "<leader>ghd", gs.diffthis, "Diff This")
+        keymap("n", "]h", gs.next_hunk, "next hunk")
+        keymap("n", "[h", gs.prev_hunk, "nrev hunk")
+        keymap("n", "<leader>ghs", ":Gitsigns stage_hunk<CR>", "stage hunk")
+        keymap("n", "<leader>ghr", ":Gitsigns reset_hunk<CR>", "seset hunk")
+        keymap("n", "<leader>gb", function() gs.blame_line({ full = true }) end, "blame line")
+        keymap("n", "<leader>ghd", gs.diffthis, "diff")
       end,
       trouble = false,
     },

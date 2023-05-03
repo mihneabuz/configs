@@ -19,7 +19,7 @@ return {
         "<tab>",
         function()
           local luasnip = require("luasnip")
-          return luasnip.locally_jumpable() and luasnip.jump(1) or "<tab>"
+          return luasnip.locally_jumpable() and "<Plug>luasnip-jump-next" or "<tab>"
         end,
         expr = true,
         silent = true,
@@ -29,7 +29,7 @@ return {
         "<s-tab>",
         function()
           local luasnip = require("luasnip")
-          return luasnip.locally_jumpable() and luasnip.jump(-1) or "<tab>"
+          return luasnip.locally_jumpable() and "<Plug>luasnip-jump-prev" or "<tab>"
         end,
         expr = true,
         silent = true,

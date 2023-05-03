@@ -3,8 +3,8 @@ return {
     "rcarriga/nvim-dap-ui",
     dependencies = { "jay-babu/mason-nvim-dap.nvim" },
     keys = {
-      { "<leader>DB", function() require("dap").toggle_breakpoint() end, desc = "toggle breakpoint" },
-      { "<leader>DD", function() require("dap").continue() end,          desc = "run debugger" },
+      { "<leader>DB", function() require("plugins.dap.handlers").breakpoint() end, desc = "toggle breakpoint" },
+      { "<leader>DD", function() require("dap").continue() end,                    desc = "run debugger" },
     },
     opts = {
       icons = {
@@ -70,8 +70,7 @@ return {
     "mfussenegger/nvim-dap",
     lazy = true,
     config = function()
-      vim.fn.sign_define("DapBreakpoint", { text = " ", texthl = "ErrorMsg", linehl = "", numhl = "" })
-      vim.fn.sign_define("DapStopped", { text = " ", texthl = "PmenuSel", linehl = "PmenuSel", numhl = "PmenuSel" })
+      require("plugins.dap.handlers").sign_setup()
     end
   },
 
@@ -82,7 +81,7 @@ return {
     opts = {
       ensure_installed = { "lldb", "delve", "python" },
       automatic_installation = true,
-      handlers = {}
+      handlers = require("plugins.dap.handlers").setup
     },
   },
 
@@ -101,7 +100,7 @@ return {
         adapters = {
           require("neotest-rust")({
             args = { "--no-capture" },
-            dap_adapter = "lldb",
+            dap_adapter = "rt_lldb",
           }),
           require("neotest-go")({
             experimental = {
@@ -114,6 +113,10 @@ return {
           }),
         }
       }
+    end,
+    config = function(_, opts)
+      require("neotest").setup(opts)
+      require("plugins.dap.handlers").set_signcolumn()
     end
   },
 
