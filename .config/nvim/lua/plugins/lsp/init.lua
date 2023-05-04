@@ -24,12 +24,12 @@ return {
         "rust_analyzer",
         "gopls",
         "clangd",
-        "pyright",
         "tsserver",
         "emmet_ls",
         "jsonls",
         "cssls",
-        "tailwindcss"
+        "tailwindcss",
+        "pylsp"
       },
     },
   },

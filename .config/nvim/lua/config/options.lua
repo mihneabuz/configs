@@ -40,7 +40,7 @@ opt.grepprg = "rg --vimgrep"
 opt.inccommand = "nosplit"
 opt.laststatus = 0
 opt.list = true
-opt.listchars = { tab = '· ', nbsp = '' }
+opt.listchars = { tab = "· ", nbsp = "" }
 opt.mouse = "a"
 opt.pumblend = 0
 opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize" }
@@ -62,7 +62,7 @@ if vim.fn.has("nvim-0.9.0") == 1 then
   opt.shortmess:append({ C = true })
 end
 
-vim.api.nvim_set_option("clipboard", "unnamed")
+vim.api.nvim_set_option("clipboard", "unnamedplus")
 
 vim.cmd([[
   let g:loaded_python_provider=0

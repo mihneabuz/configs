@@ -16,23 +16,11 @@ return {
     },
     keys = {
       {
-        "<tab>",
+        "<S-tab>",
         function()
           local luasnip = require("luasnip")
-          return luasnip.locally_jumpable() and "<Plug>luasnip-jump-next" or "<tab>"
+          return luasnip.locally_jumpable() and luasnip.jump(1)
         end,
-        expr = true,
-        silent = true,
-        mode = "i",
-      },
-      {
-        "<s-tab>",
-        function()
-          local luasnip = require("luasnip")
-          return luasnip.locally_jumpable() and "<Plug>luasnip-jump-prev" or "<tab>"
-        end,
-        expr = true,
-        silent = true,
         mode = "i",
       },
     },
@@ -117,30 +105,6 @@ return {
       { "<leader>dD", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "workspace diagnostics" },
       { "<leader>dQ", "<cmd>TroubleToggle loclist<cr>",               desc = "location list" },
       { "<leader>dq", "<cmd>TroubleToggle quickfix<cr>",              desc = "quickfix list" },
-      {
-        "[d",
-        function()
-          local trouble = require("trouble")
-          if trouble.is_open() then
-            trouble.previous({ skip_groups = true, jump = true })
-          else
-            vim.cmd.cprev()
-          end
-        end,
-        desc = "prev trouble",
-      },
-      {
-        "]d",
-        function()
-          local trouble = require("trouble")
-          if trouble.is_open() then
-            trouble.next({ skip_groups = true, jump = true })
-          else
-            vim.cmd.cnext()
-          end
-        end,
-        desc = "next trouble",
-      },
     },
   },
 
@@ -210,10 +174,10 @@ return {
       },
       highlights = {
         NormalFloat = {
-          link = 'NormalFloat'
+          link = "NormalFloat"
         },
         FloatBorder = {
-          link = 'FloatBorder'
+          link = "FloatBorder"
         },
       },
     }

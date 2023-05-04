@@ -2,10 +2,17 @@ return {
   opts = {
     transparent = true,
     colors = {
-      fg = "#b2b9c6"
+      fg = "#b2b9c6",
     },
     highlights = {
-      ["MatchParen"] = { fg = "$yellow",  fmt = "bold" }
+      ["MatchParen"] = { fg = "$yellow", fmt = "bold" },
+      ["NormalFloat"] = { bg = "$bg0" },
+      ["FloatBorder"] = { bg = "$bg0" },
+      ["Pmenu"] = { bg = "$bg0" },
+      ["DiagnosticVirtualTextError"] = { bg = "clear" },
+      ["DiagnosticVirtualTextWarn"] = { bg = "clear" },
+      ["DiagnosticVirtualTextInfo"] = { bg = "clear" },
+      ["DiagnosticVirtualTextHint"] = { bg = "clear" },
     }
   },
 
@@ -41,6 +48,11 @@ return {
         fg = { attribute = "fg", highlight = "Type" },
         bg = { attribute = "bg", highlight = "lualine_c_normal" },
       },
+      pick = {
+        bg = { attribute = "bg", highlight = "lualine_c_normal" },
+        bold = true,
+        italic = true,
+      },
 
       buffer_selected = {
         fg = { attribute = "fg", highlight = "Function" },
@@ -61,6 +73,11 @@ return {
         fg = { attribute = "fg", highlight = "Type" },
         bg = { attribute = "bg", highlight = "lualine_b_normal" },
       },
+      pick_selected = {
+        bg = { attribute = "bg", highlight = "lualine_b_normal" },
+        bold = true,
+        italic = true,
+      },
 
       buffer_visible = {
         fg = { attribute = "fg", highlight = "Function" },
@@ -77,6 +94,11 @@ return {
       modified_visible = {
         fg = { attribute = "fg", highlight = "Type" },
         bg = { attribute = "bg", highlight = "lualine_c_normal" },
+      },
+      pick_visible = {
+        bg = { attribute = "bg", highlight = "lualine_c_normal" },
+        bold = true,
+        italic = true,
       },
     }
   end

@@ -33,7 +33,7 @@ autocmd("FileType", {
     "spectre_panel",
     "startuptime",
     "tsplayground",
-    "checkhealth",
+    "checkhealth"
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false

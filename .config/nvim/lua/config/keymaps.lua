@@ -1,52 +1,60 @@
 local command = vim.api.nvim_create_user_command
-local keymap = vim.api.nvim_set_keymap
-local silent = { noremap = true, silent = true }
+local keymap = function(mode, lhs, rhs)
+  vim.keymap.set(mode, lhs, rhs, { noremap = true, silent = true })
+end
 
 -- window navigation
-keymap("n", "<C-h>", "<C-w>h", silent)
-keymap("n", "<C-j>", "<C-w>j", silent)
-keymap("n", "<C-k>", "<C-w>k", silent)
-keymap("n", "<C-l>", "<C-w>l", silent)
-
-keymap("t", "<C-h>", ":wincmd h<CR>", silent)
-keymap("t", "<C-j>", ":wincmd j<CR>", silent)
-keymap("t", "<C-k>", ":wincmd k<CR>", silent)
-keymap("t", "<C-l>", ":wincmd l<CR>", silent)
+keymap("n", "<C-h>", "<C-w>h")
+keymap("n", "<C-j>", "<C-w>j")
+keymap("n", "<C-k>", "<C-w>k")
+keymap("n", "<C-l>", "<C-w>l")
 
 -- window resizing
-keymap("n", "<C-Up>", ":resize -2<CR>", silent)
-keymap("n", "<C-Donw>", ":resize +2<CR>", silent)
-keymap("n", "<C-Left>", ":vertical resize -2<CR>", silent)
-keymap("n", "<C-Right>", ":vertical resize +2<CR>", silent)
+keymap("n", "<C-Up>", ":resize -2<CR>")
+keymap("n", "<C-Donw>", ":resize +2<CR>")
+keymap("n", "<C-Left>", ":vertical resize -2<CR>")
+keymap("n", "<C-Right>", ":vertical resize +2<CR>")
 
 -- splits
-keymap("n", "cc", ":split<CR>", silent)
-keymap("n", "cv", ":vsplit<CR>", silent)
-keymap("n", "cx", ":q<CR>", silent)
+keymap("n", "cc", ":split<CR>")
+keymap("n", "cv", ":vsplit<CR>")
+keymap("n", "cx", ":q<CR>")
 
 -- cycle buffers
-keymap("n", "<S-l>", ":bnext<CR>", silent)
-keymap("n", "<S-h>", ":bprev<CR>", silent)
+keymap("n", "<S-l>", ":bnext<CR>")
+keymap("n", "<S-h>", ":bprev<CR>")
 
 -- close window
-keymap("n", "<leader>w", ":close<CR>", silent)
+keymap("n", "<leader>w", ":close<CR>")
 
 -- close neovim
-keymap("n", "<leader>Q", ":exit<CR>", silent)
+keymap("n", "<leader>Q", ":exit<CR>")
 
 -- jk to leave insert mode and terminal mode
-keymap("i", "jk", "<Esc>", silent)
-keymap("t", "jk", [[<C-\><C-n>]], silent)
+keymap("i", "jk", "<Esc>")
+keymap("t", "jk", [[<C-\><C-n>]])
 
 -- esc to leave terminal mode
-keymap("t", "<Esc>", [[<C-\><C-n>]], silent)
+keymap("t", "<Esc>", [[<C-\><C-n>]])
 
 -- clear highligh
-keymap("n", "<leader>h", ":noh<CR>", silent)
+keymap("n", "<leader>h", ":noh<CR>")
 
 -- better indent
-keymap("v", "<", "<gv", silent)
-keymap("v", ">", ">gv", silent)
+keymap("v", "<", "<gv")
+keymap("v", ">", ">gv")
+
+-- quickfix
+keymap("n", "[q", vim.cmd.cprev)
+keymap("n", "]q", vim.cmd.cnext)
+
+-- tab
+keymap("n", "<leader><tab>", ":tabnew<cr>")
+
+-- highlights under cursor
+if vim.fn.has("nvim-0.9.0") == 1 then
+  keymap("n", "<leader>ui", vim.show_pos)
+end
 
 -- toggle realtive number
 local relative = true
@@ -60,7 +68,7 @@ local toggle_relative = function()
   end
 end
 command("ToggleRelative", toggle_relative, { nargs = 0 })
-keymap("n", "<leader>R", ":ToggleRelative<CR>", silent)
+keymap("n", "<leader>R", ":ToggleRelative<CR>")
 
 -- tab size
 local long = false
@@ -85,7 +93,7 @@ end
 command("TabLong", long_tab, { nargs = 0 })
 command("TabShort", short_tab, { nargs = 0 })
 command("TabToggle", toggle_tab, { nargs = 0 })
-keymap("n", "<leader>T", ":TabToggle<cr>", silent)
+keymap("n", "<leader>T", ":TabToggle<cr>")
 
--- stupid mac tilde
-keymap("c", "±", "~", { noremap = true })
+-- hardcore
+keymap("i", "<esc>", "")

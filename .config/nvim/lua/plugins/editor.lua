@@ -51,7 +51,7 @@ return {
       },
       default_component_configs = {
         indent = {
-          with_expanders = true, -- if nil and file nesting is enabled, will enable expanders
+          with_expanders = true,
           expander_collapsed = "",
           expander_expanded = "",
           expander_highlight = "NeoTreeExpander",
@@ -75,10 +75,8 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     cmd = "Telescope",
-    version = false, -- telescope did only one release, so use HEAD for now
-    dependencies = {
-      { "ahmedkhalf/project.nvim", main = "project_nvim", config = true },
-    },
+    version = false,
+    dependencies = { "ahmedkhalf/project.nvim" },
     keys = {
       { "<leader>tt", "<cmd>Telescope<cr>",           desc = "Telescope" },
       { "<leader>tf", Util.telescope("files"),        desc = "find files" },
@@ -122,10 +120,16 @@ return {
             ["<a-h>"] = function()
               Util.telescope("find_files", { hidden = true })()
             end,
-            ["<C-Down>"] = function(...)
+            ["<C-k>"] = function(...)
+              return require("telescope.actions").move_selection_previous(...)
+            end,
+            ["<C-j>"] = function(...)
+              return require("telescope.actions").move_selection_next(...)
+            end,
+            ["<C-l>"] = function(...)
               return require("telescope.actions").cycle_history_next(...)
             end,
-            ["<C-Up>"] = function(...)
+            ["<C-h>"] = function(...)
               return require("telescope.actions").cycle_history_prev(...)
             end,
             ["<C-f>"] = function(...)
@@ -145,14 +149,24 @@ return {
     },
     config = function(_, opts)
       local telescope = require("telescope")
-
-      local project, _ = pcall(require, "project_nvim")
-      if project then
-        telescope.load_extension("projects")
-      end
-
       telescope.setup(opts)
+      telescope.load_extension("projects")
     end
+  },
+
+  {
+    "kevinhwang91/nvim-bqf",
+    ft = "qf",
+    opts = {
+      auto_enable = true,
+    }
+  },
+
+  {
+    "ahmedkhalf/project.nvim",
+    event = "VeryLazy",
+    main = "project_nvim",
+    config = true
   },
 
   -- which-key
@@ -216,10 +230,10 @@ return {
   {
     "ThePrimeagen/harpoon",
     keys = {
-      { "<leader>m", function() require("harpoon.mark").add_file() end, desc = "mark file" },
+      { "<leader>m", function() require("harpoon.mark").add_file() end,        desc = "mark file" },
       { "<leader>n", function() require("harpoon.ui").toggle_quick_menu() end, desc = "marks menu" },
-      { "[n", function() require("harpoon.ui").nav_prev() end, desc = "prev mark" },
-      { "]n", function() require("harpoon.ui").nav_prev() end, desc = "next mark" },
+      { "[n",        function() require("harpoon.ui").nav_prev() end,          desc = "prev mark" },
+      { "]n",        function() require("harpoon.ui").nav_prev() end,          desc = "next mark" },
     }
   },
 
@@ -240,7 +254,7 @@ return {
     },
     config = function()
       require("colorizer").setup()
-      vim.cmd([[ColorizerToggle]])
+      vim.cmd.ColorizerToggle()
     end,
   },
 
@@ -261,7 +275,7 @@ return {
   },
 
   -- makes some plugins dot-repeatable like leap
-  { "tpope/vim-repeat", event = "VeryLazy" },
+  { "tpope/vim-repeat",           event = "VeryLazy" },
 
   -- kitty term integration
   { "knubie/vim-kitty-navigator", event = "VeryLazy" }

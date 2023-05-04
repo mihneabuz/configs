@@ -128,8 +128,12 @@ return {
 
       local lsp = function()
         local clients = vim.lsp.get_active_clients({ bufnr = 0 })
+        if #clients == 0 then
+          return ""
+        end
+
         local names = {}
-        for i=#clients, 1, -1 do
+        for i = #clients, 1, -1 do
           names[#names + 1] = clients[i].name
         end
 
@@ -189,20 +193,32 @@ return {
         "                                                     ",
         "                                                     ",
         "                                                     ",
+        "                                                     ",
       }
+
+      local function button(key, label, cmd, hl)
+        local b = dashboard.button(key, label, cmd)
+        b.opts.hl = { { hl or "@string", 0, 5 } }
+        b.opts.hl_shortcut = "@keyword"
+        return b
+      end
+
       dashboard.section.buttons.val = {
-        dashboard.button("e", "    New file", ":ene<cr>"),
-        dashboard.button("f", "    Find file", ":Telescope find_files<cr>"),
-        dashboard.button("t", " 󱏒   File Tree", ":ene<cr>:Neotree toggle<cr>"),
-        dashboard.button("r", "    Recent", ":Telescope oldfiles<cr>"),
-        dashboard.button("p", "    Projects", ":Telescope projects<cr>"),
-        dashboard.button("s", "    Settings", ":e $MYVIMRC<cr>"),
-        dashboard.button("l", " 󰒲   Lazy", ":Lazy<cr>"),
-        dashboard.button("m", "    Mason", ":Mason<cr>"),
-        dashboard.button("u", "    Update", ":TSUpdate<cr>:Lazy sync<cr>"),
-        dashboard.button("h", " 󰋠   Health", ":checkhealth<cr>"),
-        dashboard.button("q", "    Quit", ":qa<cr>"),
+        button("e", "   New file", ":ene<cr>"),
+        button("f", "   Find file", ":Telescope find_files<cr>"),
+        button("t", " 󱏒  File Tree", ":ene<cr>:Neotree toggle<cr>"),
+        button("r", "   Recent", ":Telescope oldfiles<cr>"),
+        button("p", "   Projects", ":Telescope projects<cr>"),
+        { type = "padding", val = 0 },
+        button("s", "   Settings", ":e $MYVIMRC<cr>", "@function"),
+        button("l", " 󰒲  Lazy", ":Lazy<cr>", "@function"),
+        button("m", "   Mason", ":Mason<cr>", "@function"),
+        button("u", "   Update", ":TSUpdate<cr>:Lazy sync<cr>", "@function"),
+        { type = "padding", val = 0 },
+        button("h", " 󰋠  Health", ":checkhealth<cr>", "DiagnosticError"),
+        button("q", "   Quit", ":qa<cr>", "DiagnosticError"),
       }
+
       return dashboard
     end,
     config = function(_, dashboard)
@@ -226,7 +242,7 @@ return {
           dashboard.section.footer.val = {
             "",
             "",
-            "⚡ Loaded " .. stats.count .. " plugins in " .. ms .. "ms",
+            "⚡ Loaded " .. stats.count .. " plugins in " .. ms .. "ms ⚡",
           }
           pcall(vim.cmd.AlphaRedraw)
         end,
@@ -242,7 +258,7 @@ return {
       handle = {
         text = " ",
         blend = 0,
-        highlight = "lualine_c_normal"
+        highlight = "lualine_b_normal"
       },
       handlers = {
         cursor = false,

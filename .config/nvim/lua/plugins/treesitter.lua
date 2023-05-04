@@ -68,7 +68,7 @@ return {
             ["ac"] = { query = "@class.outer", desc = "class outer" },
             ["ic"] = { query = "@class.inner", desc = "class inner" },
           },
-        },
+        }
       }
     },
     config = function(_, opts)

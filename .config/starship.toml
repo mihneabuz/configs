@@ -99,3 +99,7 @@ min_time = 1000
 [character]
 success_symbol = "[❯❯](bold bright-blue)"
 error_symbol = "[❯❯](bold red)"
+vimcmd_symbol = "[❯❯](bold green)"
+vimcmd_replace_one_symbol = "[❯❯](bold bright-yellow)"
+vimcmd_replace_symbol = "[❯❯](bold bright-yellow)"
+vimcmd_visual_symbol = "[❯❯](bold purple)"

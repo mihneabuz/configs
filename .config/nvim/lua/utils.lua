@@ -1,5 +1,7 @@
 local M = {}
 
+M.root_patterns = { ".git", "Cargo.toml", "package.json", "makefile", "Makefile" }
+
 function M.get_root()
   local path = vim.api.nvim_buf_get_name(0)
   path = path ~= "" and vim.loop.fs_realpath(path) or nil
