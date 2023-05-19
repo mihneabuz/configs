@@ -17,6 +17,7 @@ alias vim="nvim"
 alias lg="lazygit"
 alias lf="lfcd"
 alias venv="python -m venv"
+alias ssh="kitty +kitten ssh"
 alias dockerstart="sudo systemctl start docker"
 
 # ls additions

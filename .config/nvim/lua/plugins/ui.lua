@@ -207,6 +207,7 @@ return {
         button("e", "   New file", ":ene<cr>"),
         button("f", "   Find file", ":Telescope find_files<cr>"),
         button("t", " 󱏒  File Tree", ":ene<cr>:Neotree toggle<cr>"),
+        button("o", "   Restore", ":lua require('persistence').load()<cr>"),
         button("r", "   Recent", ":Telescope oldfiles<cr>"),
         button("p", "   Projects", ":Telescope projects<cr>"),
         { type = "padding", val = 0 },

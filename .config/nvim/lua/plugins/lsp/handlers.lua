@@ -88,10 +88,11 @@ M.manual = {
 }
 
 M.automatic = {
-  ["clangd"] = require("plugins.lsp.settings.clangd"),
-  ["jsonls"] = require("plugins.lsp.settings.jsonls"),
-  ["lua_ls"] = require("plugins.lsp.settings.lua"),
+  ["clangd"]   = require("plugins.lsp.settings.clangd"),
+  ["jsonls"]   = require("plugins.lsp.settings.jsonls"),
+  ["lua_ls"]   = require("plugins.lsp.settings.lua"),
   ["emmet_ls"] = require("plugins.lsp.settings.emmet"),
+  ["pylsp"]    = require("plugins.lsp.settings.pylsp")
 }
 
 M.setup = function(server)

@@ -97,7 +97,7 @@ return {
       finder = {
         max_height = 0.5,
         min_width = 10,
-         keys = {
+        keys = {
           expand_or_jump = 'l',
         },
       },
@@ -131,7 +131,6 @@ return {
     "ray-x/lsp_signature.nvim",
     lazy = true
   },
-
 
   --  formatters, linters, code actions
   {

@@ -13,12 +13,6 @@ end
 M.setup = function()
   local opts = require("plugins.lsp.handlers").base_opts
 
-  local settings = {
-    ["rust_analyzer"] = {}
-  }
-
-  opts = vim.tbl_deep_extend("force", { settings = settings }, opts)
-
   local success, rt = pcall(require, "rust-tools")
   if not success then
     require("lspconfig")["rust_analyzer"].setup(opts)
