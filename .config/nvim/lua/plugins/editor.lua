@@ -154,6 +154,7 @@ return {
     end
   },
 
+  -- quickfix list
   {
     "kevinhwang91/nvim-bqf",
     ft = "qf",
@@ -162,36 +163,12 @@ return {
     }
   },
 
+  -- project root
   {
     "ahmedkhalf/project.nvim",
     event = "VeryLazy",
     main = "project_nvim",
     config = true
-  },
-
-  -- which-key
-  {
-    "folke/which-key.nvim",
-    lazy = true,
-    -- event = "VeryLazy",
-    opts = {
-      plugins = { spelling = true },
-      defaults = {
-        mode           = { "n", "v" },
-        ["]"]          = { name = "+next" },
-        ["["]          = { name = "+prev" },
-        ["<leader>g"]  = { name = "+git" },
-        ["<leader>gh"] = { name = "+hunks" },
-        ["<leader>d"]  = { name = "+diagnostics" },
-        ["<leader>t"]  = { name = "+telescope" },
-        ["<leader>s"]  = { name = "+session" }
-      },
-    },
-    config = function(_, opts)
-      local wk = require("which-key")
-      wk.setup(opts)
-      wk.register(opts.defaults)
-    end,
   },
 
   -- todo comments
@@ -274,7 +251,15 @@ return {
     config = true
   },
 
-  -- makes some plugins dot-repeatable like leap
+  -- escape insert with jk
+  {
+    "max397574/better-escape.nvim",
+    event = "InsertEnter",
+    main = "better_escape",
+    config = true,
+  },
+
+  -- makes some plugins dot-repeatable
   { "tpope/vim-repeat",           event = "VeryLazy" },
 
   -- kitty term integration

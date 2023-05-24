@@ -30,8 +30,7 @@ keymap("n", "<leader>w", ":close<CR>")
 -- close neovim
 keymap("n", "<leader>Q", ":exit<CR>")
 
--- jk to leave insert mode and terminal mode
-keymap("i", "jk", "<Esc>")
+-- jk to leave terminal mode
 keymap("t", "jk", [[<C-\><C-n>]])
 
 -- esc to leave terminal mode
@@ -95,6 +94,7 @@ command("TabLong", long_tab, { nargs = 0 })
 command("TabShort", short_tab, { nargs = 0 })
 keymap("n", "<leader>T", toggle_tab)
 
+-- insert , or ; at the end of line
 local function add_to_end(char)
   local pos = vim.api.nvim_win_get_cursor(0)
   local len = string.len(vim.api.nvim_call_function("getline", { pos[1] }))
