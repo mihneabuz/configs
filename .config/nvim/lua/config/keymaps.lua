@@ -20,10 +20,6 @@ keymap("n", "cc", ":split<CR>")
 keymap("n", "cv", ":vsplit<CR>")
 keymap("n", "cx", ":q<CR>")
 
--- cycle buffers
-keymap("n", "<S-l>", ":bnext<CR>")
-keymap("n", "<S-h>", ":bprev<CR>")
-
 -- close window
 keymap("n", "<leader>w", ":close<CR>")
 

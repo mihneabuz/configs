@@ -39,6 +39,8 @@ return {
     event = "VeryLazy",
     dependencies = { "lualine.nvim", },
     keys = {
+      { "<S-l>", "<cmd>BufferLineCycleNext<cr>" },
+      { "<S-h>", "<cmd>BufferLineCyclePrev<cr>" },
       { "<leader>B", "<cmd>BufferLineSortByExtension<cr>", desc = "sort buffers" },
       { "<leader>b", "<cmd>BufferLinePick<cr>",            desc = "pick buffer" },
     },

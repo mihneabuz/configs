@@ -50,6 +50,9 @@ fish_add_path /usr/lib/ruby/gems/3.0.0
 fish_add_path /opt/homebrew/bin
 fish_add_path /opt/homebrew/sbin
 
+# rust cache
+export RUSTC_WRAPPER=sccache
+
 # pnpm
 set -gx PNPM_HOME "/home/mihnea/.local/share/pnpm"
 set -gx PATH "$PNPM_HOME" $PATH
