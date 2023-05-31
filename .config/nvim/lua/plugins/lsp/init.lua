@@ -135,6 +135,7 @@ return {
   --  formatters, linters, code actions
   {
     "jose-elias-alvarez/null-ls.nvim",
+    dependencies = { "mason.nvim" },
     event = { "BufReadPre", "BufNewFile" },
     opts = function()
       local nls = require("null-ls")
