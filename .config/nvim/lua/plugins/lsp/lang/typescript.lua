@@ -10,7 +10,7 @@ M.setup = function()
   opts = vim.tbl_deep_extend("force", { settings = settings }, opts)
 
   if vim.fn.executable("prettierd") == 1 then
-    require("plugins.lsp.handlers").disable_formatter(opts)
+    require("plugins.lsp.handlers").disable_capability(opts, "documentFormattingProvider")
   end
 
   local success, typescript = pcall(require, "typescript")
