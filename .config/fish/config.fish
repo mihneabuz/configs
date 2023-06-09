@@ -19,13 +19,11 @@ alias lf="lfcd"
 alias venv="python -m venv"
 alias ssh="kitty +kitten ssh"
 alias dockerstart="sudo systemctl start docker"
+alias exa="exa -s type"
 
 # ls additions
 source ~/.config/fish/ls.fish
 set -Ux LSCOLORS ExFxdxdxCxagababagacax
-
-# better clear
-bind \cl 'for i in (seq 1 $LINES); echo; end; clear; commandline -f repaint'
 
 # greeting
 set fish_greeting ""

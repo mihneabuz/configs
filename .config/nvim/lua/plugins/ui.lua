@@ -39,10 +39,10 @@ return {
     event = "VeryLazy",
     dependencies = { "lualine.nvim", },
     keys = {
-      { "<S-l>", "<cmd>BufferLineCycleNext<cr>" },
-      { "<S-h>", "<cmd>BufferLineCyclePrev<cr>" },
-      { "<leader>B", "<cmd>BufferLineSortByExtension<cr>", desc = "sort buffers" },
-      { "<leader>b", "<cmd>BufferLinePick<cr>",            desc = "pick buffer" },
+      { "<S-l>",     "<cmd>keepjumps BufferLineCycleNext<cr>" },
+      { "<S-h>",     "<cmd>keepjumps BufferLineCyclePrev<cr>" },
+      { "<leader>B", "<cmd>keepjumps BufferLineSortByExtension<cr>", desc = "sort buffers" },
+      { "<leader>b", "<cmd>keepjumps BufferLinePick<cr>",            desc = "pick buffer" },
     },
     opts = function()
       return {
