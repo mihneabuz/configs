@@ -180,6 +180,8 @@ return {
     event = "VimEnter",
     opts = function()
       local dashboard = require("alpha.themes.dashboard")
+      local version = vim.version()
+
       dashboard.section.header.opts.hl = "@field";
       dashboard.section.header.val = {
         "                                                     ",
@@ -193,6 +195,11 @@ return {
         "  ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║ ",
         "  ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ ",
         "                                                     ",
+        "                                                     ",
+        string.format(
+          "                        %d.%d.%d                        ",
+          version.major, version.minor, version.patch
+        ),
         "                                                     ",
         "                                                     ",
         "                                                     ",
@@ -242,6 +249,7 @@ return {
         callback = function()
           local stats = require("lazy").stats()
           local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
+
           dashboard.section.footer.val = {
             "",
             "",

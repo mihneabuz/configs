@@ -43,6 +43,7 @@ return {
         use_libuv_file_watcher = true,
       },
       window = {
+        width = 48,
         mappings = {
           ["<space>"] = "none",
           ["l"] = "open",
@@ -160,6 +161,9 @@ return {
     ft = "qf",
     opts = {
       auto_enable = true,
+      preview = {
+        winblend = 0
+      }
     }
   },
 
@@ -203,14 +207,15 @@ return {
     },
   },
 
-  -- harpoon
+  -- marking and navigation
   {
-    "ThePrimeagen/harpoon",
+    "cbochs/grapple.nvim",
     keys = {
-      { "<leader>m", function() require("harpoon.mark").add_file() end,        desc = "mark file" },
-      { "<leader>n", function() require("harpoon.ui").toggle_quick_menu() end, desc = "marks menu" },
-      { "[n",        function() require("harpoon.ui").nav_prev() end,          desc = "prev mark" },
-      { "]n",        function() require("harpoon.ui").nav_prev() end,          desc = "next mark" },
+      { "<leader>m", function() require("grapple").toggle() end,         desc = "toogle mark" },
+      { "<leader>n", function() require("grappel").popup_tags() end,     desc = "marks menu" },
+      { "<leader>N", function() require("grappel").quickfix() end,       desc = "marks quickfix" },
+      { "[n",        function() require("grappel").cycle_forward() end,  desc = "prev mark" },
+      { "]n",        function() require("grappel").cycle_backward() end, desc = "next mark" },
     }
   },
 
