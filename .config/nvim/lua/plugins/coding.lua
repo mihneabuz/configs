@@ -53,6 +53,21 @@ return {
         end
       })
 
+      local types = require('cmp.types')
+      local compare_kind = function(entry1, entry2)
+        local kind1 = entry1:get_kind()
+        local kind2 = entry2:get_kind()
+        if kind1 ~= kind2 then
+          if kind1 == types.lsp.CompletionItemKind.Snippet then
+            return false
+          end
+
+          if kind2 == types.lsp.CompletionItemKind.Snippet then
+            return true
+          end
+        end
+      end
+
       return {
         completion = {
           completeopt = "menu,menuone,noinsert",
@@ -85,6 +100,14 @@ return {
         formatting = {
           fields = { "kind", "abbr" },
           format = format
+        },
+        sorting = {
+          comparators = {
+            compare_kind,
+            cmp.config.compare.offset,
+            cmp.config.compare.exact,
+            cmp.config.compare.length,
+          },
         },
         experimental = {
           ghost_text = {
