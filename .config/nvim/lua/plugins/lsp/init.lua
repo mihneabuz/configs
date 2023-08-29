@@ -93,6 +93,7 @@ return {
   {
     "glepnir/lspsaga.nvim",
     cmd = "Lspsaga",
+    version = "*",
     opts = {
       finder = {
         max_height = 0.5,

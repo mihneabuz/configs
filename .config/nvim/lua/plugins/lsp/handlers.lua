@@ -45,8 +45,9 @@ M.on_attach = function(client, bufnr)
   keymap("gk", vim.lsp.buf.signature_help)
   keymap("gd", vim.lsp.buf.definition)
   keymap("gD", vim.lsp.buf.declaration)
-  keymap("gR", vim.lsp.buf.references)
-  keymap("gr", "<cmd>Lspsaga lsp_finder<CR>")
+  keymap("gr", vim.lsp.buf.references)
+
+  keymap("gR", "<cmd>Lspsaga lsp_finder<CR>")
   keymap("gpd", "<cmd>Lspsaga peek_definition<CR>")
   keymap("gpt", "<cmd>Lspsaga peek_type_definition<CR>")
 
@@ -91,9 +92,9 @@ M.manual = {
 M.automatic = {
   ["clangd"]   = function() return require("plugins.lsp.settings.clangd") end,
   ["jsonls"]   = function() return require("plugins.lsp.settings.jsonls") end,
-  ["lua_ls"]   = function() return require("plugins.lsp.settings.lua")    end,
-  ["emmet_ls"] = function() return require("plugins.lsp.settings.emmet")  end,
-  ["pylsp"]    = function() return require("plugins.lsp.settings.pylsp")  end,
+  ["lua_ls"]   = function() return require("plugins.lsp.settings.lua") end,
+  ["emmet_ls"] = function() return require("plugins.lsp.settings.emmet") end,
+  ["pylsp"]    = function() return require("plugins.lsp.settings.pylsp") end,
 }
 
 M.extra_opts = function(server)

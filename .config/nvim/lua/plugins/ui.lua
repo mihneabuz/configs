@@ -214,10 +214,10 @@ return {
 
       dashboard.section.buttons.val = {
         button("e", "   New file", ":ene<cr>"),
-        button("f", "   Find file", ":Telescope find_files<cr>"),
+        button("f", "   Finder", ":Telescope find_files<cr>"),
         button("t", " 󱏒  File Tree", ":ene<cr>:Neotree toggle<cr>"),
         button("o", "   Restore", ":lua require('persistence').load()<cr>"),
-        button("r", "   Recent", ":Telescope oldfiles<cr>"),
+        button("r", "   Recents", ":Telescope oldfiles<cr>"),
         button("p", "   Projects", ":Telescope projects<cr>"),
         { type = "padding", val = 0 },
         button("s", "   Settings", ":e $MYVIMRC<cr>", "@function"),
