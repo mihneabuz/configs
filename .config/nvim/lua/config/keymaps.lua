@@ -10,21 +10,21 @@ keymap("n", "<C-k>", "<C-w>k")
 keymap("n", "<C-l>", "<C-w>l")
 
 -- window resizing
-keymap("n", "<C-Up>", ":resize -2<CR>")
-keymap("n", "<C-Donw>", ":resize +2<CR>")
-keymap("n", "<C-Left>", ":vertical resize -2<CR>")
-keymap("n", "<C-Right>", ":vertical resize +2<CR>")
+keymap("n", "<S-Up>", "<cmd>resize -2<cr>")
+keymap("n", "<S-Down>", "<cmd>resize +2<cr>")
+keymap("n", "<S-Left>", "<cmd>vertical resize -2<cr>")
+keymap("n", "<S-Right>", "<cmd>vertical resize +2<cr>")
 
 -- splits
-keymap("n", "cc", ":split<CR>")
-keymap("n", "cv", ":vsplit<CR>")
-keymap("n", "cx", ":q<CR>")
+keymap("n", "cc", "<cmd>split<cr>")
+keymap("n", "cv", "<cmd>vsplit<cr>")
+keymap("n", "cx", "<cmd>q<cr>")
 
 -- close window
-keymap("n", "<leader>w", ":close<CR>")
+keymap("n", "<leader>w", "<cmd>close<cr>")
 
 -- close neovim
-keymap("n", "<leader>Q", ":exit<CR>")
+keymap("n", "<leader>Q", "<cmd>exit<cr>")
 
 -- jk to leave terminal mode
 keymap("t", "jk", [[<C-\><C-n>]])
@@ -33,7 +33,7 @@ keymap("t", "jk", [[<C-\><C-n>]])
 keymap("t", "<Esc>", [[<C-\><C-n>]])
 
 -- clear highligh
-keymap("n", "<leader>h", ":noh<CR>")
+keymap("n", "<leader>h", "<cmd>noh<cr>")
 
 -- better indent
 keymap("v", "<", "<gv")
@@ -43,11 +43,11 @@ keymap("v", ">", ">gv")
 keymap("n", "*", "*N")
 
 -- quickfix
-keymap("n", "[q", vim.cmd.cprev)
-keymap("n", "]q", vim.cmd.cnext)
+keymap("n", "[q", "<cmd>try | cprev | catch | clast  | catch | endtry<cr>")
+keymap("n", "]q", "<cmd>try | cnext | catch | cfirst | catch | endtry<cr>")
 
 -- tab
-keymap("n", "<leader><tab>", ":tabnew<cr>")
+keymap("n", "<leader><tab>", "<cmd>tabnew<cr>")
 
 -- highlights under cursor
 if vim.fn.has("nvim-0.9.0") == 1 then

@@ -1,5 +1,3 @@
-local Util = require("utils")
-
 return {
 
   -- buffer remove
@@ -21,15 +19,6 @@ return {
         desc = "Neo-tree",
       },
     },
-    init = function()
-      vim.g.neo_tree_remove_legacy_commands = 1
-      if vim.fn.argc() == 1 then
-        local stat = vim.loop.fs_stat(vim.fn.argv(0))
-        if stat and stat.type == "directory" then
-          require("neo-tree")
-        end
-      end
-    end,
     opts = {
       add_blank_line_at_top = true,
       close_if_last_window = true,
@@ -39,7 +28,9 @@ return {
       enable_opened_markers = false,
       filesystem = {
         bind_to_cwd = false,
-        follow_current_file = true,
+        follow_current_file = {
+          enabled = true,
+        },
         use_libuv_file_watcher = true,
       },
       window = {
@@ -79,27 +70,30 @@ return {
     version = false,
     dependencies = { "ahmedkhalf/project.nvim" },
     keys = {
-      { "<leader>tt", "<cmd>Telescope<cr>",           desc = "Telescope" },
-      { "<leader>tf", Util.telescope("files"),        desc = "find files" },
-      { "<leader>tg", "<cmd>Telescope live_grep<cr>", desc = "live grep" },
-      { "<leader>tr", "<cmd>Telescope oldfiles<cr>",  desc = "recent files" },
-      { "<leader>tc", "<cmd>Telescope commands<cr>",  desc = "commands" },
+      { "gG",         "<cmd>Telescope grep_string<cr>", desc = "grep word" },
+      { "<leader>tt", "<cmd>Telescope<cr>",             desc = "Telescope" },
+      { "<leader>tf", "<cmd>Telescope find_files<cr>",  desc = "find files" },
+      { "<leader>tg", "<cmd>Telescope live_grep<cr>",   desc = "live grep" },
+      { "<leader>tr", "<cmd>Telescope oldfiles<cr>",    desc = "recent files" },
+      { "<leader>tc", "<cmd>Telescope commands<cr>",    desc = "commands" },
       {
         "<leader>ts",
-        Util.telescope("lsp_dynamic_workspace_symbols", {
-          symbols = {
-            "Class",
-            "Function",
-            "Method",
-            "Constructor",
-            "Interface",
-            "Module",
-            "Struct",
-            "Trait",
-            "Field",
-            "Property",
-          },
-        }),
+        function()
+          require("telescope.builtin").lsp_dynamic_workspace_symbols({
+            symbols = {
+              "Class",
+              "Function",
+              "Method",
+              "Constructor",
+              "Interface",
+              "Module",
+              "Struct",
+              "Trait",
+              "Field",
+              "Property",
+            },
+          })
+        end,
         desc = "symbols",
       },
     },
@@ -212,32 +206,20 @@ return {
     "cbochs/grapple.nvim",
     keys = {
       { "<leader>m", function() require("grapple").toggle() end,         desc = "toogle mark" },
-      { "<leader>n", function() require("grappel").popup_tags() end,     desc = "marks menu" },
-      { "<leader>N", function() require("grappel").quickfix() end,       desc = "marks quickfix" },
-      { "[n",        function() require("grappel").cycle_forward() end,  desc = "prev mark" },
-      { "]n",        function() require("grappel").cycle_backward() end, desc = "next mark" },
-    }
+      { "<leader>n", function() require("grapple").popup_tags() end,     desc = "marks menu" },
+      { "<leader>N", function() require("grapple").quickfix() end,       desc = "marks quickfix" },
+      { "[n",        function() require("grapple").cycle_forward() end,  desc = "prev mark" },
+      { "]n",        function() require("grapple").cycle_backward() end, desc = "next mark" },
+    },
+    config = true,
   },
 
-  -- search/replace in multiple files
+  -- surround
   {
-    "nvim-pack/nvim-spectre",
-    keys = {
-      { "<leader>S", function() require("spectre").open() end, desc = "Spectre" },
-    },
-  },
-
-  -- rgb colors
-  {
-    "norcalli/nvim-colorizer.lua",
-    event = { "BufReadPre", "BufNewFile" },
-    keys = {
-      { "<leader>cc", "<cmd>ColorizerToggle<cr>", desc = "toggle colorizer" },
-    },
-    config = function()
-      require("colorizer").setup()
-      vim.cmd.ColorizerToggle()
-    end,
+    "kylechui/nvim-surround",
+    version = "*",
+    event = { "BufReadPost", "BufNewFile" },
+    config = true
   },
 
   -- highlight ranges
@@ -262,6 +244,19 @@ return {
     event = "InsertEnter",
     main = "better_escape",
     config = true,
+  },
+
+  -- rgb colors
+  {
+    "norcalli/nvim-colorizer.lua",
+    event = { "BufReadPre", "BufNewFile" },
+    keys = {
+      { "<leader>cc", "<cmd>ColorizerToggle<cr>", desc = "toggle colorizer" },
+    },
+    config = function()
+      require("colorizer").setup()
+      vim.cmd.ColorizerToggle()
+    end,
   },
 
   -- makes some plugins dot-repeatable

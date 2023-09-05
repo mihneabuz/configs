@@ -124,12 +124,23 @@ return {
       local filename = {
         "filename",
         symbols = {
-          modified = "󰏫"
+          modified = "󰏫",
+          readonly = "",
+          unnamed = "",
+          newfile = ""
         }
       }
 
+      local mark = function()
+        local marked = require("grapple").exists({ buffer = 0 })
+        if marked then
+          return ""
+        end
+        return ""
+      end
+
       local lsp = function()
-        local clients = vim.lsp.get_active_clients({ bufnr = 0 })
+        local clients = vim.lsp.get_clients({ bufnr = 0 })
         if #clients == 0 then
           return ""
         end
@@ -160,7 +171,7 @@ return {
         sections = {
           lualine_a = { { "mode", fmt = function(s) return pad(s, 7) end } },
           lualine_b = { diagnostics, "branch", "diff" },
-          lualine_c = { filetype, filename },
+          lualine_c = { filetype, filename, mark },
           lualine_x = { lsp },
           lualine_y = { "location" },
           lualine_z = { time },
@@ -213,20 +224,20 @@ return {
       end
 
       dashboard.section.buttons.val = {
-        button("e", "   New file", ":ene<cr>"),
-        button("f", "   Finder", ":Telescope find_files<cr>"),
-        button("t", " 󱏒  File Tree", ":ene<cr>:Neotree toggle<cr>"),
-        button("o", "   Restore", ":lua require('persistence').load()<cr>"),
-        button("r", "   Recents", ":Telescope oldfiles<cr>"),
-        button("p", "   Projects", ":Telescope projects<cr>"),
+        button("e", "   New file", "<cmd>ene<cr>"),
+        button("f", "   Finder", "<cmd>Telescope find_files<cr>"),
+        button("t", " 󱏒  File Tree", "<cmd>ene<cr><cmd>Neotree toggle<cr>"),
+        button("o", "   Restore", "<cmd>lua require('persistence').load()<cr>"),
+        button("r", "   Recents", "<cmd>Telescope oldfiles<cr>"),
+        button("p", "   Projects", "<cmd>Telescope projects<cr>"),
         { type = "padding", val = 0 },
-        button("s", "   Settings", ":e $MYVIMRC<cr>", "@function"),
-        button("l", " 󰒲  Lazy", ":Lazy<cr>", "@function"),
-        button("m", "   Mason", ":Mason<cr>", "@function"),
-        button("u", "   Update", ":TSUpdate<cr>:Lazy sync<cr>", "@function"),
+        button("s", "   Settings", "<cmd>e $MYVIMRC<cr>", "@function"),
+        button("l", " 󰒲  Lazy", "<cmd>Lazy<cr>", "@function"),
+        button("m", "   Mason", "<cmd>Mason<cr>", "@function"),
+        button("u", "   Update", "<cmd>TSUpdate<cr><cmd>Lazy sync<cr>", "@function"),
         { type = "padding", val = 0 },
-        button("h", " 󰋠  Health", ":checkhealth<cr>", "DiagnosticError"),
-        button("q", "   Quit", ":qa<cr>", "DiagnosticError"),
+        button("h", " 󰋠  Health", "<cmd>checkhealth<cr>", "DiagnosticError"),
+        button("q", "   Quit", "<cmd>qa<cr>", "DiagnosticError"),
       }
 
       return dashboard

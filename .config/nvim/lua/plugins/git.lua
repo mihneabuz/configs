@@ -1,4 +1,16 @@
 return {
+  -- general commands
+  {
+    "tpope/vim-fugitive",
+    cmd = { "Git" },
+    keys = {
+      { "<leader>gs",  "<cmd>Git status<cr>",        desc = "git status" },
+      { "<leader>gdd", "<cmd>Git diff<cr>",          desc = "git diff" },
+      { "<leader>gds", "<cmd>Git diff --staged<cr>", desc = "git staged" },
+      { "<leader>gc",  "<cmd>Git diff --staged<cr>", desc = "git staged" },
+    },
+  },
+
   -- git signs
   {
     "lewis6991/gitsigns.nvim",
@@ -22,10 +34,10 @@ return {
 
         keymap("n", "]h", gs.next_hunk, "next hunk")
         keymap("n", "[h", gs.prev_hunk, "nrev hunk")
-        keymap("n", "<leader>ghs", ":Gitsigns stage_hunk<CR>", "stage hunk")
-        keymap("n", "<leader>ghr", ":Gitsigns reset_hunk<CR>", "seset hunk")
+        keymap("n", "<leader>ghs", "<cmd>Gitsigns stage_hunk<cr>", "git stage hunk")
+        keymap("n", "<leader>ghr", "<cmd>Gitsigns reset_hunk<cr>", "git seset hunk")
         keymap("n", "<leader>gb", function() gs.blame_line({ full = true }) end, "blame line")
-        keymap("n", "<leader>ghd", gs.diffthis, "diff")
+        keymap("n", "<leader>ghd", gs.diffthis, "git diff")
       end,
       trouble = false,
     },

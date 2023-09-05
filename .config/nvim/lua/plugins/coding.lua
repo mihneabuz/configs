@@ -143,14 +143,6 @@ return {
     end
   },
 
-  -- surround
-  {
-    "kylechui/nvim-surround",
-    version = "*",
-    event = { "BufReadPost", "BufNewFile" },
-    config = true
-  },
-
   -- comments
   {
     "numToStr/Comment.nvim",

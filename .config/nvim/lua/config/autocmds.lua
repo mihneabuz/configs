@@ -30,7 +30,6 @@ autocmd("FileType", {
     "man",
     "notify",
     "qf",
-    "spectre_panel",
     "startuptime",
     "tsplayground",
     "checkhealth"

@@ -47,28 +47,31 @@ M.on_attach = function(client, bufnr)
   keymap("gD", vim.lsp.buf.declaration)
   keymap("gr", vim.lsp.buf.references)
 
-  keymap("gR", "<cmd>Lspsaga lsp_finder<CR>")
-  keymap("gpd", "<cmd>Lspsaga peek_definition<CR>")
-  keymap("gpt", "<cmd>Lspsaga peek_type_definition<CR>")
+  keymap("gR", "<cmd>Lspsaga lsp_finder<cr>")
+  keymap("gpd", "<cmd>Lspsaga peek_definition<cr>")
+  keymap("gpt", "<cmd>Lspsaga peek_type_definition<cr>")
 
-  keymap("gic", "<cmd>Lspsaga incoming_calls<CR>")
-  keymap("goc", "<cmd>Lspsaga outgoing_calls<CR>")
+  keymap("gic", "<cmd>Lspsaga incoming_calls<cr>")
+  keymap("goc", "<cmd>Lspsaga outgoing_calls<cr>")
 
   keymap("gl", vim.diagnostic.open_float)
   keymap("[d", vim.diagnostic.goto_prev)
   keymap("]d", vim.diagnostic.goto_next)
 
-  keymap("<leader>r", "<cmd>Lspsaga rename ++project<CR>")
+  keymap("<leader>r", "<cmd>Lspsaga rename ++project<cr>")
 
   keymap("<leader>F", vim.lsp.buf.format, { "n", "v" })
 
-  keymap("<leader>ca", "<cmd>Lspsaga code_action<CR>", { "n", "v" })
+  keymap("<leader>ca", "<cmd>Lspsaga code_action<cr>", { "n", "v" })
   keymap("<leader>cl", function()
     vim.lsp.codelens.run()
     vim.lsp.codelens.refresh()
   end)
 
-  keymap("<leader>o", "<cmd>Lspsaga outline<CR>")
+  keymap("<leader>o", "<cmd>Lspsaga outline<cr>")
+
+  keymap("<leader>" .. "-", "<cmd>LspStop<cr>")
+  keymap("<leader>" .. "=", "<cmd>LspStart<cr>")
 end
 
 M.base_opts = {
