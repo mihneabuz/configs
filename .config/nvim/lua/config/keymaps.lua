@@ -45,6 +45,7 @@ keymap("n", "*", "*N")
 -- quickfix
 keymap("n", "[q", "<cmd>try | cprev | catch | clast  | catch | endtry<cr>")
 keymap("n", "]q", "<cmd>try | cnext | catch | cfirst | catch | endtry<cr>")
+keymap("n", "<C-q>", "<cmd>cclose<cr>")
 
 -- tab
 keymap("n", "<leader><tab>", "<cmd>tabnew<cr>")
