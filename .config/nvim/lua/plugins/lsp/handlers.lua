@@ -88,8 +88,8 @@ M.disable_capability = function(opts, capability)
 end
 
 M.manual = {
-  ["rust_analyzer"] = true,
-  ["tsserver"] = true,
+  ["rust_analyzer"] = function() return require("plugins.lsp.lang.rust") end,
+  ["tsserver"]      = function() return require("plugins.lsp.lang.typescript") end,
 }
 
 M.automatic = {
@@ -117,6 +117,17 @@ M.setup = function(server)
   local opts = vim.tbl_deep_extend("force", M.extra_opts(server), M.base_opts)
 
   require("lspconfig")[server].setup(opts)
+end
+
+M.setup_manual_server = function(server_name)
+  local base_opts = require("plugins.lsp.handlers").base_opts
+
+  local success = M.manual[server_name]().setup(base_opts)
+  if not success then
+    require("lspconfig")[server_name].setup(base_opts)
+  end
+
+  require("lspconfig.configs")[server_name].launch()
 end
 
 return M

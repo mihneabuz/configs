@@ -10,12 +10,12 @@ local function execute_command(command, args, cwd)
       :toggle()
 end
 
-M.setup = function()
-  local opts = require("plugins.lsp.handlers").base_opts
+M.setup = function(base_opts)
+  local opts = base_opts
 
   local success, rt = pcall(require, "rust-tools")
   if not success then
-    require("lspconfig")["rust_analyzer"].setup(opts)
+    return false
   end
 
   local mason_path = vim.fn.glob(vim.fn.stdpath("data") .. "/mason/packages/codelldb/extension/")
@@ -43,6 +43,8 @@ M.setup = function()
       adapter = dap_adapter
     }
   })
+
+  return true
 end
 
 return M

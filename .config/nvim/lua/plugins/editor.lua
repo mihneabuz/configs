@@ -109,12 +109,6 @@ return {
             ["<a-t>"] = function(...)
               return require("trouble.providers.telescope").open_selected_with_trouble(...)
             end,
-            ["<a-i>"] = function()
-              Util.telescope("find_files", { no_ignore = true })()
-            end,
-            ["<a-h>"] = function()
-              Util.telescope("find_files", { hidden = true })()
-            end,
             ["<C-k>"] = function(...)
               return require("telescope.actions").move_selection_previous(...)
             end,

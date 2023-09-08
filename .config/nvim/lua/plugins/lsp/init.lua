@@ -61,9 +61,9 @@ return {
     config = function(_, opts)
       local signs = {
         { name = "DiagnosticSignError", text = "" },
-        { name = "DiagnosticSignWarn",  text = "" },
-        { name = "DiagnosticSignHint",  text = "" },
-        { name = "DiagnosticSignInfo",  text = "" },
+        { name = "DiagnosticSignWarn", text = "" },
+        { name = "DiagnosticSignHint", text = "" },
+        { name = "DiagnosticSignInfo", text = "" },
       }
 
       for _, sign in ipairs(signs) do
@@ -171,7 +171,7 @@ return {
     "simrat39/rust-tools.nvim",
     ft = "rust",
     config = function()
-      require("plugins.lsp.lang.rust").setup()
+      require("plugins.lsp.handlers").setup_manual_server("rust_analyzer")
     end
   },
   {
@@ -194,7 +194,7 @@ return {
     "jose-elias-alvarez/typescript.nvim",
     ft = { "typescript", "javascript", "javascriptreact", "typescriptreact" },
     config = function()
-      require("plugins.lsp.lang.typescript").setup()
+      require("plugins.lsp.handlers").setup_manual_server("tsserver")
     end
   },
 }
