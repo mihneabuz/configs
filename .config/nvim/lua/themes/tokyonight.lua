@@ -1,4 +1,6 @@
 return {
+  background = "#1a1b26",
+
   opts = {
     style = "night",
     light_style = "day",

@@ -1,4 +1,6 @@
 return {
+  background = "#22272e",
+
   opts = {
     transparent = true,
     colors = {
