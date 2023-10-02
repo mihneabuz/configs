@@ -96,6 +96,15 @@ return {
         end,
         desc = "symbols",
       },
+      {
+        "<leader>tG",
+        function()
+          require("telescope.builtin").grep_string({
+            search = vim.fn.expand("<cword>")
+          })
+        end,
+        desc = "grep under cursor",
+      }
     },
     opts = {
       defaults = {
