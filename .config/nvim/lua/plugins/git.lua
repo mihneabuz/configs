@@ -1,4 +1,5 @@
 return {
+
   -- general commands
   {
     "tpope/vim-fugitive",

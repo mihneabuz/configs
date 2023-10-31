@@ -127,14 +127,17 @@ M.setup = function(server)
 end
 
 M.setup_manual_server = function(server_name)
+  if not pcall(require, "lspconfig") then
+    return
+  end
+
   local base_opts = require("plugins.lsp.handlers").base_opts
 
   local success = M.manual[server_name]().setup(base_opts)
   if not success then
     require("lspconfig")[server_name].setup(base_opts)
+    require("lspconfig.configs")[server_name].launch()
   end
-
-  require("lspconfig.configs")[server_name].launch()
 end
 
 return M

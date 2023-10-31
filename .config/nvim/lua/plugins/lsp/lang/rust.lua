@@ -10,8 +10,12 @@ local function execute_command(command, args, cwd)
       :toggle()
 end
 
+local extra_opts = {
+  root_dir = require("lspconfig").util.root_pattern("Cargo.toml")
+}
+
 M.setup = function(base_opts)
-  local opts = base_opts
+  local opts = vim.tbl_extend("force", base_opts, extra_opts)
 
   local success, rt = pcall(require, "rust-tools")
   if not success then

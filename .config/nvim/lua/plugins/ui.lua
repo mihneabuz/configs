@@ -272,6 +272,7 @@ return {
     end,
   },
 
+  -- scrollbar
   {
     "petertriho/nvim-scrollbar",
     event = { "BufReadPre", "BufNewFile" },

@@ -8,9 +8,6 @@ require("lazy").setup({
   spec = {
     { import = "plugins" },
   },
-  install = {
-    colorscheme = { "onedark" }
-  },
   performance = {
     rtp = {
       disabled_plugins = {
@@ -26,5 +23,8 @@ require("lazy").setup({
   },
   ui = {
     border = "rounded"
+  },
+  change_detection = {
+    enabled = false
   }
 })

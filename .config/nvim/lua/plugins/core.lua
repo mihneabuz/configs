@@ -2,9 +2,6 @@ return {
   {
     "folke/lazy.nvim",
     version = "*",
-    keys = {
-      { "<leader>L", "<cmd>Lazy<cr>", desc = "Lazy" },
-    }
   },
 
   {
