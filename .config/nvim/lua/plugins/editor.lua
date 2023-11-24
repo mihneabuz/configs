@@ -220,7 +220,6 @@ return {
   -- surround
   {
     "kylechui/nvim-surround",
-    version = "*",
     event = { "BufReadPost", "BufNewFile" },
     config = true
   },
@@ -266,5 +265,6 @@ return {
   { "tpope/vim-repeat",           event = "VeryLazy" },
 
   -- kitty term integration
-  { "knubie/vim-kitty-navigator", event = "VeryLazy" }
+  { "knubie/vim-kitty-navigator", event = "VeryLazy" },
+
 }

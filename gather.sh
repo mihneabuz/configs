@@ -7,8 +7,8 @@ rm -rf .config
 mkdir .config
 
 for n in $Targets; do
-	echo $n
-	cp -r ~/.config/$n .config/
+  echo $n
+  cp -r ~/.config/$n .config/
 done
 
 cp ~/.gitconfig .gitconfig

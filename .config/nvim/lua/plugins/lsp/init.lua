@@ -93,7 +93,6 @@ return {
   {
     "glepnir/lspsaga.nvim",
     cmd = "Lspsaga",
-    version = "*",
     opts = {
       finder = {
         max_height = 0.5,
@@ -135,7 +134,7 @@ return {
 
   --  formatters, linters, code actions
   {
-    "jose-elias-alvarez/null-ls.nvim",
+    "nvimtools/none-ls.nvim",
     dependencies = { "mason.nvim" },
     event = { "BufReadPre", "BufNewFile" },
     opts = function()
