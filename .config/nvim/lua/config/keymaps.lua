@@ -26,11 +26,12 @@ keymap("n", "<leader>w", "<cmd>close<cr>")
 -- close neovim
 keymap("n", "<leader>Q", "<cmd>exit<cr>")
 
--- jk to leave terminal mode
-keymap("t", "jk", [[<C-\><C-n>]])
-
 -- esc to leave terminal mode
 keymap("t", "<Esc>", [[<C-\><C-n>]])
+
+-- alt-s to leave insert/terminal mode
+keymap("i", "<A-s>", [[<C-\><C-n>]])
+keymap("t", "<A-s>", [[<C-\><C-n>]])
 
 -- clear highligh
 keymap("n", "<leader>h", "<cmd>noh<cr>")

@@ -63,6 +63,17 @@ return {
     end,
   },
 
+  {
+    "lmburns/lf.nvim",
+    keys = {
+      { "<leader>lf", function() require("lf").start("~") end, desc = "open lf" },
+    },
+    opts = {
+      border = "rounded",
+      escape_quit = false
+    }
+  },
+
   -- fuzzy finder
   {
     "nvim-telescope/telescope.nvim",
@@ -238,14 +249,6 @@ return {
       { "<leader>f", "<cmd>HopWord<cr>", desc = "hop" }
     },
     config = true
-  },
-
-  -- escape insert with jk
-  {
-    "max397574/better-escape.nvim",
-    event = "InsertEnter",
-    main = "better_escape",
-    config = true,
   },
 
   -- rgb colors
