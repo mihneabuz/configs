@@ -161,6 +161,15 @@ return {
     end
   },
 
+  {
+    "JoosepAlviste/nvim-ts-context-commentstring",
+    config = function()
+      ---@diagnostic disable: inject-field
+      vim.g.skip_ts_context_commentstring_module = true
+      require('ts_context_commentstring').setup();
+    end
+  },
+
   -- terminal
   {
     "akinsho/toggleterm.nvim",
