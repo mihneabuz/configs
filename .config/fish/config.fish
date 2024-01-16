@@ -1,3 +1,20 @@
+set TTY (tty)
+if [ "$(tty)" = "/dev/tty1" ]
+    set -gx _JAVA_AWT_WM_NONREPARENTING 1
+    set -gx XCURSOR_SIZE 24
+
+    set -gx LIBVA_DRIVER_NAME nvidia
+    set -gx XDG_SESSION_TYPE wayland
+    set -gx GBM_BACKEND nvidia-drm
+    set -gx __GLX_VENDOR_LIBRARY_NAME nvidia
+    set -gx WLR_NO_HARDWARE_CURSORS 1
+
+    set -gx GTK_THEME Adwaita:dark
+    set -gx QT_STYLE_OVERRIDE adwaita
+
+    exec Hyprland
+end
+
 if status is-interactive
     # Commands to run in interactive sessions can go here
 end
@@ -23,7 +40,7 @@ alias exa="exa -s type"
 
 # ls additions
 source ~/.config/fish/ls.fish
-set -Ux LSCOLORS ExFxdxdxCxagababagacax
+set -gx LSCOLORS ExFxdxdxCxagababagacax
 
 # greeting
 set fish_greeting ""

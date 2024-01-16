@@ -3,8 +3,6 @@
 yay -S hyprland-git \
   waybar-hyprland-git \
   hyprpaper-git \
-  gdm \
-  gdm-settings \
   polkit \
   polkit-gnome \
   wofi \
