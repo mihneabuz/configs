@@ -81,14 +81,14 @@ return {
     version = false,
     dependencies = { "ahmedkhalf/project.nvim" },
     keys = {
-      { "gG",         "<cmd>Telescope grep_string<cr>", desc = "grep word" },
-      { "<leader>tt", "<cmd>Telescope<cr>",             desc = "Telescope" },
-      { "<leader>tf", "<cmd>Telescope find_files<cr>",  desc = "find files" },
-      { "<leader>tg", "<cmd>Telescope live_grep<cr>",   desc = "live grep" },
-      { "<leader>tr", "<cmd>Telescope oldfiles<cr>",    desc = "recent files" },
-      { "<leader>tc", "<cmd>Telescope commands<cr>",    desc = "commands" },
+      { "gG",     "<cmd>Telescope grep_string<cr>", desc = "grep word" },
+      { "<C-s>t", "<cmd>Telescope<cr>",             desc = "Telescope" },
+      { "<C-s>f", "<cmd>Telescope find_files<cr>",  desc = "find files" },
+      { "<C-s>g", "<cmd>Telescope live_grep<cr>",   desc = "live grep" },
+      { "<C-s>r", "<cmd>Telescope oldfiles<cr>",    desc = "recent files" },
+      { "<C-s>c", "<cmd>Telescope commands<cr>",    desc = "commands" },
       {
-        "<leader>ts",
+        "<C-s>s",
         function()
           require("telescope.builtin").lsp_dynamic_workspace_symbols({
             symbols = {
@@ -108,7 +108,7 @@ return {
         desc = "symbols",
       },
       {
-        "<leader>tG",
+        "<C-s>a",
         function()
           require("telescope.builtin").grep_string({
             search = vim.fn.expand("<cword>")
@@ -123,12 +123,6 @@ return {
         selection_caret = " ",
         mappings = {
           i = {
-            ["<c-t>"] = function(...)
-              return require("trouble.providers.telescope").open_with_trouble(...)
-            end,
-            ["<a-t>"] = function(...)
-              return require("trouble.providers.telescope").open_selected_with_trouble(...)
-            end,
             ["<C-k>"] = function(...)
               return require("telescope.actions").move_selection_previous(...)
             end,
@@ -141,14 +135,33 @@ return {
             ["<C-h>"] = function(...)
               return require("telescope.actions").cycle_history_prev(...)
             end,
-            ["<C-f>"] = function(...)
+            ["<C-.>"] = function(...)
               return require("telescope.actions").preview_scrolling_down(...)
             end,
-            ["<C-b>"] = function(...)
+            ["<C-,>"] = function(...)
               return require("telescope.actions").preview_scrolling_up(...)
+            end,
+            ["<C-o>"] = function(...)
+              require("telescope.actions").send_selected_to_qflist(...)
+              vim.cmd("copen")
+              vim.api.nvim_input('<cr>')
+            end,
+            ["<C-s>"] = function(...)
+              return require("telescope.actions").close(...)
+            end,
+            ["<C-t>"] = function(...)
+              return require("trouble.providers.telescope").open_with_trouble(...)
+            end,
+            ["<A-t>"] = function(...)
+              return require("trouble.providers.telescope").open_selected_with_trouble(...)
             end,
           },
           n = {
+            ["<C-o>"] = function(...)
+              require("telescope.actions").send_selected_to_qflist(...)
+              vim.cmd("copen")
+              vim.api.nvim_input('<cr>')
+            end,
             ["q"] = function(...)
               return require("telescope.actions").close(...)
             end,

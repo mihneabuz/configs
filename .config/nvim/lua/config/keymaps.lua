@@ -16,15 +16,8 @@ keymap("n", "<S-Left>", "<cmd>vertical resize -2<cr>")
 keymap("n", "<S-Right>", "<cmd>vertical resize +2<cr>")
 
 -- splits
-keymap("n", "cc", "<cmd>split<cr>")
-keymap("n", "cv", "<cmd>vsplit<cr>")
-keymap("n", "cx", "<cmd>q<cr>")
-
--- close window
-keymap("n", "<leader>w", "<cmd>close<cr>")
-
--- close neovim
-keymap("n", "<leader>Q", "<cmd>exit<cr>")
+keymap("n", "<C-w>s", "<cmd>split<cr>")
+keymap("n", "<C-w>v", "<cmd>vsplit<cr>")
 
 -- esc to leave terminal mode
 keymap("t", "<Esc>", [[<C-\><C-n>]])

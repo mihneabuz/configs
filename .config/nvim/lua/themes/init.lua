@@ -1,6 +1,6 @@
 local M = {}
 
-M.name = Colorscheme
+M.name = os.getenv("COLORSCHEME")
 if not M.name then
   M.name = "onedark"
 end
