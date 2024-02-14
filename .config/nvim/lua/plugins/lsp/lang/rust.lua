@@ -10,12 +10,29 @@ local function execute_command(command, args, cwd)
       :toggle()
 end
 
-local extra_opts = {
-  root_dir = require("lspconfig").util.root_pattern("Cargo.toml")
-}
+local function extra_opts()
+  local root_dir = require("lspconfig").util.root_pattern("Cargo.toml")
+  local settings = {}
+
+  if vim.fn.executable("leptosfmt") then
+    local config = root_dir(vim.fn.getcwd()) .. "/leptosfmt.toml"
+    if vim.fn.filereadable(config) > 0 then
+      settings["rust-analyzer"] = {
+        rustfmt = {
+          overrideCommand = { "leptosfmt", "--config-file", config, "--stdin", "--rustfmt" }
+        }
+      }
+    end
+  end
+
+  return {
+    root_dir = root_dir,
+    settings = settings
+  }
+end
 
 M.setup = function(base_opts)
-  local opts = vim.tbl_extend("force", base_opts, extra_opts)
+  local opts = vim.tbl_extend("force", base_opts, extra_opts())
 
   local success, rt = pcall(require, "rust-tools")
   if not success then
@@ -28,7 +45,7 @@ M.setup = function(base_opts)
   local liblldb_path = mason_path .. "lldb/lib/liblldb.so"
 
   local dap_adapter = {}
-  if vim.fn.filereadable(codelldb_path) and vim.fn.filereadable(liblldb_path) then
+  if vim.fn.filereadable(codelldb_path) > 0 and vim.fn.filereadable(liblldb_path) > 0 then
     dap_adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path)
   end
 
