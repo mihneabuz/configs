@@ -15,6 +15,12 @@ return {
       ["DiagnosticVirtualTextWarn"] = { bg = "clear" },
       ["DiagnosticVirtualTextInfo"] = { bg = "clear" },
       ["DiagnosticVirtualTextHint"] = { bg = "clear" },
+      ["@lsp.type.string.rust"] = { fg = "$green" },
+      ["@lsp.typemod.string.macro.rust"] = { fg = "$green" },
+      ["@lsp.type.generic.rust"] = { fg = "$yellow" },
+      ["@lsp.type.operator.rust"] = { fg = "$fg" },
+      ["@none.html"] = { fg = "$light_grey" },
+      ["@spell.html"] = { fg = "$light_grey" },
     }
   },
 

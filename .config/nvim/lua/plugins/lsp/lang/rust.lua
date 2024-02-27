@@ -1,5 +1,8 @@
 local M = {}
 
+local root_fn = require("lspconfig").util.root_pattern("Cargo.toml")
+local root_dir = root_fn(vim.fn.getcwd())
+
 local function execute_command(command, args, cwd)
   require("toggleterm.terminal").Terminal
       :new({
@@ -11,11 +14,10 @@ local function execute_command(command, args, cwd)
 end
 
 local function extra_opts()
-  local root_dir = require("lspconfig").util.root_pattern("Cargo.toml")
   local settings = {}
 
   if vim.fn.executable("leptosfmt") then
-    local config = root_dir(vim.fn.getcwd()) .. "/leptosfmt.toml"
+    local config = root_dir .. "/leptosfmt.toml"
     if vim.fn.filereadable(config) > 0 then
       settings["rust-analyzer"] = {
         rustfmt = {
@@ -26,7 +28,7 @@ local function extra_opts()
   end
 
   return {
-    root_dir = root_dir,
+    root_dir = root_fn,
     settings = settings
   }
 end
@@ -45,6 +47,10 @@ local function setup_dap_adapter()
 end
 
 local function setup_tailwind_lsp(base_opts)
+  if vim.fn.system({ "grep", "maud", root_dir .. "/Cargo.toml" }) == "" then
+    return
+  end
+
   local opts = vim.tbl_extend("force", base_opts, {
     filetypes = { "rust" },
     init_options = {
@@ -88,6 +94,8 @@ M.setup = function(base_opts)
       adapter = dap_adapter
     }
   })
+
+  setup_tailwind_lsp(base_opts)
 
   return true
 end
