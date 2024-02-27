@@ -31,6 +31,38 @@ local function extra_opts()
   }
 end
 
+local function setup_dap_adapter()
+  local mason_path = vim.fn.glob(vim.fn.stdpath("data") .. "/mason/packages/codelldb/extension/")
+
+  local codelldb_path = mason_path .. "adapter/codelldb"
+  local liblldb_path = mason_path .. "lldb/lib/liblldb.so"
+
+  if vim.fn.filereadable(codelldb_path) > 0 and vim.fn.filereadable(liblldb_path) > 0 then
+    return require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path)
+  end
+
+  return {}
+end
+
+local function setup_tailwind_lsp(base_opts)
+  local opts = vim.tbl_extend("force", base_opts, {
+    filetypes = { "rust" },
+    init_options = {
+      userLanguages = {
+        rust = "javascript",
+      },
+    },
+    settings = {
+      tailwindCSS = {
+        classAttribures = { "class" },
+        validate = false,
+      }
+    }
+  })
+
+  require("lspconfig")["tailwindcss"].setup(opts)
+end
+
 M.setup = function(base_opts)
   local opts = vim.tbl_extend("force", base_opts, extra_opts())
 
@@ -39,15 +71,7 @@ M.setup = function(base_opts)
     return false
   end
 
-  local mason_path = vim.fn.glob(vim.fn.stdpath("data") .. "/mason/packages/codelldb/extension/")
-
-  local codelldb_path = mason_path .. "adapter/codelldb"
-  local liblldb_path = mason_path .. "lldb/lib/liblldb.so"
-
-  local dap_adapter = {}
-  if vim.fn.filereadable(codelldb_path) > 0 and vim.fn.filereadable(liblldb_path) > 0 then
-    dap_adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path)
-  end
+  local dap_adapter = setup_dap_adapter()
 
   rt.setup({
     tools = {
