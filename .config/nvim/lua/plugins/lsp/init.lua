@@ -135,10 +135,12 @@ return {
   --  formatters, linters, code actions
   {
     "nvimtools/none-ls.nvim",
+    branch = "0.7-compat",
     dependencies = { "mason.nvim" },
     event = { "BufReadPre", "BufNewFile" },
     opts = function()
       local nls = require("null-ls")
+
       local sources = {
         -- trailling whitespace
         nls.builtins.diagnostics.trail_space,
