@@ -21,6 +21,10 @@ return {
       ["@lsp.type.operator.rust"] = { fg = "$fg" },
       ["@none.html"] = { fg = "$light_grey" },
       ["@spell.html"] = { fg = "$light_grey" },
+      ["@lsp.type.selfKeyword.rust"] = { fg = "$red" },
+      ["@lsp.typemod.selfKeyword.macro.rust"] = { fg = "$red" },
+      ["@lsp.type.selfTypeKeyword.rust"] = { fg = "$yellow" },
+      ["@lsp.typemod.selfTypeKeyword.macro.rust"] = { fg = "$yellow" }
     }
   },
 
