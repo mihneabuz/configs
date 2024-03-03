@@ -124,10 +124,8 @@ return {
     cmd = { "TroubleToggle", "Trouble" },
     opts = { use_diagnostic_signs = true },
     keys = {
-      { "<leader>dd", "<cmd>TroubleToggle document_diagnostics<cr>",  desc = "document diagnostics" },
-      { "<leader>dD", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "workspace diagnostics" },
-      { "<leader>dQ", "<cmd>TroubleToggle loclist<cr>",               desc = "location list" },
-      { "<leader>dq", "<cmd>TroubleToggle quickfix<cr>",              desc = "quickfix list" },
+      { "<leader>dd", "<cmd>TroubleToggle document_diagnostics<cr>",  desc = "Document diagnostics" },
+      { "<leader>dD", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace diagnostics" },
     },
   },
 
@@ -150,8 +148,8 @@ return {
       "JoosepAlviste/nvim-ts-context-commentstring",
     },
     keys = {
-      { "gc",  desc = "comment",     mode = { "n", "v" } },
-      { "gcc", desc = "comment line" },
+      { "gc",  desc = "Comment",     mode = { "n", "v" } },
+      { "gcc", desc = "Comment line" },
     },
     main = "Comment",
     opts = function()
@@ -174,8 +172,8 @@ return {
   {
     "akinsho/toggleterm.nvim",
     keys = {
-      { [[<C-\>]], "<cmd>ToggleTerm direction=float<cr>",      desc = "terminal float",  mode = { "n", "t" } },
-      { [[<C-]>]], "<cmd>ToggleTerm direction=horizontal<cr>", desc = "terminal bottom", mode = { "n", "t" } },
+      { [[<C-\>]], "<cmd>ToggleTerm direction=float<cr>",      desc = "Open terminal float", mode = { "n", "t" } },
+      { [[<C-]>]], "<cmd>ToggleTerm direction=horizontal<cr>", desc = "Open terminal split", mode = { "n", "t" } },
     },
     cmd = "ToggleTerm",
     opts = {

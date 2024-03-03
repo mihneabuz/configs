@@ -4,7 +4,7 @@ return {
   {
     "echasnovski/mini.bufremove",
     keys = {
-      { "<leader>q", function() require("mini.bufremove").delete(0, false) end, desc = "close buffer" },
+      { "<leader>q", function() require("mini.bufremove").delete(0, false) end, desc = "Close buffer" },
     },
   },
 
@@ -16,7 +16,7 @@ return {
       {
         "<leader>e",
         function() require("neo-tree.command").execute({ toggle = true }) end,
-        desc = "Neo-tree",
+        desc = "File explorer",
       },
     },
     opts = {
@@ -66,7 +66,7 @@ return {
   {
     "lmburns/lf.nvim",
     keys = {
-      { "<leader>lf", function() require("lf").start("~") end, desc = "open lf" },
+      { "<leader>lf", function() require("lf").start("~") end, desc = "Open lf" },
     },
     opts = {
       border = "rounded",
@@ -81,12 +81,14 @@ return {
     version = false,
     dependencies = { "ahmedkhalf/project.nvim" },
     keys = {
-      { "gG",     "<cmd>Telescope grep_string<cr>", desc = "grep word" },
+      { "gG",     "<cmd>Telescope grep_string<cr>", desc = "Search word under cursor" },
       { "<C-s>t", "<cmd>Telescope<cr>",             desc = "Telescope" },
-      { "<C-s>f", "<cmd>Telescope find_files<cr>",  desc = "find files" },
-      { "<C-s>g", "<cmd>Telescope live_grep<cr>",   desc = "live grep" },
-      { "<C-s>r", "<cmd>Telescope oldfiles<cr>",    desc = "recent files" },
-      { "<C-s>c", "<cmd>Telescope commands<cr>",    desc = "commands" },
+      { "<C-s>h", "<cmd>Telescope help_tags<cr>",   desc = "Help" },
+      { "<C-s>f", "<cmd>Telescope find_files<cr>",  desc = "Files" },
+      { "<C-s>g", "<cmd>Telescope live_grep<cr>",   desc = "Grep files" },
+      { "<C-s>r", "<cmd>Telescope oldfiles<cr>",    desc = "Recent files" },
+      { "<C-s>c", "<cmd>Telescope commands<cr>",    desc = "Commands" },
+      { "<C-s>d", "<cmd>Telescope diagnostics<cr>", desc = "Diagnostics" },
       {
         "<C-s>s",
         function()
@@ -105,17 +107,8 @@ return {
             },
           })
         end,
-        desc = "symbols",
+        desc = "Symbols",
       },
-      {
-        "<C-s>a",
-        function()
-          require("telescope.builtin").grep_string({
-            search = vim.fn.expand("<cword>")
-          })
-        end,
-        desc = "grep under cursor",
-      }
     },
     opts = {
       defaults = {
@@ -212,8 +205,8 @@ return {
       }
     },
     keys = {
-      { "]t", function() require("todo-comments").jump_next() end, desc = "next todo" },
-      { "[t", function() require("todo-comments").jump_prev() end, desc = "previous todo" },
+      { "]t", function() require("todo-comments").jump_next() end, desc = "Next todo" },
+      { "[t", function() require("todo-comments").jump_prev() end, desc = "Prev todo" },
     },
   },
 
@@ -223,8 +216,8 @@ return {
     event = "BufReadPre",
     opts = { options = { "buffers", "curdir", "tabpages", "winsize", "help", "globals" } },
     keys = {
-      { "<leader>sr", function() require("persistence").load() end,                desc = "restore session" },
-      { "<leader>sl", function() require("persistence").load({ last = true }) end, desc = "restore last session" },
+      { "<leader>sr", function() require("persistence").load() end,                desc = "Restore session" },
+      { "<leader>sl", function() require("persistence").load({ last = true }) end, desc = "Restore last session" },
     },
   },
 
@@ -232,11 +225,11 @@ return {
   {
     "cbochs/grapple.nvim",
     keys = {
-      { "<leader>m", function() require("grapple").toggle() end,         desc = "toogle mark" },
-      { "<leader>n", function() require("grapple").popup_tags() end,     desc = "marks menu" },
-      { "<leader>N", function() require("grapple").quickfix() end,       desc = "marks quickfix" },
-      { "[n",        function() require("grapple").cycle_forward() end,  desc = "prev mark" },
-      { "]n",        function() require("grapple").cycle_backward() end, desc = "next mark" },
+      { "<leader>m", function() require("grapple").toggle() end,         desc = "Toogle mark" },
+      { "<leader>n", function() require("grapple").popup_tags() end,     desc = "Marks menu" },
+      { "<leader>N", function() require("grapple").quickfix() end,       desc = "Marks quickfix" },
+      { "[n",        function() require("grapple").cycle_forward() end,  desc = "Prev mark" },
+      { "]n",        function() require("grapple").cycle_backward() end, desc = "Next mark" },
     },
     config = true,
   },
@@ -259,7 +252,7 @@ return {
   {
     "phaazon/hop.nvim",
     keys = {
-      { "<leader>f", "<cmd>HopWord<cr>", desc = "hop" }
+      { "<leader>f", "<cmd>HopWord<cr>", desc = "Hop" }
     },
     config = true
   },
@@ -269,7 +262,7 @@ return {
     "norcalli/nvim-colorizer.lua",
     event = { "BufReadPre", "BufNewFile" },
     keys = {
-      { "<leader>cc", "<cmd>ColorizerToggle<cr>", desc = "toggle colorizer" },
+      { "<leader>cc", "<cmd>ColorizerToggle<cr>", desc = "Toggle colorizer" },
     },
     config = function()
       require("colorizer").setup()

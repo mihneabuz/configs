@@ -7,6 +7,7 @@ opt.softtabstop = 0
 opt.shiftwidth = 2
 opt.expandtab = true
 opt.smartindent = true
+opt.breakindent = true
 opt.smartcase = true
 opt.hlsearch = true
 opt.ignorecase = true

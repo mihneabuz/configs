@@ -47,7 +47,7 @@ local function setup_dap_adapter()
 end
 
 local function setup_tailwind_lsp(base_opts)
-  if vim.fn.system({ "grep", "maud", root_dir .. "/Cargo.toml" }) == "" then
+  if vim.fn.glob("tailwind.config.*") == "" then
     return
   end
 

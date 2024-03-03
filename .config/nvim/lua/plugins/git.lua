@@ -5,10 +5,8 @@ return {
     "tpope/vim-fugitive",
     cmd = { "Git" },
     keys = {
-      { "<leader>gs",  "<cmd>Git status<cr>",        desc = "git status" },
-      { "<leader>gdd", "<cmd>Git diff<cr>",          desc = "git diff" },
-      { "<leader>gds", "<cmd>Git diff --staged<cr>", desc = "git staged" },
-      { "<leader>gc",  "<cmd>Git diff --staged<cr>", desc = "git staged" },
+      { "<leader>gs", "<cmd>Git status<cr>", desc = "Status" },
+      { "<leader>gd", "<cmd>Git diff<cr>",   desc = "Diff" },
     },
   },
 
@@ -30,15 +28,14 @@ return {
         local gs = package.loaded.gitsigns
 
         local function keymap(mode, l, r, desc)
-          vim.keymap.set(mode, l, r, { buffer = buffer, desc = desc })
+          vim.keymap.set(mode, l, r, { silent = true, buffer = buffer, desc = desc })
         end
 
-        keymap("n", "]h", gs.next_hunk, "next hunk")
-        keymap("n", "[h", gs.prev_hunk, "nrev hunk")
-        keymap("n", "<leader>ghs", "<cmd>Gitsigns stage_hunk<cr>", "git stage hunk")
-        keymap("n", "<leader>ghr", "<cmd>Gitsigns reset_hunk<cr>", "git seset hunk")
-        keymap("n", "<leader>gb", function() gs.blame_line({ full = true }) end, "blame line")
-        keymap("n", "<leader>ghd", gs.diffthis, "git diff")
+        keymap("n", "]h", gs.next_hunk, "Next git hunk")
+        keymap("n", "[h", gs.prev_hunk, "Prev git hunk")
+        keymap("n", "<leader>gb", function() gs.blame_line({ full = true }) end, "Blame line")
+        keymap("n", "<leader>gh", "<cmd>Gitsigns stage_hunk<cr>", "Stage hunk")
+        keymap("n", "<leader>gr", "<cmd>Gitsigns reset_hunk<cr>", "Reset hunk")
       end,
       trouble = false,
     },
@@ -54,11 +51,16 @@ return {
         let g:mergetool_prefer_revision = "local"
       ]])
 
-      local keymap = vim.api.nvim_set_keymap
-      local silent = { noremap = true, silent = true }
+      require('which-key').register({
+        ['<leader>m'] = { name = 'Mergetool', _ = 'which_key_ignore' },
+      })
 
-      keymap("n", "<leader>mg", "<cmd>diffget<cr>", silent)
-      keymap("n", "<leader>mp", "<cmd>diffput<cr>", silent)
+      local function keymap(mode, l, r, desc)
+        vim.keymap.set(mode, l, r, { noremap = true, silent = true, desc = desc })
+      end
+
+      keymap("n", "<leader>mg", "<cmd>diffget<cr>", "Diff get")
+      keymap("n", "<leader>mp", "<cmd>diffput<cr>", "Diff put")
     end
   },
 }

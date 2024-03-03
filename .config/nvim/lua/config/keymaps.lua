@@ -1,23 +1,23 @@
 local command = vim.api.nvim_create_user_command
-local keymap = function(mode, lhs, rhs)
-  vim.keymap.set(mode, lhs, rhs, { noremap = true, silent = true })
+local keymap = function(mode, lhs, rhs, desc)
+  vim.keymap.set(mode, lhs, rhs, { noremap = true, silent = true, desc = desc })
 end
 
 -- window navigation
-keymap("n", "<C-h>", "<C-w>h")
-keymap("n", "<C-j>", "<C-w>j")
-keymap("n", "<C-k>", "<C-w>k")
-keymap("n", "<C-l>", "<C-w>l")
+keymap("n", "<C-h>", "<C-w>h", "Navigate window left")
+keymap("n", "<C-j>", "<C-w>j", "Navigate window down")
+keymap("n", "<C-k>", "<C-w>k", "Navigate window up")
+keymap("n", "<C-l>", "<C-w>l", "Navigate window right")
 
 -- window resizing
-keymap("n", "<S-Up>", "<cmd>resize -2<cr>")
-keymap("n", "<S-Down>", "<cmd>resize +2<cr>")
-keymap("n", "<S-Left>", "<cmd>vertical resize -2<cr>")
-keymap("n", "<S-Right>", "<cmd>vertical resize +2<cr>")
+keymap("n", "<S-Up>", "<cmd>resize -2<cr>", "Decrease window vertical size")
+keymap("n", "<S-Down>", "<cmd>resize +2<cr>", "Increase window vertical size")
+keymap("n", "<S-Left>", "<cmd>vertical resize -2<cr>", "Decrease window horizontal size")
+keymap("n", "<S-Right>", "<cmd>vertical resize +2<cr>", "Increase window horizontal size")
 
 -- splits
-keymap("n", "<C-w>s", "<cmd>split<cr>")
-keymap("n", "<C-w>v", "<cmd>vsplit<cr>")
+keymap("n", "<C-w>s", "<cmd>split<cr>", "Split window horizontal")
+keymap("n", "<C-w>v", "<cmd>vsplit<cr>", "Split window vertical")
 
 -- esc to leave terminal mode
 keymap("t", "<Esc>", [[<C-\><C-n>]])
@@ -26,8 +26,8 @@ keymap("t", "<Esc>", [[<C-\><C-n>]])
 keymap("i", "<A-s>", [[<C-\><C-n>]])
 keymap("t", "<A-s>", [[<C-\><C-n>]])
 
--- clear highligh
-keymap("n", "<leader>h", "<cmd>noh<cr>")
+-- clear highlight
+keymap("n", "<leader>h", "<cmd>noh<cr>", "Clear [H]ighlight")
 
 -- better indent
 keymap("v", "<", "<gv")
@@ -37,19 +37,19 @@ keymap("v", ">", ">gv")
 keymap("n", "*", "*N")
 
 -- quickfix
-keymap("n", "[q", "<cmd>try | cprev | catch | clast  | catch | endtry<cr>")
-keymap("n", "]q", "<cmd>try | cnext | catch | cfirst | catch | endtry<cr>")
-keymap("n", "<C-q>", "<cmd>cclose<cr>")
+keymap("n", "[q", "<cmd>try | cprev | catch | clast  | catch | endtry<cr>", "Next quickfix item")
+keymap("n", "]q", "<cmd>try | cnext | catch | cfirst | catch | endtry<cr>", "Prev quickfix item")
+keymap("n", "<C-q>", "<cmd>cclose<cr>", "Close quickfix")
 
 -- tab
-keymap("n", "<leader><tab>", "<cmd>tabnew<cr>")
+keymap("n", "<leader><tab>", "<cmd>tabnew<cr>", "Create new tab")
 
 -- Lazy
-keymap("n", "<leader>L", "<cmd>Lazy<cr>")
+keymap("n", "<leader>L", "<cmd>Lazy<cr>", "Open Lazy")
 
 -- highlights under cursor
 if vim.fn.has("nvim-0.9.0") == 1 then
-  keymap("n", "<leader>ui", vim.show_pos)
+  keymap("n", "<leader>ui", vim.show_pos, "Show highlight under cursor")
 end
 
 -- toggle realtive number
@@ -63,7 +63,7 @@ local toggle_relative = function()
     relative = true
   end
 end
-keymap("n", "<leader>R", toggle_relative)
+keymap("n", "<leader>R", toggle_relative, "Toggle relative numbers")
 
 -- tab size
 local long = false
@@ -86,7 +86,7 @@ local function toggle_tab()
 end
 command("TabLong", long_tab, { nargs = 0 })
 command("TabShort", short_tab, { nargs = 0 })
-keymap("n", "<leader>T", toggle_tab)
+keymap("n", "<leader>T", toggle_tab, "Toggle tab width")
 
 -- insert , or ; at the end of line
 local function add_to_end(char)
@@ -99,5 +99,5 @@ local function add_to_end(char)
 
   vim.api.nvim_win_set_cursor(0, pos)
 end
-keymap("n", "<leader>;", function() add_to_end(";") end)
-keymap("n", "<leader>,", function() add_to_end(",") end)
+keymap("n", "<leader>;", function() add_to_end(";") end, "Add `;` to end of line")
+keymap("n", "<leader>,", function() add_to_end(",") end, "Add `,` to end of line")
