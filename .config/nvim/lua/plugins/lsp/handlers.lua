@@ -22,42 +22,39 @@ M.on_attach = function(client, bufnr)
     require("plugins.lsp.cursor_hold").register(bufnr)
   end
 
-  local keymap = function(bind, cmd, mode)
-    mode = mode or "n"
-    vim.keymap.set(mode, bind, cmd, { noremap = true, silent = true, buffer = bufnr })
-  end
-
-  keymap("K", vim.lsp.buf.hover)
-  keymap("gk", vim.lsp.buf.signature_help)
-  keymap("gd", vim.lsp.buf.definition)
-  keymap("gD", vim.lsp.buf.declaration)
-  keymap("gr", vim.lsp.buf.references)
-
-  keymap("gR", "<cmd>Lspsaga lsp_finder<cr>")
-  keymap("gpd", "<cmd>Lspsaga peek_definition<cr>")
-  keymap("gpt", "<cmd>Lspsaga peek_type_definition<cr>")
-
-  keymap("gic", "<cmd>Lspsaga incoming_calls<cr>")
-  keymap("goc", "<cmd>Lspsaga outgoing_calls<cr>")
-
-  keymap("gl", vim.diagnostic.open_float)
-  keymap("[d", vim.diagnostic.goto_prev)
-  keymap("]d", vim.diagnostic.goto_next)
-
-  keymap("<leader>r", "<cmd>Lspsaga rename ++project<cr>")
-
-  keymap("<leader>F", vim.lsp.buf.format, { "n", "v" })
-
-  keymap("<leader>ca", "<cmd>Lspsaga code_action<cr>", { "n", "v" })
-  keymap("<leader>cl", function()
+  local function codelens()
     vim.lsp.codelens.run()
     vim.lsp.codelens.refresh()
-  end)
+  end
 
-  keymap("<leader>o", "<cmd>Lspsaga outline<cr>")
+  local keymap = function(bind, cmd, desc, mode)
+    mode = mode or "n"
+    vim.keymap.set(mode, bind, cmd, { noremap = true, silent = true, buffer = bufnr, desc = desc })
+  end
 
-  keymap("<leader>" .. "-", "<cmd>LspStop<cr>")
-  keymap("<leader>" .. "=", "<cmd>LspStart<cr>")
+  keymap("K", vim.lsp.buf.hover, "Symbol under cursor")
+  keymap("gd", vim.lsp.buf.definition, "Go to definition")
+  keymap("gh", vim.lsp.buf.type_definition, "Go to type definition")
+  keymap("gr", vim.lsp.buf.references, "List references")
+  keymap("gi", vim.lsp.buf.implementation, "List implementations")
+
+  keymap("gD", "<cmd>Lspsaga peek_definition<cr>", "Peek definition")
+  keymap("gH", "<cmd>Lspsaga peek_type_definition<cr>", "Peek type definition")
+
+  keymap("gI", vim.lsp.buf.incoming_calls, "List incoming calls")
+  keymap("gO", vim.lsp.buf.outgoing_calls, "List outgoing calls")
+
+  keymap("gl", vim.diagnostic.open_float, "Line diagnostics")
+  keymap("[d", vim.diagnostic.goto_prev, "Next diagnostic")
+  keymap("]d", vim.diagnostic.goto_next, "Prev diagnostic")
+
+  keymap("<leader>r", vim.lsp.buf.rename, "Rename")
+  keymap("<leader>F", vim.lsp.buf.format, "Format", { "n", "v" })
+
+  keymap("<leader>ca", "<cmd>Lspsaga code_action<cr>", "Code actions", { "n", "v" })
+  keymap("<leader>cl", codelens, "Code lens")
+
+  keymap("<leader>" .. "=", function() require("plugins.lsp.diagnostics").toggle() end, "Toggle diagnostics")
 end
 
 M.on_exit = function(_, _, client_id)

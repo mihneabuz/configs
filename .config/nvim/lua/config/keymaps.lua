@@ -27,7 +27,7 @@ keymap("i", "<A-s>", [[<C-\><C-n>]])
 keymap("t", "<A-s>", [[<C-\><C-n>]])
 
 -- clear highlight
-keymap("n", "<leader>h", "<cmd>noh<cr>", "Clear [H]ighlight")
+keymap("n", "<leader>h", "<cmd>noh<cr>", "Clear Highlight")
 
 -- better indent
 keymap("v", "<", "<gv")

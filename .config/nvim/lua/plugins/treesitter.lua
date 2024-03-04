@@ -5,10 +5,6 @@ return {
     version = false,
     build = ":TSUpdate",
     event = "VeryLazy",
-    keys = {
-      { "<c-space>", desc = "inc selection" },
-      { "<bs>",      desc = "dec selection", mode = "x" },
-    },
     opts = {
       ensure_installed = {
         "bash",
@@ -80,7 +76,7 @@ return {
   {
     "AckslD/nvim-trevJ.lua",
     keys = {
-      { "<leader>J", function() require("trevj").format_at_cursor() end, desc = "reverse J" },
+      { "<leader>J", function() require("trevj").format_at_cursor() end, desc = "Expand line" },
     },
     config = true
   },
@@ -89,9 +85,9 @@ return {
     "kevinhwang91/nvim-ufo",
     dependencies = { "kevinhwang91/promise-async" },
     keys = {
-      { "za", desc = "toggle fold" },
-      { "zM", function() require("ufo").openAllFolds() end,  desc = "open all folds" },
-      { "zN", function() require("ufo").closeAllFolds() end, desc = "close all folds" },
+      { "za", desc = "Toggle fold" },
+      { "zM", function() require("ufo").openAllFolds() end,  desc = "Open all folds" },
+      { "zN", function() require("ufo").closeAllFolds() end, desc = "Close all folds" },
     },
     main = "ufo",
     opts = {
@@ -131,7 +127,7 @@ return {
   {
     "mizlan/iswap.nvim",
     keys = {
-      { "gs", "<cmd>ISwapNodeWith<cr>", desc = "swap param" }
+      { "gs", "<cmd>ISwapNodeWith<cr>", desc = "Swap parameter" }
     },
     config = true
   },

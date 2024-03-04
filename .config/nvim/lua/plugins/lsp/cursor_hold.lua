@@ -19,6 +19,7 @@ M.register = function(bufnr)
       if not M.enabled[bufnr] then
         local autocmds = vim.api.nvim_get_autocmds({ group = "LspDocumentHighlight", event = "CursorHold" })
         for _, autocmd in ipairs(autocmds) do
+          ---@diagnostic disable: undefined-field
           if autocmd.buffer == bufnr then
             return vim.api.nvim_del_autocmd(autocmd.id)
           end

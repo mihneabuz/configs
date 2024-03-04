@@ -5,13 +5,23 @@ return {
     "folke/which-key.nvim",
     event = { "VeryLazy" },
     config = function()
-      require('which-key').setup()
+      local whichkey = require('which-key')
+      whichkey.setup()
 
-      require('which-key').register {
+      whichkey.register({
         ['<C-s>'] = { name = 'Search', _ = 'which_key_ignore' },
-        ['<leader>d'] = { name = 'Diagnostics', _ = 'which_key_ignore' },
         ['<leader>g'] = { name = 'Git', _ = 'which_key_ignore' },
+      })
+
+      local ignore_list = {
+        "ge", "gg", "gi", "gn", "gN", "gv", "g~", "g%"
       }
+
+      for _, ignored in ipairs(ignore_list) do
+        whichkey.register({
+          [ignored] = 'which_key_ignore'
+        })
+      end
     end
   },
 
