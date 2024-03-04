@@ -3,8 +3,8 @@ return {
     "rcarriga/nvim-dap-ui",
     dependencies = { "jay-babu/mason-nvim-dap.nvim" },
     keys = {
-      { "<leader>DB", function() require("plugins.dap.handlers").breakpoint() end, desc = "toggle breakpoint" },
-      { "<leader>DD", function() require("dap").continue() end,                    desc = "run debugger" },
+      { "<leader>DB", function() require("plugins.dap.handlers").breakpoint() end, desc = "Toggle breakpoint" },
+      { "<leader>DD", function() require("dap").continue() end,                    desc = "Run debugger" },
     },
     opts = {
       icons = {
@@ -89,11 +89,11 @@ return {
     "nvim-neotest/neotest",
     dependencies = { "vim-test/vim-test" },
     keys = {
-      { "<leader>z",  function() require("neotest").run.run() end },
-      { "<leader>aa", function() require("neotest").run.run(vim.fn.expand("%")) end },
-      { "<leader>ad", function() require("neotest").run.run({ strategy = "dap" }) end },
-      { "<leader>al", function() require("neotest").output.open() end },
-      { "<leader>as", function() require("neotest").summary.toggle() end },
+      { "<leader>az", function() require("neotest").run.run() end,                     desc = "Run test under cursor" },
+      { "<leader>aa", function() require("neotest").run.run(vim.fn.expand("%")) end,   desc = "Run all tests in file" },
+      { "<leader>ad", function() require("neotest").run.run({ strategy = "dap" }) end, desc = "Run test with debugger" },
+      { "<leader>al", function() require("neotest").output.open() end,                 desc = "Open test ouput" },
+      { "<leader>as", function() require("neotest").summary.toggle() end,              desc = "Show test summary" },
     },
     opts = function()
       return {

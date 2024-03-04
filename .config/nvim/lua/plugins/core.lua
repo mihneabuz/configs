@@ -6,11 +6,17 @@ return {
     event = { "VeryLazy" },
     config = function()
       local whichkey = require('which-key')
-      whichkey.setup()
+      whichkey.setup({
+
+      })
 
       whichkey.register({
         ['<C-s>'] = { name = 'Search', _ = 'which_key_ignore' },
         ['<leader>g'] = { name = 'Git', _ = 'which_key_ignore' },
+        ['<leader>c'] = { name = 'Code', _ = 'which_key_ignore' },
+        ['<leader>a'] = { name = 'Tests', _ = 'which_key_ignore' },
+        ['<leader>d'] = { name = 'Diagnostics', _ = 'which_key_ignore' },
+        ['<leader>D'] = { name = 'Debugger', _ = 'which_key_ignore' },
       })
 
       local ignore_list = {

@@ -15,6 +15,8 @@ function M.sign_setup()
       runner_group = group
 
       local placed = vim.fn.sign_getplaced(buf, { group = "dap_breakpoints", lnum = args.lnum })
+
+      ---@diagnostic disable: undefined-field
       local breakpoint = placed[1].signs[1]
 
       if breakpoint then

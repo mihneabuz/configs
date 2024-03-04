@@ -14,16 +14,6 @@ return {
       history = true,
       delete_check_events = "TextChanged",
     },
-    keys = {
-      {
-        "<S-tab>",
-        function()
-          local luasnip = require("luasnip")
-          return luasnip.locally_jumpable() and luasnip.jump(1)
-        end,
-        mode = "i",
-      },
-    },
   },
 
   -- auto completion
@@ -42,6 +32,7 @@ return {
     },
     opts = function()
       local cmp = require("cmp")
+      local luasnip = require("luasnip")
 
       local format = require("lspkind").cmp_format({
         mode = "symbol",
@@ -74,7 +65,7 @@ return {
         },
         snippet = {
           expand = function(args)
-            require("luasnip").lsp_expand(args.body)
+            luasnip.lsp_expand(args.body)
           end,
         },
         mapping = cmp.mapping.preset.insert({
@@ -83,12 +74,17 @@ return {
           ["<C-.>"] = cmp.mapping.scroll_docs(-4),
           ["<C-,>"] = cmp.mapping.scroll_docs(4),
           ["<C-Space>"] = cmp.mapping.complete(),
-          ["<C-e>"] = cmp.mapping.abort(),
-          ["<CR>"] = cmp.mapping.confirm({ select = true }),
-          ["<S-CR>"] = cmp.mapping.confirm({
-            behavior = cmp.ConfirmBehavior.Replace,
-            select = true,
-          }),
+          ["<C-y>"] = cmp.mapping.confirm({ select = true }),
+          ["<C-l>"] = cmp.mapping(function()
+            if luasnip.expand_or_locally_jumpable() then
+              luasnip.expand_or_jump()
+            end
+          end, { 'i', 's' }),
+          ['<C-h>'] = cmp.mapping(function()
+            if luasnip.locally_jumpable(-1) then
+              luasnip.jump(-1)
+            end
+          end, { 'i', 's' }),
         }),
         sources = cmp.config.sources({
           { name = "nvim_lsp", priority = 50 },
@@ -125,7 +121,7 @@ return {
     opts = { use_diagnostic_signs = true },
     keys = {
       { "<leader>dd", "<cmd>TroubleToggle document_diagnostics<cr>",  desc = "Document diagnostics" },
-      { "<leader>dD", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace diagnostics" },
+      { "<leader>dw", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace diagnostics" },
     },
   },
 

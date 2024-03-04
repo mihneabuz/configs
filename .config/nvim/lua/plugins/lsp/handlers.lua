@@ -54,7 +54,7 @@ M.on_attach = function(client, bufnr)
   keymap("<leader>ca", "<cmd>Lspsaga code_action<cr>", "Code actions", { "n", "v" })
   keymap("<leader>cl", codelens, "Code lens")
 
-  keymap("<leader>" .. "=", function() require("plugins.lsp.diagnostics").toggle() end, "Toggle diagnostics")
+  keymap("<leader>dt", function() require("plugins.lsp.diagnostics").toggle() end, "Toggle diagnostics")
 end
 
 M.on_exit = function(_, _, client_id)

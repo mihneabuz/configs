@@ -10,7 +10,7 @@ return {
         function()
           require("notify").dismiss({ silent = true, pending = true })
         end,
-        desc = "dismiss notifications",
+        desc = "Dismiss notifications",
       },
     },
     opts = {
@@ -39,10 +39,10 @@ return {
     event = "VeryLazy",
     dependencies = { "lualine.nvim", },
     keys = {
-      { "<S-l>",     "<cmd>keepjumps BufferLineCycleNext<cr>" },
-      { "<S-h>",     "<cmd>keepjumps BufferLineCyclePrev<cr>" },
-      { "<leader>B", "<cmd>keepjumps BufferLineSortByExtension<cr>", desc = "sort buffers" },
-      { "<leader>b", "<cmd>keepjumps BufferLinePick<cr>",            desc = "pick buffer" },
+      { "<S-l>",     "<cmd>keepjumps BufferLineCycleNext<cr>",       desc = "Next buffer" },
+      { "<S-h>",     "<cmd>keepjumps BufferLineCyclePrev<cr>",       desc = "Prev buffer" },
+      { "<leader>B", "<cmd>keepjumps BufferLineSortByExtension<cr>", desc = "Sort buffers" },
+      { "<leader>b", "<cmd>keepjumps BufferLinePick<cr>",            desc = "Pick buffer" },
     },
     opts = function()
       return {
@@ -147,6 +147,7 @@ return {
 
         local names = {}
         for i = #clients, 1, -1 do
+          ---@diagnostic disable: undefined-field
           names[#names + 1] = clients[i].name
         end
 

@@ -66,7 +66,7 @@ return {
   {
     "lmburns/lf.nvim",
     keys = {
-      { "<leader>lf", function() require("lf").start("~") end, desc = "Open lf" },
+      { "<leader>l", function() require("lf").start("~") end, desc = "Open lf" },
     },
     opts = {
       border = "rounded",
@@ -81,14 +81,17 @@ return {
     version = false,
     dependencies = { "ahmedkhalf/project.nvim" },
     keys = {
-      { "gG",     "<cmd>Telescope grep_string<cr>", desc = "Search word under cursor" },
-      { "<C-s>t", "<cmd>Telescope<cr>",             desc = "Telescope" },
-      { "<C-s>h", "<cmd>Telescope help_tags<cr>",   desc = "Help" },
-      { "<C-s>f", "<cmd>Telescope find_files<cr>",  desc = "Files" },
-      { "<C-s>g", "<cmd>Telescope live_grep<cr>",   desc = "Grep files" },
-      { "<C-s>r", "<cmd>Telescope oldfiles<cr>",    desc = "Recent files" },
-      { "<C-s>c", "<cmd>Telescope commands<cr>",    desc = "Commands" },
-      { "<C-s>d", "<cmd>Telescope diagnostics<cr>", desc = "Diagnostics" },
+      { "gG",     "<cmd>Telescope grep_string<cr>",     desc = "Search word under cursor" },
+      { "<C-s>t", "<cmd>Telescope<cr>",                 desc = "Telescope" },
+      { "<C-s>h", "<cmd>Telescope help_tags<cr>",       desc = "Help" },
+      { "<C-s>f", "<cmd>Telescope find_files<cr>",      desc = "Files" },
+      { "<C-s>g", "<cmd>Telescope live_grep<cr>",       desc = "Grep files" },
+      { "<C-s>r", "<cmd>Telescope oldfiles<cr>",        desc = "Recent files" },
+      { "<C-s>c", "<cmd>Telescope commands<cr>",        desc = "Commands" },
+      { "<C-s>o", "<cmd>Telescope keymaps<cr>",         desc = "Git commits" },
+      { "<C-s>k", "<cmd>Telescope keymaps<cr>",         desc = "Keymaps" },
+      { "<C-s>h", "<cmd>Telescope command_history<cr>", desc = "Command history" },
+      { "<C-s>d", "<cmd>Telescope diagnostics<cr>",     desc = "Diagnostics" },
       {
         "<C-s>s",
         function()
@@ -141,12 +144,6 @@ return {
             end,
             ["<C-s>"] = function(...)
               return require("telescope.actions").close(...)
-            end,
-            ["<C-t>"] = function(...)
-              return require("trouble.providers.telescope").open_with_trouble(...)
-            end,
-            ["<A-t>"] = function(...)
-              return require("trouble.providers.telescope").open_selected_with_trouble(...)
             end,
           },
           n = {
@@ -216,8 +213,7 @@ return {
     event = "BufReadPre",
     opts = { options = { "buffers", "curdir", "tabpages", "winsize", "help", "globals" } },
     keys = {
-      { "<leader>sr", function() require("persistence").load() end,                desc = "Restore session" },
-      { "<leader>sl", function() require("persistence").load({ last = true }) end, desc = "Restore last session" },
+      { "<leader>s", function() require("persistence").load({ last = true }) end, desc = "Restore session" },
     },
   },
 
@@ -225,9 +221,8 @@ return {
   {
     "cbochs/grapple.nvim",
     keys = {
-      { "<leader>m", function() require("grapple").toggle() end,         desc = "Toogle mark" },
-      { "<leader>n", function() require("grapple").popup_tags() end,     desc = "Marks menu" },
-      { "<leader>N", function() require("grapple").quickfix() end,       desc = "Marks quickfix" },
+      { "<leader>N", function() require("grapple").toggle() end,         desc = "Toogle mark" },
+      { "<leader>n", function() require("grapple").open_tags() end,      desc = "Show marks" },
       { "[n",        function() require("grapple").cycle_forward() end,  desc = "Prev mark" },
       { "]n",        function() require("grapple").cycle_backward() end, desc = "Next mark" },
     },
@@ -262,7 +257,7 @@ return {
     "norcalli/nvim-colorizer.lua",
     event = { "BufReadPre", "BufNewFile" },
     keys = {
-      { "<leader>cc", "<cmd>ColorizerToggle<cr>", desc = "Toggle colorizer" },
+      { "<leader>C", "<cmd>ColorizerToggle<cr>", desc = "Toggle colorizer" },
     },
     config = function()
       require("colorizer").setup()

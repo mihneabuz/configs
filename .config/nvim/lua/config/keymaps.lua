@@ -3,6 +3,9 @@ local keymap = function(mode, lhs, rhs, desc)
   vim.keymap.set(mode, lhs, rhs, { noremap = true, silent = true, desc = desc })
 end
 
+-- disable command line window
+keymap("n", "q:", "")
+
 -- window navigation
 keymap("n", "<C-h>", "<C-w>h", "Navigate window left")
 keymap("n", "<C-j>", "<C-w>j", "Navigate window down")
