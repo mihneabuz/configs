@@ -48,8 +48,7 @@ M.on_attach = function(client, bufnr)
   keymap("[d", vim.diagnostic.goto_prev, "Next diagnostic")
   keymap("]d", vim.diagnostic.goto_next, "Prev diagnostic")
 
-  keymap("<leader>r", vim.lsp.buf.rename, "Rename")
-  keymap("<leader>F", vim.lsp.buf.format, "Format", { "n", "v" })
+  keymap("<leader>r", vim.lsp.buf.rename, "Rename symbol")
 
   keymap("<leader>ca", "<cmd>Lspsaga code_action<cr>", "Code actions", { "n", "v" })
   keymap("<leader>cl", codelens, "Code lens")
@@ -82,14 +81,6 @@ M.base_opts = {
   on_attach = M.on_attach,
   on_exit = M.on_exit,
 }
-
-M.disable_capability = function(opts, capability)
-  local old_on_attach = opts.on_attach
-  opts.on_attach = function(client, bufnr)
-    client.server_capabilities[capability] = false
-    old_on_attach(client, bufnr)
-  end
-end
 
 M.manual = {
   ["rust_analyzer"] = function() return require("plugins.lsp.lang.rust") end,

@@ -7,16 +7,10 @@ M.setup = function(base_opts)
 
   local opts = vim.tbl_deep_extend("force", { settings = settings }, base_opts)
 
-  if vim.fn.executable("prettierd") == 1 then
-    require("plugins.lsp.handlers").disable_capability(opts, "documentFormattingProvider")
-  end
-
   local success, typescript = pcall(require, "typescript")
   if not success then
     return false
   end
-
-  require("null-ls").register(require("typescript.extensions.null-ls.code-actions"))
 
   typescript.setup({
     debug = false,
