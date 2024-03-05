@@ -33,7 +33,6 @@ end
 M.format = function()
   local ft = M.duplicated_ft[vim.bo.filetype] or vim.bo.filetype
   local opts = M.opts_by_ft[ft] or M.default_opts
-  vim.print(opts)
   require("conform").format(opts)
 end
 

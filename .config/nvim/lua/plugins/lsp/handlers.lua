@@ -19,7 +19,23 @@ M.on_attach = function(client, bufnr)
   end
 
   if client.server_capabilities.documentHighlightProvider then
-    require("plugins.lsp.cursor_hold").register(bufnr)
+    vim.api.nvim_create_augroup("LspDocumentHighlight", { clear = false })
+
+    vim.api.nvim_create_autocmd("CursorHold", {
+      group = "LspDocumentHighlight",
+      buffer = bufnr,
+      callback = function()
+        if vim.api.nvim_buf_line_count(0) < 10000 then
+          vim.lsp.buf.document_highlight()
+        end
+      end
+    })
+
+    vim.api.nvim_create_autocmd("CursorMoved", {
+      group = "LspDocumentHighlight",
+      buffer = bufnr,
+      callback = vim.lsp.buf.clear_references
+    })
   end
 
   local function codelens()
@@ -56,35 +72,13 @@ M.on_attach = function(client, bufnr)
   keymap("<leader>dt", function() require("plugins.lsp.diagnostics").toggle() end, "Toggle diagnostics")
 end
 
-M.on_exit = function(_, _, client_id)
-  local buffers = vim.lsp.get_buffers_by_client_id(client_id)
-
-  for _, bufnr in ipairs(buffers) do
-    local clients = vim.lsp.get_clients({ bufnr })
-
-    local has_highlighting = false
-    for _, client in ipairs(clients) do
-      if client["id"] ~= client_id and client["server_capabilities"]["documentHighlightProvider"] then
-        has_highlighting = true
-        break
-      end
-    end
-
-    if not has_highlighting then
-      require("plugins.lsp.cursor_hold").unregister(bufnr)
-    end
-  end
-end
-
 M.base_opts = {
   capabilities = M.capabilities,
   on_attach = M.on_attach,
-  on_exit = M.on_exit,
 }
 
 M.manual = {
   ["rust_analyzer"] = function() return require("plugins.lsp.lang.rust") end,
-  ["tsserver"]      = function() return require("plugins.lsp.lang.typescript") end,
 }
 
 M.automatic = {

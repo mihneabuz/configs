@@ -63,17 +63,6 @@ return {
     end,
   },
 
-  {
-    "lmburns/lf.nvim",
-    keys = {
-      { "<leader>l", function() require("lf").start("~") end, desc = "Open lf" },
-    },
-    opts = {
-      border = "rounded",
-      escape_quit = false
-    }
-  },
-
   -- fuzzy finder
   {
     "nvim-telescope/telescope.nvim",
@@ -186,27 +175,6 @@ return {
     config = true
   },
 
-  -- todo comments
-  {
-    "folke/todo-comments.nvim",
-    cmd = { "TodoTrouble", "TodoTelescope" },
-    event = { "BufReadPost", "BufNewFile" },
-    opts = {
-      keywords = {
-        FIX  = { icon = " ", color = "#ff5135", alt = { "BUG", "ISSUE" } },
-        TODO = { icon = " ", color = "#ffcc66", alt = { "DO" } },
-        WARN = { icon = " ", color = "#ff8800", alt = { "WARNING" } },
-        PERF = { icon = " ", color = "#c678dd", alt = { "PERFORMANCE", "OPTIMIZE" } },
-        NOTE = { icon = " ", color = "#bbfdbb", alt = { "INFO" } },
-        DEL  = { icon = " ", color = "#aabbdd", alt = { "DELETE", "TRASH", "TEMP" } }
-      }
-    },
-    keys = {
-      { "]t", function() require("todo-comments").jump_next() end, desc = "Next todo" },
-      { "[t", function() require("todo-comments").jump_prev() end, desc = "Prev todo" },
-    },
-  },
-
   -- session management
   {
     "folke/persistence.nvim",
@@ -227,6 +195,27 @@ return {
       { "]n",        function() require("grapple").cycle_backward() end, desc = "Next mark" },
     },
     config = true,
+  },
+
+  -- todo comments
+  {
+    "folke/todo-comments.nvim",
+    cmd = { "TodoTrouble", "TodoTelescope" },
+    event = { "BufReadPost", "BufNewFile" },
+    opts = {
+      keywords = {
+        FIX  = { icon = " ", color = "#ff5135", alt = { "BUG", "ISSUE" } },
+        TODO = { icon = " ", color = "#ffcc66", alt = { "DO" } },
+        WARN = { icon = " ", color = "#ff8800", alt = { "WARNING" } },
+        PERF = { icon = " ", color = "#c678dd", alt = { "PERFORMANCE", "OPTIMIZE" } },
+        NOTE = { icon = " ", color = "#bbfdbb", alt = { "INFO" } },
+        DEL  = { icon = " ", color = "#aabbdd", alt = { "DELETE", "TRASH", "TEMP" } }
+      }
+    },
+    keys = {
+      { "]t", function() require("todo-comments").jump_next() end, desc = "Next todo" },
+      { "[t", function() require("todo-comments").jump_prev() end, desc = "Prev todo" },
+    },
   },
 
   -- surround

@@ -154,13 +154,4 @@ return {
       crates.show()
     end
   },
-
-  -- typescript
-  {
-    "jose-elias-alvarez/typescript.nvim",
-    ft = { "typescript", "javascript", "javascriptreact", "typescriptreact" },
-    config = function()
-      require("plugins.lsp.handlers").setup_manual_server("tsserver")
-    end
-  },
 }
