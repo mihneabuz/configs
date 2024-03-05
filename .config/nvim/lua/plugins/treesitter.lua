@@ -8,7 +8,8 @@ return {
     opts = {
       ensure_installed = {
         "bash",
-        "c", "cpp",
+        "c",
+        "cpp",
         "c_sharp",
         "css",
         "cuda",
@@ -19,6 +20,7 @@ return {
         "go",
         "graphql",
         "haskell",
+        "hcl",
         "html",
         "java",
         "javascript",
@@ -36,6 +38,7 @@ return {
         "typescript",
         "tsx",
         "vim",
+        "vimdoc",
         "yaml",
         "markdown",
         "markdown_inline",

@@ -90,7 +90,7 @@ return {
       { "<C-s>c", "<cmd>Telescope commands<cr>",        desc = "Commands" },
       { "<C-s>o", "<cmd>Telescope keymaps<cr>",         desc = "Git commits" },
       { "<C-s>k", "<cmd>Telescope keymaps<cr>",         desc = "Keymaps" },
-      { "<C-s>h", "<cmd>Telescope command_history<cr>", desc = "Command history" },
+      { "<C-s>v", "<cmd>Telescope command_history<cr>", desc = "Command history" },
       { "<C-s>d", "<cmd>Telescope diagnostics<cr>",     desc = "Diagnostics" },
       {
         "<C-s>s",

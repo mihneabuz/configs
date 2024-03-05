@@ -29,13 +29,41 @@ autocmd("FileType", {
     "lspinfo",
     "man",
     "notify",
+    "grapple",
     "qf",
     "startuptime",
     "tsplayground",
-    "checkhealth"
+    "checkhealth",
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
-    vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
+    vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true, nowait = true })
   end,
+})
+
+-- highlight trailling spaces
+augroup("HighlightTraillingWhitespace", { clear = true })
+autocmd("FileType", {
+  group = "HighlightTraillingWhitespace",
+  callback = function(ev)
+    local ignored = {
+      "alpha",
+      "lazy",
+      "mason",
+      "grapple",
+      "PlenaryTestPopup",
+      "help",
+      "lspinfo",
+      "man",
+      "notify",
+      "qf",
+      "startuptime",
+      "tsplayground",
+      "checkhealth"
+    }
+
+    if not vim.list_contains(ignored, ev.match) then
+      vim.cmd([[match DiagnosticUnderlineHint /\s\+$/]])
+    end
+  end
 })

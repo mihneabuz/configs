@@ -132,41 +132,6 @@ return {
     lazy = true
   },
 
-  --  formatters, linters, code actions
-  {
-    "nvimtools/none-ls.nvim",
-    branch = "0.7-compat",
-    dependencies = { "mason.nvim" },
-    event = { "BufReadPre", "BufNewFile" },
-    opts = function()
-      local nls = require("null-ls")
-
-      local sources = {
-        -- trailling whitespace
-        nls.builtins.diagnostics.trail_space,
-        nls.builtins.formatting.trim_whitespace,
-
-        -- git code actions
-        nls.builtins.code_actions.gitsigns,
-      }
-
-      if vim.fn.executable("prettierd") == 1 then
-        table.insert(sources, nls.builtins.formatting.prettierd)
-      end
-
-      if vim.fn.executable("eslint_d") == 1 then
-        table.insert(sources, nls.builtins.diagnostics.eslint_d)
-        table.insert(sources, nls.builtins.code_actions.eslint_d)
-      end
-
-      return {
-        debug = false,
-        on_attach = require("plugins.lsp.handlers").on_attach,
-        sources = sources
-      }
-    end,
-  },
-
   -- rust
   {
     "simrat39/rust-tools.nvim",

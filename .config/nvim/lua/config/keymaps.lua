@@ -4,7 +4,7 @@ local keymap = function(mode, lhs, rhs, desc)
 end
 
 -- disable command line window
-keymap("n", "q:", "")
+keymap("n", "q<cmd>", "<nop>")
 
 -- window navigation
 keymap("n", "<C-h>", "<C-w>h", "Navigate window left")
