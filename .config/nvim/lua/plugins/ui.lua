@@ -238,7 +238,7 @@ return {
         button("u", "   Update", "<cmd>TSUpdate<cr><cmd>Lazy sync<cr>", "@function"),
         { type = "padding", val = 0 },
         button("h", " 󰋠  Health", "<cmd>checkhealth<cr>", "DiagnosticError"),
-        button("q", "   Quit", "<cmd>qa<cr>", "DiagnosticError"),
+        button("q", "   Quit", "<cmd>qa<cr>", "DiagnosticError"),
       }
 
       return dashboard

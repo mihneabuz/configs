@@ -4,6 +4,7 @@ return {
   {
     "L3MON4D3/LuaSnip",
     build = "make install_jsregexp",
+    lazy = true,
     dependencies = {
       "rafamadriz/friendly-snippets",
       config = function()
@@ -157,6 +158,7 @@ return {
 
   {
     "JoosepAlviste/nvim-ts-context-commentstring",
+    lazy = true,
     config = function()
       ---@diagnostic disable: inject-field
       vim.g.skip_ts_context_commentstring_module = true

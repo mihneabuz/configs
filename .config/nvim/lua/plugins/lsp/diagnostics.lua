@@ -1,20 +1,51 @@
 local M = {}
 
-M.config = vim.diagnostic.config()
+M.init = function()
+  M.opts = {
+    underline = true,
+    virtual_text = false,
+    signs = {
+      active = {
+        { name = "DiagnosticSignError", text = "" },
+        { name = "DiagnosticSignWarn", text = "" },
+        { name = "DiagnosticSignHint", text = "" },
+        { name = "DiagnosticSignInfo", text = "" },
+      }
+    },
+    float = {
+      focusable = false,
+      style = "minimal",
+      border = "rounded",
+      source = "always",
+      header = "",
+      prefix = "",
+    },
+    update_in_insert = true,
+    severity_sort = true,
+  }
 
-M.enabled = true
+  for _, sign in ipairs(M.opts.signs.active) do
+    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
+  end
+
+  M.enable()
+
+  M.enabled = true
+end
 
 M.enable = function()
-  vim.diagnostic.config(M.config)
+  vim.diagnostic.config(vim.deepcopy(M.opts))
 end
 
 M.disable = function()
-  local settings = {}
-  for _, setting in ipairs(vim.tbl_keys(M.config)) do
-    settings[setting] = false
-  end
-
-  vim.diagnostic.config(settings)
+  vim.diagnostic.config({
+    virtual_text = false,
+    update_in_insert = false,
+    underline = false,
+    severity_sort = false,
+    float = false,
+    signs = false
+  })
 end
 
 M.toggle = function()

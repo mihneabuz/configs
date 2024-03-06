@@ -3,18 +3,16 @@ return {
 
   {
     "folke/which-key.nvim",
-    event = { "VeryLazy" },
+    keys = { "<leader>", "<C-s>" },
     config = function()
       local whichkey = require('which-key')
-      whichkey.setup({
-
-      })
+      whichkey.setup()
 
       whichkey.register({
         ['<C-s>'] = { name = 'Search', _ = 'which_key_ignore' },
         ['<leader>g'] = { name = 'Git', _ = 'which_key_ignore' },
         ['<leader>c'] = { name = 'Code', _ = 'which_key_ignore' },
-        ['<leader>a'] = { name = 'Tests', _ = 'which_key_ignore' },
+        ['<leader>t'] = { name = 'Tests', _ = 'which_key_ignore' },
         ['<leader>d'] = { name = 'Diagnostics', _ = 'which_key_ignore' },
         ['<leader>D'] = { name = 'Debugger', _ = 'which_key_ignore' },
       })

@@ -89,11 +89,11 @@ return {
     "nvim-neotest/neotest",
     dependencies = { "vim-test/vim-test" },
     keys = {
-      { "<leader>az", function() require("neotest").run.run() end,                     desc = "Run test under cursor" },
-      { "<leader>aa", function() require("neotest").run.run(vim.fn.expand("%")) end,   desc = "Run all tests in file" },
-      { "<leader>ad", function() require("neotest").run.run({ strategy = "dap" }) end, desc = "Run test with debugger" },
-      { "<leader>al", function() require("neotest").output.open() end,                 desc = "Open test ouput" },
-      { "<leader>as", function() require("neotest").summary.toggle() end,              desc = "Show test summary" },
+      { "<leader>tz", function() require("neotest").run.run() end,                     desc = "Run test under cursor" },
+      { "<leader>ta", function() require("neotest").run.run(vim.fn.expand("%")) end,   desc = "Run all tests in file" },
+      { "<leader>td", function() require("neotest").run.run({ strategy = "dap" }) end, desc = "Run test with debugger" },
+      { "<leader>tl", function() require("neotest").output.open() end,                 desc = "Open test ouput" },
+      { "<leader>ts", function() require("neotest").summary.toggle() end,              desc = "Show test summary" },
     },
     opts = function()
       return {
