@@ -30,6 +30,12 @@ M.set = function(filetype, opts)
   M.opts_by_ft[filetype] = opts
 end
 
+M.add_formatter = function(filetype, formatter)
+  local opts = M.get(filetype)
+  table.insert(opts.formatters, formatter)
+  M.set(opts)
+end
+
 M.format = function()
   local ft = M.duplicated_ft[vim.bo.filetype] or vim.bo.filetype
   local opts = M.opts_by_ft[ft] or M.default_opts

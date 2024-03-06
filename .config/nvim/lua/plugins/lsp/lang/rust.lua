@@ -3,16 +3,6 @@ local M = {}
 local root_fn = require("lspconfig").util.root_pattern("Cargo.toml")
 local root_dir = root_fn(vim.fn.getcwd())
 
-local function execute_command(command, args, cwd)
-  require("toggleterm.terminal").Terminal
-      :new({
-        dir = cwd,
-        cmd = require("rust-tools.utils.utils").make_command_from_args(command, args),
-        close_on_exit = false,
-      })
-      :toggle()
-end
-
 local function extra_opts()
   local settings = {}
 
@@ -46,7 +36,7 @@ local function setup_dap_adapter()
   return {}
 end
 
-local function setup_tailwind_lsp(base_opts)
+local function setup_tailwind(base_opts)
   if vim.fn.glob("tailwind.config.*") == "" then
     return
   end
@@ -67,6 +57,8 @@ local function setup_tailwind_lsp(base_opts)
   })
 
   require("lspconfig")["tailwindcss"].setup(opts)
+
+  require("plugins.format.handlers").add_formatter("rust", "rustywind")
 end
 
 M.setup = function(base_opts)
@@ -81,7 +73,7 @@ M.setup = function(base_opts)
 
   rt.setup({
     tools = {
-      executor = { execute_command = execute_command },
+      executor = require("rust-tools.executors").toggleterm,
       runnables = {
         use_telescope = true
       },
@@ -95,7 +87,7 @@ M.setup = function(base_opts)
     }
   })
 
-  setup_tailwind_lsp(base_opts)
+  setup_tailwind(base_opts)
 
   return true
 end
