@@ -3,7 +3,7 @@ return {
 
   {
     "folke/which-key.nvim",
-    keys = { "<leader>", "<C-s>" },
+    keys = { "<leader>", "<C-s>", "g", "z" },
     config = function()
       local whichkey = require('which-key')
       whichkey.setup()

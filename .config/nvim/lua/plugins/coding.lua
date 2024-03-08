@@ -39,7 +39,7 @@ return {
         mode = "symbol",
         elipsis_char = "..",
         before = function(_, item)
-          item.abbr = string.sub(item.abbr, 1, 32)
+          item.abbr = string.sub(item.abbr, 1, 52)
           item.menu = nil
           return item
         end

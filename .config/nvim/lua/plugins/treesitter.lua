@@ -46,7 +46,10 @@ return {
         "regex"
       },
       highlight = { enable = true },
-      indent = { enable = true },
+      indent = {
+        enable = true,
+        additional_vim_regex_highlighting = false,
+      },
     },
     config = function(_, opts)
       require("nvim-treesitter.configs").setup(opts)
@@ -96,7 +99,7 @@ return {
     opts = {
       open_fold_hl_timeout = 100,
       provider_selector = function(_, _, _)
-        return { "treesitter", "indent" }
+        return { "treesitter" }
       end,
       fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
         local newVirtText = {}

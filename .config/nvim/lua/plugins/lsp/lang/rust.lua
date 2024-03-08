@@ -3,91 +3,97 @@ local M = {}
 local root_fn = require("lspconfig").util.root_pattern("Cargo.toml")
 local root_dir = root_fn(vim.fn.getcwd())
 
-local function extra_opts()
-  local settings = {}
-
-  if vim.fn.executable("leptosfmt") then
+local function should_use_leptosfmt()
+  if root_dir ~= nil and vim.fn.executable("leptosfmt") then
     local config = root_dir .. "/leptosfmt.toml"
     if vim.fn.filereadable(config) > 0 then
-      settings["rust-analyzer"] = {
-        rustfmt = {
-          overrideCommand = { "leptosfmt", "--config-file", config, "--stdin", "--rustfmt" }
-        }
-      }
+      return true
     end
+  end
+
+  return false
+end
+
+local function override_leptosfmt()
+  return {
+    "leptosfmt", "--config-file", root_dir .. "/leptosfmt.toml", "--stdin", "--rustfmt"
+  }
+end
+
+local function extra_opts()
+  local settings = {
+    ["rust_analyzer"] = {
+      checkOnSave = {
+        allFeatures = true,
+        command = "clippy",
+        extraArgs = { "--no-deps" }
+      },
+      procMacro = {
+        enable = true,
+        ignored = {
+          ["async-trait"] = { "async_trait" },
+          ["async-recursion"] = { "async_recursion" },
+        },
+      },
+    }
+  }
+
+  if should_use_leptosfmt() then
+    settings = vim.tbl_deep_extend('force', settings, {
+      ["rust-analyzer"] = {
+        rustfmt = { overrideCommand = override_leptosfmt() }
+      }
+    })
   end
 
   return {
     root_dir = root_fn,
-    settings = settings
+    settings = settings,
   }
 end
 
-local function setup_dap_adapter()
-  local mason_path = vim.fn.glob(vim.fn.stdpath("data") .. "/mason/packages/codelldb/extension/")
-
-  local codelldb_path = mason_path .. "adapter/codelldb"
-  local liblldb_path = mason_path .. "lldb/lib/liblldb.so"
-
-  if vim.fn.filereadable(codelldb_path) > 0 and vim.fn.filereadable(liblldb_path) > 0 then
-    return require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path)
-  end
-
-  return {}
+local function should_setup_tailwind()
+  return vim.fn.glob("tailwind.config.*") ~= ""
 end
 
-local function setup_tailwind(base_opts)
-  if vim.fn.glob("tailwind.config.*") == "" then
-    return
-  end
+local function setup_tailwind()
+  require("plugins.format.handlers").add_formatter("rust", "rustywind")
 
-  local opts = vim.tbl_extend("force", base_opts, {
+  require("lspconfig")["tailwindcss"].setup({
     filetypes = { "rust" },
     init_options = {
       userLanguages = {
         rust = "javascript",
       },
     },
-    settings = {
-      tailwindCSS = {
-        classAttribures = { "class" },
-        validate = false,
-      }
-    }
+  })
+end
+
+local function setup_ferris()
+  require("ferris").setup()
+
+  vim.keymap.set("n", "<leader>w", "", {
+    callback = function() require("ferris.methods.reload_workspace")() end,
+    desc = "Reload cargo workspace",
+    silent = true,
   })
 
-  require("lspconfig")["tailwindcss"].setup(opts)
-
-  require("plugins.format.handlers").add_formatter("rust", "rustywind")
+  vim.keymap.set("n", "gw", "", {
+    callback = function() require("ferris.methods.open_documentation")() end,
+    desc = "Go to documentation",
+    silent = true,
+  })
 end
 
 M.setup = function(base_opts)
+  setup_ferris()
+
   local opts = vim.tbl_extend("force", base_opts, extra_opts())
+  require("lspconfig")["rust_analyzer"].setup(opts)
 
-  local success, rt = pcall(require, "rust-tools")
-  if not success then
-    return false
+  if should_setup_tailwind() then
+    setup_tailwind()
   end
-
-  local dap_adapter = setup_dap_adapter()
-
-  rt.setup({
-    tools = {
-      executor = require("rust-tools.executors").toggleterm,
-      runnables = {
-        use_telescope = true
-      },
-      inlay_hints = {
-        only_current_line = true
-      },
-    },
-    server = opts,
-    dap = {
-      adapter = dap_adapter
-    }
-  })
-
-  setup_tailwind(base_opts)
 
   return true
 end

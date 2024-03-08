@@ -44,55 +44,49 @@ return {
       { "<leader>B", "<cmd>keepjumps BufferLineSortByExtension<cr>", desc = "Sort buffers" },
       { "<leader>b", "<cmd>keepjumps BufferLinePick<cr>",            desc = "Pick buffer" },
     },
-    opts = function()
-      return {
-        options = {
-          numbers                 = "none",
-          right_mouse_command     = nil,
-          left_mouse_command      = nil,
-          middle_mouse_command    = nil,
-          indicator               = { icon = "▐" },
-          modified_icon           = "",
-          max_name_length         = 28,
-          max_prefix_length       = 12,
-          enforce_regular_tabs    = false,
-          diagnostics             = false,
-          offsets                 = {
-            {
-              filetype = "neo-tree",
-              text = "Neo-tree",
-              highlight = "BufferLineFill",
-              text_align = "left",
-            },
+    opts = {
+      options = {
+        numbers                 = "none",
+        right_mouse_command     = nil,
+        left_mouse_command      = nil,
+        middle_mouse_command    = nil,
+        indicator               = { icon = "▐" },
+        modified_icon           = "󰏫",
+        max_name_length         = 28,
+        max_prefix_length       = 12,
+        enforce_regular_tabs    = false,
+        diagnostics             = false,
+        offsets                 = {
+          {
+            filetype = "neo-tree",
+            text = "Neo-tree",
+            highlight = "BufferLineFill",
+            text_align = "left",
           },
-          show_buffer_icons       = true,
-          show_buffer_close_icons = false,
-          show_close_icon         = false,
-          show_tab_indicators     = false,
-          persist_buffer_sort     = true,
-          separator_style         = {},
-          always_show_bufferline  = false,
-          custom_areas            = {
-            right = function()
-              local res = {}
-              local total = #vim.api.nvim_list_tabpages()
-
-              if total > 1 then
-                local tabpage = vim.api.nvim_get_current_tabpage()
-                local fg = vim.api.nvim_get_hl_by_name("Keyword", true).foreground
-                table.insert(res, {
-                  text = "" .. tabpage .. "  " .. total .. " ",
-                  fg = fg
-                })
-              end
-
-              return res
-            end,
-          }
         },
-        highlights = require("themes").default.bufferline,
-      }
-    end,
+        show_buffer_icons       = true,
+        show_buffer_close_icons = false,
+        show_close_icon         = false,
+        show_tab_indicators     = false,
+        persist_buffer_sort     = true,
+        separator_style         = {},
+        always_show_bufferline  = false,
+        custom_areas            = {
+          right = function()
+            local total = #vim.api.nvim_list_tabpages()
+            if total < 2 then
+              return {}
+            end
+
+            return { {
+              text = "" .. vim.api.nvim_get_current_tabpage() .. "  " .. total .. " ",
+              fg = vim.api.nvim_get_hl_by_name("Keyword", true).foreground
+            } }
+          end,
+        }
+      },
+      highlights = require("themes").default.bufferline,
+    }
   },
 
   -- statusline
@@ -124,8 +118,8 @@ return {
       local filename = {
         "filename",
         symbols = {
-          modified = "󰏫",
-          readonly = "",
+          modified = "󰏫 ",
+          readonly = " ",
           unnamed = "",
           newfile = ""
         }
@@ -134,7 +128,7 @@ return {
       local mark = function()
         local marked = require("grapple").exists({ buffer = 0 })
         if marked then
-          return ""
+          return " "
         end
         return ""
       end
@@ -235,7 +229,7 @@ return {
         button("s", "   Settings", "<cmd>e $MYVIMRC<cr>", "@function"),
         button("l", " 󰒲  Lazy", "<cmd>Lazy<cr>", "@function"),
         button("m", "   Mason", "<cmd>Mason<cr>", "@function"),
-        button("u", "   Update", "<cmd>TSUpdate<cr><cmd>Lazy sync<cr>", "@function"),
+        button("u", "   Update", "<cmd>Lazy sync<cr>", "@function"),
         { type = "padding", val = 0 },
         button("h", " 󰋠  Health", "<cmd>checkhealth<cr>", "DiagnosticError"),
         button("q", "   Quit", "<cmd>qa<cr>", "DiagnosticError"),
@@ -267,32 +261,11 @@ return {
             "",
             "⚡ Loaded " .. stats.count .. " plugins in " .. ms .. "ms ⚡",
           }
+
           pcall(vim.cmd.AlphaRedraw)
         end,
       })
     end,
-  },
-
-  -- scrollbar
-  {
-    "petertriho/nvim-scrollbar",
-    event = { "BufReadPre", "BufNewFile" },
-    opts = {
-      throttle_ms = 200,
-      handle = {
-        text = " ",
-        blend = 0,
-        highlight = "lualine_b_normal"
-      },
-      handlers = {
-        cursor = false,
-        diagnostic = true,
-        gitsigns = true,
-        handle = true,
-        search = false,
-        ale = false,
-      },
-    }
   },
 
   -- icons

@@ -106,7 +106,7 @@ return {
 
   -- rust
   {
-    "simrat39/rust-tools.nvim",
+    "vxpm/ferris.nvim",
     ft = "rust",
     config = function()
       require("plugins.lsp.handlers").setup_manual_server("rust_analyzer")
@@ -115,11 +115,6 @@ return {
   {
     "saecki/crates.nvim",
     event = { "BufRead Cargo.toml" },
-    opts = {
-      null_ls = {
-        enabled = true,
-      },
-    },
     config = function(_, opts)
       local crates = require("crates");
       crates.setup(opts)

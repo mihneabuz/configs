@@ -74,7 +74,7 @@ detect_extensions = []
 
 [python]
 format = "[❯](bright-red) [${symbol}${version} ]($style)"
-symbol = " "
+symbol = " "
 style = "bold bright-green"
 version_format = "${raw}"
 
