@@ -26,6 +26,7 @@ if status is-interactive
   alias venv="python -m venv"
   alias dockerstart="sudo systemctl start docker"
   alias exa="exa -s type"
+  alias hist="commandline (history | fzf)"
 
   if set -q KITTY_WINDOW_ID
     alias ssh="kitty +kitten ssh"
@@ -46,8 +47,8 @@ if status is-interactive
   starship init fish | source
 end
 
-set -gx SHELL "fish"
-set -gx EDITOR "nvim"
+set -gx SHELL "/usr/bin/fish"
+set -gx EDITOR "/usr/bin/nvim"
 
 # greeting
 set fish_greeting ""

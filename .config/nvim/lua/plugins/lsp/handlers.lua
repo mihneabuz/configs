@@ -19,10 +19,7 @@ M.on_attach = function(client, bufnr)
   end
 
   if client.server_capabilities.documentHighlightProvider then
-    vim.api.nvim_create_augroup("LspDocumentHighlight", { clear = false })
-
-    vim.api.nvim_create_autocmd("CursorHold", {
-      group = "LspDocumentHighlight",
+    vim.api.nvim_create_autocmd({ "CursorHold" }, {
       buffer = bufnr,
       callback = function()
         if vim.api.nvim_buf_line_count(0) < 10000 then
@@ -31,24 +28,32 @@ M.on_attach = function(client, bufnr)
       end
     })
 
-    vim.api.nvim_create_autocmd("CursorMoved", {
-      group = "LspDocumentHighlight",
+    vim.api.nvim_create_autocmd({ "CursorMoved" }, {
       buffer = bufnr,
       callback = vim.lsp.buf.clear_references
     })
   end
 
-  local function codelens()
-    vim.lsp.codelens.run()
-    vim.lsp.codelens.refresh()
-  end
+  -- if client.server_capabilities.inlayHintProvider then
+  --   vim.lsp.inlay_hint.enable(bufnr, true)
+  -- end
+
+  -- if client.server_capabilities.codeLensProvider then
+  --   vim.lsp.codelens.refresh()
+  --   vim.api.nvim_create_autocmd({ "BufEnter", "InsertLeave" }, {
+  --     buffer = bufnr,
+  --     callback = vim.lsp.codelens.refresh,
+  --   })
+  -- end
 
   local keymap = function(bind, cmd, desc, mode)
     mode = mode or "n"
     vim.keymap.set(mode, bind, cmd, { noremap = true, silent = true, buffer = bufnr, desc = desc })
   end
 
-  keymap("K", vim.lsp.buf.hover, "Symbol under cursor")
+  keymap("K", vim.lsp.buf.hover, "Peek hover doc")
+  keymap("<C-k>", "<cmd>Lspsaga hover_doc ++keep<cr>", "Toggle hover doc")
+
   keymap("gd", vim.lsp.buf.definition, "Go to definition")
   keymap("gh", vim.lsp.buf.type_definition, "Go to type definition")
   keymap("gr", vim.lsp.buf.references, "List references")
@@ -67,7 +72,7 @@ M.on_attach = function(client, bufnr)
   keymap("<leader>r", vim.lsp.buf.rename, "Rename symbol")
 
   keymap("<leader>ca", "<cmd>Lspsaga code_action<cr>", "Code actions", { "n", "v" })
-  keymap("<leader>cl", codelens, "Code lens")
+  keymap("<leader>cl", function() vim.lsp.codelens.run() end, "Code lens")
 
   keymap("<leader>dt", function() require("plugins.lsp.diagnostics").toggle() end, "Toggle diagnostics")
 end

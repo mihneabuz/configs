@@ -1,7 +1,7 @@
 require("config.options")
-require("config.bootstrap")
 require("config.keymaps")
 require("config.autocmds")
+require("config.bootstrap")
 
 ---@diagnostic disable: undefined-field
 if vim.g.neovide then

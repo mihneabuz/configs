@@ -4,7 +4,9 @@ return {
     dependencies = { "jay-babu/mason-nvim-dap.nvim" },
     keys = {
       { "<leader>DB", function() require("plugins.dap.handlers").breakpoint() end, desc = "Toggle breakpoint" },
-      { "<leader>DD", function() require("dap").continue() end,                    desc = "Run debugger" },
+      { "<leader>DD", function() require("dap").continue() end,                    desc = "Start debugger" },
+      { "<leader>DC", function() require("dapui").close() end,                     desc = "Close debugger" },
+      { "<leader>DC", function() require("dapui").toggle() end,                    desc = "Toggle debugger" },
     },
     opts = {
       icons = {
@@ -79,7 +81,7 @@ return {
     lazy = true,
     dependencies = { "mason.nvim" },
     opts = {
-      ensure_installed = { "lldb", "delve", "python" },
+      ensure_installed = { "lldb" },
       automatic_installation = true,
       handlers = require("plugins.dap.handlers").setup
     },
@@ -87,7 +89,7 @@ return {
 
   {
     "nvim-neotest/neotest",
-    dependencies = { "vim-test/vim-test" },
+    dependencies = { "nvim-neotest/nvim-nio" },
     keys = {
       { "<leader>tz", function() require("neotest").run.run() end,                     desc = "Run test under cursor" },
       { "<leader>ta", function() require("neotest").run.run(vim.fn.expand("%")) end,   desc = "Run all tests in file" },
@@ -100,16 +102,7 @@ return {
         adapters = {
           require("neotest-rust")({
             args = { "--no-capture" },
-            dap_adapter = "rt_lldb",
-          }),
-          require("neotest-go")({
-            experimental = {
-              test_table = true,
-            },
-            args = { "-count=1", "-timeout=60s" }
-          }),
-          require("neotest-vim-test")({
-            ignore_file_types = { "rust", "go" },
+            dap_adapter = "lldb",
           }),
         }
       }
@@ -120,8 +113,6 @@ return {
     end
   },
 
-  { "rouge8/neotest-rust",           lazy = true },
-  { "nvim-neotest/neotest-go",       lazy = true },
-  { "nvim-neotest/neotest-vim-test", lazy = true },
-  { "vim-test/vim-test",             lazy = true }
+  { "nvim-neotest/nvim-nio", lazy = true },
+  { "rouge8/neotest-rust",   lazy = true },
 }

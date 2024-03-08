@@ -7,10 +7,10 @@ return {
     priority = 1000,
     config = function()
       local themes = require("themes")
-      local onedark = require("onedark")
-      onedark.setup(themes["onedark"].opts)
 
       if (themes.name == "onedark") then
+        local onedark = require("onedark")
+        onedark.setup(themes["onedark"].opts)
         onedark.load()
       end
     end
@@ -22,9 +22,9 @@ return {
     priority = 1000,
     config = function()
       local themes = require("themes")
-      require("tokyonight").setup(themes["tokyonight"].opts)
 
       if (themes.name == "tokyonight") then
+        require("tokyonight").setup(themes["tokyonight"].opts)
         vim.cmd([[colorscheme tokyonight]])
       end
     end

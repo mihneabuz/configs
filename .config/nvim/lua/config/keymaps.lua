@@ -68,7 +68,7 @@ local toggle_relative = function()
 end
 keymap("n", "<leader>R", toggle_relative, "Toggle relative numbers")
 
--- tab size
+-- toggle tab size
 local long = false
 local function long_tab()
   vim.opt.tabstop = 4
@@ -81,7 +81,7 @@ local function short_tab()
   long = false
 end
 local function toggle_tab()
-  if (long) then
+  if long then
     short_tab()
   else
     long_tab()
@@ -90,6 +90,26 @@ end
 command("TabLong", long_tab, { nargs = 0 })
 command("TabShort", short_tab, { nargs = 0 })
 keymap("n", "<leader>T", toggle_tab, "Toggle tab width")
+
+-- toggle spell check
+local spell = false
+local function spellcheck()
+  vim.cmd([[setlocal spell spelllang=en_us]])
+  spell = true
+end
+local function nospellcheck()
+  vim.cmd([[setlocal nospell]])
+  spell = false
+end
+local function toggle_spellcheck()
+  if spell then
+    nospellcheck()
+  else
+    spellcheck()
+  end
+end
+command("Spellcheck", toggle_spellcheck, { nargs = 0 })
+keymap("n", "<leader>S", toggle_spellcheck, "Toggle spell check")
 
 -- insert , or ; at the end of line
 local function add_to_end(char)

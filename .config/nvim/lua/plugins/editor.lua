@@ -255,9 +255,6 @@ return {
   },
 
   -- makes some plugins dot-repeatable
-  { "tpope/vim-repeat",           event = "VeryLazy" },
-
-  -- kitty term integration
-  { "knubie/vim-kitty-navigator", event = "VeryLazy" },
+  { "tpope/vim-repeat", event = "VeryLazy" },
 
 }
