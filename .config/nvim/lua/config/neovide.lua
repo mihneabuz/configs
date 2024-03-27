@@ -13,6 +13,7 @@ vim.g.neovide_hide_mouse_when_typing = true
 vim.g.neovide_cursor_animation_length = 0.06
 vim.g.neovide_cursor_trail_size = 0.6
 vim.g.neovide_cursor_antialiasing = false
+vim.g.neovide_floating_blur = 0
 
 vim.keymap.set('n', '<D-s>', ':w<CR>')
 vim.keymap.set('v', '<D-c>', '"+y')

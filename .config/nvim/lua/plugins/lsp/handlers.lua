@@ -51,7 +51,9 @@ M.on_attach = function(client, bufnr)
     vim.keymap.set(mode, bind, cmd, { noremap = true, silent = true, buffer = bufnr, desc = desc })
   end
 
-  keymap("K", vim.lsp.buf.hover, "Symbol under cursor")
+  keymap("K", vim.lsp.buf.hover, "Peek hover doc")
+  keymap("<C-k>", "<cmd>Lspsaga hover_doc ++keep<cr>", "Toggle hover doc")
+
   keymap("gd", vim.lsp.buf.definition, "Go to definition")
   keymap("gh", vim.lsp.buf.type_definition, "Go to type definition")
   keymap("gr", vim.lsp.buf.references, "List references")

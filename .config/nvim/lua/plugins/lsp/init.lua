@@ -94,9 +94,10 @@ return {
     },
     config = function(_, opts)
       -- hack to set correct background
+      local old = vim.api.nvim_get_hl_by_name("Normal", true)
       vim.api.nvim_set_hl(0, "Normal", { link = "NormalFloat" })
       require("lspsaga").setup(opts)
-      vim.api.nvim_set_hl(0, "Normal", {})
+      vim.api.nvim_set_hl(0, "Normal", old)
     end
   },
   {
