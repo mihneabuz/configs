@@ -234,7 +234,7 @@ return {
 
   -- motion
   {
-    "phaazon/hop.nvim",
+    "smoka7/hop.nvim",
     keys = {
       { "<leader>f", "<cmd>HopWord<cr>", desc = "Hop" }
     },
