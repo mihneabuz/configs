@@ -37,8 +37,8 @@ return {
         keymap("v", "<leader>gs", function() gs.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') }) end, "Stage hunk")
         keymap("v", "<leader>gr", function() gs.reset_hunk({ vim.fn.line('.'), vim.fn.line('v') }) end, "Reset hunk")
 
-        keymap("n", "<leader>gS", function() gs.stage_hunk() end, "Stage buffer")
-        keymap("n", "<leader>gR", function() gs.reset_hunk() end, "Reset buffer")
+        keymap("n", "<leader>gS", function() gs.stage_buffer() end, "Stage buffer")
+        keymap("n", "<leader>gR", function() gs.reset_buffer() end, "Reset buffer")
 
         keymap("n", "<leader>gu", function() gs.undo_stage_hunk() end, "Undo last stage")
       end,
