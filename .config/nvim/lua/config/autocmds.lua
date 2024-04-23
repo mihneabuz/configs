@@ -61,7 +61,9 @@ autocmd("FileType", {
       "qf",
       "startuptime",
       "tsplayground",
-      "checkhealth"
+      "checkhealth",
+      "neo-tree",
+      "filesystem"
     }
 
     if not vim.list_contains(ignored, ev.match) then
