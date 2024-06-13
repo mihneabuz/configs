@@ -4,7 +4,7 @@
   "position": "top",
   "height": 28,
   "modules-left": [
-    "wlr/workspaces"
+    "hyprland/workspaces"
   ],
   "modules-center": [
     "clock"
@@ -15,7 +15,7 @@
     "tray"
   ],
 
-  "wlr/workspaces": {
+  "hyprland/workspaces": {
     "format": "{icon}",
     "format-icons": {
       "1": "󰍹",

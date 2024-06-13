@@ -1,16 +1,17 @@
 #!/bin/bash
 
-yay -S hyprland-git \
-  waybar-hyprland-git \
-  hyprpaper-git \
+yay -S hyprland \
+  hyprpaper \
+  hypridle \
+  waybar \
   polkit \
   polkit-gnome \
   wofi \
   kitty \
-  neovide-git \
+  neovide \
   nemo \
   firefox-nightly-bin \
   ttf-ubuntu-font-family \
-  nerd-fonts-cascadia-code \
   noto-fonts-emoji \
-  wl-clipboard
+  wl-clipboard \
+  dunst
