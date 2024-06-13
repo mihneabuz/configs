@@ -186,7 +186,7 @@ return {
       persist_mode = true,
       direction = "float",
       close_on_exit = true,
-      shell = "fish",
+      shell = "fish -C fish_default_key_bindings",
       auto_scroll = true,
       float_opts = {
         border = "rounded",

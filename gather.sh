@@ -1,6 +1,6 @@
 #!/bin/bash
 
-Targets="lf nvim kitty fish hypr nemo waybar starship.toml wofi yabai skhd colors helix"
+Targets="lf nvim kitty fish hypr nemo waybar starship.toml wofi yabai skhd colors helix dunst"
 
 rm -rf .config
 
