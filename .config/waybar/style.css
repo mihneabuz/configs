@@ -8,11 +8,9 @@
 }
 
 window#waybar {
-  background: linear-gradient(
-    rgba(20, 22, 26, 0.2) 20%,
-    rgba(20, 22, 26, 0.1) 40%,
-    rgba(20, 22, 26, 0.0) 100%
-  );
+  background: linear-gradient(rgba(20, 22, 26, 0.2) 20%,
+      rgba(20, 22, 26, 0.1) 40%,
+      rgba(20, 22, 26, 0.0) 100%);
 }
 
 
@@ -28,7 +26,7 @@ window#waybar {
 /* ------------- WORKSPACES ------------- */
 
 #workspaces {
-  margin: 0 5px;
+  margin: 2px 5px;
 }
 
 #workspaces button {
@@ -65,13 +63,16 @@ window#waybar {
 
 /* ------------- AUDIO ------------- */
 
-#custom-volumeIcon, #custom-volumeBar {
+#custom-volumeIcon,
+#custom-volumeBar {
   margin-top: 2px;
-  padding-right: 16px;
+  padding-top: 2px;
+  padding-bottom: 2px;
 }
 
 #custom-volumeIcon {
   padding-left: 16px;
+  padding-right: 24px;
   font-size: 20px;
 
   border-top-left-radius: 4px;
@@ -90,11 +91,11 @@ window#waybar {
 }
 
 #custom-volumeBar {
-  padding-top: 1px;
+  padding-right: 16px;
   margin-right: 8px;
 
   font-family: UbuntuMono Nerd Font;
-  font-size: 12px;
+  font-size: 16px;
 
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
@@ -109,4 +110,21 @@ window#waybar {
 
 #custom-volumeBar.muted {
   color: @red;
+}
+
+/* ------------- CPU/MEM/DISK ------------- */
+
+#cpu, #memory, #disk {
+  margin-top: 2px;
+  margin-right: 6px;
+
+  padding-right: 12px;
+  padding-left: 12px;
+
+  border-radius: 4px;
+
+  font-size: 20px;
+
+  color: @blue;
+  background-color: @background;
 }

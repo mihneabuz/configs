@@ -2,7 +2,7 @@
   "start_hidden": true,
   "layer": "bottom",
   "position": "top",
-  "height": 28,
+  "height": 30,
   "modules-left": [
     "hyprland/workspaces"
   ],
@@ -10,6 +10,9 @@
     "clock"
   ],
   "modules-right": [
+    "cpu",
+    "memory",
+    "disk",
     "custom/volumeIcon",
     "custom/volumeBar",
     "tray"
@@ -21,8 +24,10 @@
       "1": "󰍹",
       "2": "",
       "3": "󰈹",
-      "4": "󰙯",
-      "5": ""
+      "4": "󰇮"
+    },
+    "persistent-workspaces": {
+      "*": 4
     },
     "on-click": "activate",
     "active-only": false,
@@ -36,13 +41,27 @@
     "tooltip": false,
   },
 
+  "cpu": {
+    "format": "   {usage:2}%",
+    "interval": 2
+  },
+
+  "memory": {
+    "format": "   {used}G",
+    "interval": 2
+  },
+
+  "disk": {
+    "format": "   {free}",
+  },
+
   "custom/volumeIcon": {
     "exec": "~/.config/waybar/provider/provider muted",
     "return-type": "json",
     "format": "{icon}",
     "format-icons": {
-      "on": "󰕾",
-      "off": "󰸈",
+      "on": "",
+      "off": "",
     },
     "tooltip": false,
     "signal": 7,
