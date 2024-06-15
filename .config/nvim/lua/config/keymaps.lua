@@ -6,6 +6,9 @@ end
 -- disable command line window
 keymap("n", "q<cmd>", "<nop>")
 
+-- close buffer
+keymap("n", "<C-q>", "<cmd>bd<cr>")
+
 -- window navigation
 keymap("n", "<C-h>", "<C-w>h", "Navigate window left")
 keymap("n", "<C-j>", "<C-w>j", "Navigate window down")
@@ -42,7 +45,6 @@ keymap("n", "*", "*N")
 -- quickfix
 keymap("n", "[q", "<cmd>try | cprev | catch | clast  | catch | endtry<cr>", "Next quickfix item")
 keymap("n", "]q", "<cmd>try | cnext | catch | cfirst | catch | endtry<cr>", "Prev quickfix item")
-keymap("n", "<C-q>", "<cmd>cclose<cr>", "Close quickfix")
 
 -- tab
 keymap("n", "<leader><tab>", "<cmd>tabnew<cr>", "Create new tab")

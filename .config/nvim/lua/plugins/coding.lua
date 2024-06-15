@@ -35,28 +35,37 @@ return {
       local cmp = require("cmp")
       local luasnip = require("luasnip")
 
-      local format = require("lspkind").cmp_format({
-        mode = "symbol",
-        elipsis_char = "..",
-        before = function(_, item)
-          item.abbr = string.sub(item.abbr, 1, 52)
-          item.menu = nil
-          return item
-        end
-      })
+      local kind = require("cmp.types").lsp.CompletionItemKind
+      local kind_priority = {
+        [kind.Keyword]     = 20,
 
-      local types = require('cmp.types')
+        [kind.Field]       = 15,
+        [kind.Variable]    = 15,
+        [kind.Property]    = 15,
+        [kind.Value]       = 15,
+
+        [kind.Constructor] = 10,
+        [kind.Method]      = 10,
+        [kind.Function]    = 10,
+        [kind.Operator]    = 10,
+
+        [kind.Class]       = 5,
+        [kind.Interface]   = 5,
+        [kind.Struct]      = 5,
+        [kind.Enum]        = 5,
+        [kind.EnumMember]  = 5,
+        [kind.Constant]    = 5,
+
+        [kind.Snippet]     = 3,
+      }
+
       local compare_kind = function(entry1, entry2)
         local kind1 = entry1:get_kind()
         local kind2 = entry2:get_kind()
         if kind1 ~= kind2 then
-          if kind1 == types.lsp.CompletionItemKind.Snippet then
-            return false
-          end
-
-          if kind2 == types.lsp.CompletionItemKind.Snippet then
-            return true
-          end
+          local prio1 = kind_priority[kind1] or 0
+          local prio2 = kind_priority[kind2] or 0
+          return prio1 > prio2
         end
       end
 
@@ -80,12 +89,12 @@ return {
             if luasnip.expand_or_locally_jumpable() then
               luasnip.expand_or_jump()
             end
-          end, { 'i', 's' }),
-          ['<C-h>'] = cmp.mapping(function()
+          end, { "i", "s" }),
+          ["<C-h>"] = cmp.mapping(function()
             if luasnip.locally_jumpable(-1) then
               luasnip.jump(-1)
             end
-          end, { 'i', 's' }),
+          end, { "i", "s" }),
         }),
         sources = cmp.config.sources({
           { name = "nvim_lsp", priority = 50 },
@@ -96,7 +105,15 @@ return {
         }),
         formatting = {
           fields = { "kind", "abbr" },
-          format = format
+          format = require("lspkind").cmp_format({
+            mode = "symbol",
+            elipsis_char = "…",
+            before = function(_, item)
+              item.abbr = string.sub(item.abbr, 1, 50)
+              item.menu = nil
+              return item
+            end
+          })
         },
         sorting = {
           comparators = {
@@ -119,10 +136,21 @@ return {
   {
     "folke/trouble.nvim",
     cmd = { "TroubleToggle", "Trouble" },
-    opts = { use_diagnostic_signs = true },
+    opts = {
+      auto_close = true,
+      use_diagnostic_signs = true
+    },
     keys = {
-      { "<leader>dd", "<cmd>TroubleToggle document_diagnostics<cr>",  desc = "Document diagnostics" },
-      { "<leader>dw", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace diagnostics" },
+      {
+        "<leader>dd",
+        "<cmd>Trouble diagnostics toggle<cr>",
+        desc = "Buffer diagnostics"
+      },
+      {
+        "<leader>dw",
+        "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+        desc = "Workspace diagnostics"
+      },
     },
   },
 
@@ -130,11 +158,10 @@ return {
   {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
-    config = function()
-      require("nvim-autopairs").setup({})
-      local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-      local cmp = require("cmp")
-      cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+    config = function(_, opts)
+      require("nvim-autopairs").setup(opts)
+      local autopairs_cmp = require("nvim-autopairs.completion.cmp")
+      require("cmp").event:on("confirm_done", autopairs_cmp.on_confirm_done())
     end
   },
 
@@ -162,7 +189,7 @@ return {
     config = function()
       ---@diagnostic disable: inject-field
       vim.g.skip_ts_context_commentstring_module = true
-      require('ts_context_commentstring').setup();
+      require("ts_context_commentstring").setup();
     end
   },
 

@@ -34,8 +34,8 @@ return {
 
         keymap("n", "<leader>gs", function() gs.stage_hunk() end, "Stage hunk")
         keymap("n", "<leader>gr", function() gs.reset_hunk() end, "Reset hunk")
-        keymap("v", "<leader>gs", function() gs.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') }) end, "Stage hunk")
-        keymap("v", "<leader>gr", function() gs.reset_hunk({ vim.fn.line('.'), vim.fn.line('v') }) end, "Reset hunk")
+        keymap("v", "<leader>gs", function() gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") }) end, "Stage hunk")
+        keymap("v", "<leader>gr", function() gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") }) end, "Reset hunk")
 
         keymap("n", "<leader>gS", function() gs.stage_buffer() end, "Stage buffer")
         keymap("n", "<leader>gR", function() gs.reset_buffer() end, "Reset buffer")
@@ -55,8 +55,8 @@ return {
       vim.g.mergetool_layout = "mr"
       vim.g.mergetool_prefer_revision = "local"
 
-      require('which-key').register({
-        ['<leader>m'] = { name = 'Mergetool', _ = 'which_key_ignore' },
+      require("which-key").register({
+        ["<leader>m"] = { name = "Mergetool", _ = "which_key_ignore" },
       })
 
       local function keymap(mode, l, r, desc)

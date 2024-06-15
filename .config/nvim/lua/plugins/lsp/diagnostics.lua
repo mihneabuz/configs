@@ -5,12 +5,18 @@ M.init = function()
     underline = true,
     virtual_text = false,
     signs = {
-      active = {
-        { name = "DiagnosticSignError", text = "" },
-        { name = "DiagnosticSignWarn", text = "" },
-        { name = "DiagnosticSignHint", text = "" },
-        { name = "DiagnosticSignInfo", text = "" },
-      }
+      text = {
+        [vim.diagnostic.severity.HINT]  = "",
+        [vim.diagnostic.severity.INFO]  = "",
+        [vim.diagnostic.severity.WARN]  = "",
+        [vim.diagnostic.severity.ERROR] = "",
+      },
+      numhl = {
+        [vim.diagnostic.severity.HINT]  = "DiagnosticSignHint",
+        [vim.diagnostic.severity.INFO]  = "DiagnosticSignInfo",
+        [vim.diagnostic.severity.WARN]  = "DiagnosticSignWarn",
+        [vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
+      },
     },
     float = {
       focusable = false,
@@ -24,17 +30,12 @@ M.init = function()
     severity_sort = true,
   }
 
-  for _, sign in ipairs(M.opts.signs.active) do
-    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
-  end
-
   M.enable()
-
-  M.enabled = true
 end
 
 M.enable = function()
   vim.diagnostic.config(vim.deepcopy(M.opts))
+  M.enabled = true
 end
 
 M.disable = function()
@@ -46,15 +47,14 @@ M.disable = function()
     float = false,
     signs = false
   })
+  M.enabled = false
 end
 
 M.toggle = function()
-  M.enabled = not M.enabled
-
   if M.enabled then
-    M.enable()
-  else
     M.disable()
+  else
+    M.enable()
   end
 end
 

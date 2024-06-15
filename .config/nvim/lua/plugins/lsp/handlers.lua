@@ -66,8 +66,8 @@ M.on_attach = function(client, bufnr)
   keymap("gO", vim.lsp.buf.outgoing_calls, "List outgoing calls")
 
   keymap("gl", vim.diagnostic.open_float, "Line diagnostics")
-  keymap("[d", vim.diagnostic.goto_prev, "Next diagnostic")
-  keymap("]d", vim.diagnostic.goto_next, "Prev diagnostic")
+  keymap("[d", function() vim.diagnostic.jump({ count = -1 }) end, "Next diagnostic")
+  keymap("]d", function() vim.diagnostic.jump({ count =  1 }) end, "Prev diagnostic")
 
   keymap("<leader>r", vim.lsp.buf.rename, "Rename symbol")
 

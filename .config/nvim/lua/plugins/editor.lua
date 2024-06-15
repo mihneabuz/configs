@@ -1,13 +1,5 @@
 return {
 
-  -- buffer remove
-  {
-    "echasnovski/mini.bufremove",
-    keys = {
-      { "<leader>q", function() require("mini.bufremove").delete(0, false) end, desc = "Close buffer" },
-    },
-  },
-
   -- file explorer
   {
     "nvim-neo-tree/neo-tree.nvim",
@@ -106,65 +98,33 @@ return {
       defaults = {
         prompt_prefix = " ",
         selection_caret = " ",
-        mappings = {
-          i = {
-            ["<C-k>"] = function(...)
-              return require("telescope.actions").move_selection_previous(...)
-            end,
-            ["<C-j>"] = function(...)
-              return require("telescope.actions").move_selection_next(...)
-            end,
-            ["<C-l>"] = function(...)
-              return require("telescope.actions").cycle_history_next(...)
-            end,
-            ["<C-h>"] = function(...)
-              return require("telescope.actions").cycle_history_prev(...)
-            end,
-            ["<C-.>"] = function(...)
-              return require("telescope.actions").preview_scrolling_down(...)
-            end,
-            ["<C-,>"] = function(...)
-              return require("telescope.actions").preview_scrolling_up(...)
-            end,
-            ["<C-o>"] = function(...)
-              require("telescope.actions").send_selected_to_qflist(...)
-              vim.cmd("copen")
-              vim.api.nvim_input('<cr>')
-            end,
-            ["<C-s>"] = function(...)
-              return require("telescope.actions").close(...)
-            end,
-          },
-          n = {
-            ["<C-o>"] = function(...)
-              require("telescope.actions").send_selected_to_qflist(...)
-              vim.cmd("copen")
-              vim.api.nvim_input('<cr>')
-            end,
-            ["q"] = function(...)
-              return require("telescope.actions").close(...)
-            end,
-          },
-        },
       },
     },
     config = function(_, opts)
       local telescope = require("telescope")
+
+      opts.defaults.mappings = {
+        i = {
+          ["<C-k>"] = require("telescope.actions").move_selection_previous,
+          ["<C-j>"] = require("telescope.actions").move_selection_next,
+          ["<C-l>"] = require("telescope.actions").cycle_history_next,
+          ["<C-h>"] = require("telescope.actions").cycle_history_prev,
+          ["<C-.>"] = require("telescope.actions").preview_scrolling_down,
+          ["<C-,>"] = require("telescope.actions").preview_scrolling_up,
+          ["<C-a>"] = function(...)
+            require("telescope.actions").send_to_qflist(...)
+            require("trouble").open("qflist")
+          end,
+          ["<C-s>"] = function(...)
+            require("telescope.actions").send_selected_to_qflist(...)
+            require("trouble").open("qflist")
+          end,
+        },
+      }
+
       telescope.setup(opts)
       telescope.load_extension("projects")
     end
-  },
-
-  -- quickfix list
-  {
-    "kevinhwang91/nvim-bqf",
-    ft = "qf",
-    opts = {
-      auto_enable = true,
-      preview = {
-        winblend = 0
-      }
-    }
   },
 
   -- project root
@@ -179,7 +139,9 @@ return {
   {
     "folke/persistence.nvim",
     event = "BufReadPre",
-    opts = { options = { "buffers", "curdir", "tabpages", "winsize", "help", "globals" } },
+    opts = {
+      options = { "buffers", "curdir", "tabpages", "winsize", "help", "globals" }
+    },
     keys = {
       { "<leader>s", function() require("persistence").load({ last = true }) end, desc = "Restore session" },
     },
@@ -228,7 +190,7 @@ return {
   -- highlight ranges
   {
     "winston0410/range-highlight.nvim",
-    event = { "BufReadPost", "BufNewFile" },
+    event = { "CmdlineEnter" },
     config = true,
   },
 

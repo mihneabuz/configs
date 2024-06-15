@@ -1,37 +1,5 @@
 return {
 
-  -- notifications
-  {
-    "rcarriga/nvim-notify",
-    event = "VeryLazy",
-    keys = {
-      {
-        "<leader>u",
-        function()
-          require("notify").dismiss({ silent = true, pending = true })
-        end,
-        desc = "Dismiss notifications",
-      },
-    },
-    opts = {
-      timeout = 1500,
-      max_height = function()
-        return math.floor(vim.o.lines * 0.4)
-      end,
-      max_width = function()
-        return math.floor(vim.o.columns * 0.6)
-      end,
-      background_colour = "NormalFloat",
-      stages = "fade",
-      render = "minimal",
-    },
-    config = function(_, opts)
-      local notify = require("notify")
-      notify.setup(opts)
-      vim.notify = notify
-    end
-  },
-
   -- bufferline
   {
     "akinsho/bufferline.nvim",

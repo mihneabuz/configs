@@ -39,7 +39,7 @@ local function extra_opts()
   }
 
   if should_use_leptosfmt() then
-    settings = vim.tbl_deep_extend('force', settings, {
+    settings = vim.tbl_deep_extend("force", settings, {
       ["rust-analyzer"] = {
         rustfmt = { overrideCommand = override_leptosfmt() }
       }
@@ -72,17 +72,17 @@ end
 local function setup_ferris()
   require("ferris").setup()
 
-  vim.keymap.set("n", "<leader>w", "", {
-    callback = function() require("ferris.methods.reload_workspace")() end,
-    desc = "Reload cargo workspace",
-    silent = true,
-  })
+  local function ferris_keymap(mode, key, fn, desc)
+    vim.keymap.set(mode, key, "", {
+      callback = function() require("ferris.methods." .. fn)() end,
+      desc = desc,
+      silent = true,
+    })
+  end
 
-  vim.keymap.set("n", "gw", "", {
-    callback = function() require("ferris.methods.open_documentation")() end,
-    desc = "Go to documentation",
-    silent = true,
-  })
+  ferris_keymap("n", "<leader>w", "reload_workspace", "Reload cargo workspace")
+  ferris_keymap("n", "gw", "open_documentation", "Go to documentation")
+  ferris_keymap("n", "gm", "view_memory_layout", "Show memory layout")
 end
 
 M.setup = function(base_opts)

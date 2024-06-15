@@ -22,14 +22,7 @@ return {
       ensure_installed = {
         "lua_ls",
         "rust_analyzer",
-        "gopls",
-        "clangd",
-        "tsserver",
-        "emmet_ls",
         "jsonls",
-        "cssls",
-        "tailwindcss",
-        "pylsp"
       },
     },
   },
@@ -70,7 +63,7 @@ return {
         max_height = 0.5,
         min_width = 10,
         keys = {
-          expand_or_jump = 'l',
+          expand_or_jump = "l",
         },
       },
       outline = {
