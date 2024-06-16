@@ -49,14 +49,17 @@ return {
         [kind.Function]    = 10,
         [kind.Operator]    = 10,
 
-        [kind.Class]       = 5,
-        [kind.Interface]   = 5,
-        [kind.Struct]      = 5,
-        [kind.Enum]        = 5,
-        [kind.EnumMember]  = 5,
-        [kind.Constant]    = 5,
+        [kind.Class]       = 8,
+        [kind.Interface]   = 8,
+        [kind.Struct]      = 8,
+        [kind.Enum]        = 8,
+        [kind.EnumMember]  = 8,
+        [kind.Constant]    = 8,
 
-        [kind.Snippet]     = 3,
+        [kind.Snippet]     = 5,
+
+        [kind.Folder]      = 3,
+        [kind.File]        = 2,
       }
 
       local compare_kind = function(entry1, entry2)
@@ -135,7 +138,7 @@ return {
   -- diagnostics
   {
     "folke/trouble.nvim",
-    cmd = { "TroubleToggle", "Trouble" },
+    cmd = "Trouble",
     opts = {
       auto_close = true,
       use_diagnostic_signs = true
@@ -160,8 +163,9 @@ return {
     event = "InsertEnter",
     config = function(_, opts)
       require("nvim-autopairs").setup(opts)
-      local autopairs_cmp = require("nvim-autopairs.completion.cmp")
-      require("cmp").event:on("confirm_done", autopairs_cmp.on_confirm_done())
+      local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+      local cmp = require("cmp")
+      cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
     end
   },
 
@@ -204,17 +208,9 @@ return {
     opts = {
       size = 20,
       hide_numbers = true,
-      shade_terminals = true,
       shading_factor = "2",
-      start_in_insert = true,
-      insert_mappings = true,
-      terminal_mappings = true,
-      persist_size = true,
-      persist_mode = true,
       direction = "float",
-      close_on_exit = true,
       shell = "fish -C fish_default_key_bindings",
-      auto_scroll = true,
       float_opts = {
         border = "rounded",
         winblend = 0,

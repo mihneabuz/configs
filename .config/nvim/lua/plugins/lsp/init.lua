@@ -94,7 +94,7 @@ return {
     end
   },
   {
-    "ray-x/lsp_signature.nvim",
+    "mihneabuz/lsp_signature.nvim",
     lazy = true
   },
 

@@ -45,7 +45,9 @@ return {
         "query",
         "regex"
       },
-      highlight = { enable = true },
+      highlight = {
+        enable = true
+      },
       indent = {
         enable = true,
         additional_vim_regex_highlighting = false,
@@ -58,6 +60,7 @@ return {
 
   {
     "nvim-treesitter/nvim-treesitter-textobjects",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
     event = { "BufReadPost", "BufNewFile" },
     opts = {
       textobjects = {
@@ -76,7 +79,6 @@ return {
     config = function(_, opts)
       require("nvim-treesitter.configs").setup(opts)
     end,
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
   },
 
   {

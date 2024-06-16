@@ -6,17 +6,47 @@ M.capabilities = vim.tbl_deep_extend(
   require("cmp_nvim_lsp").default_capabilities()
 )
 
-M.on_attach = function(client, bufnr)
-  if client.server_capabilities.hoverProvider then
-    require("lsp_signature").on_attach({
-      bind         = true,
-      doc_lines    = 0,
-      hint_enable  = false,
-      handler_opts = {
-        border = "rounded"
-      }
-    }, bufnr)
+M.setup_keymaps = function(bufnr)
+  local keymap = function(bind, cmd, desc, mode)
+    local opts = { noremap = true, silent = true, buffer = bufnr, desc = desc }
+    vim.keymap.set(mode or "n", bind, cmd, opts)
   end
+
+  local list_opts = {
+    on_list = function(what)
+      vim.fn.setqflist({}, ' ', what)
+      require("trouble").open("qflist")
+    end
+  }
+
+  keymap("K", vim.lsp.buf.hover, "Peek hover doc")
+  keymap("<C-k>", "<cmd>Lspsaga hover_doc ++keep<cr>", "Toggle hover doc")
+
+  keymap("gd", vim.lsp.buf.definition, "Go to definition")
+  keymap("gh", vim.lsp.buf.type_definition, "Go to type definition")
+
+  keymap("gD", "<cmd>Lspsaga peek_definition<cr>", "Peek definition")
+  keymap("gH", "<cmd>Lspsaga peek_type_definition<cr>", "Peek type definition")
+
+  keymap("gr", function() vim.lsp.buf.references(nil, list_opts) end, "List references")
+  keymap("gi", function() vim.lsp.buf.implementation(list_opts) end, "List implementations")
+
+  keymap("gI", vim.lsp.buf.incoming_calls, "List incoming calls")
+  keymap("gO", vim.lsp.buf.outgoing_calls, "List outgoing calls")
+
+  keymap("<leader>r", vim.lsp.buf.rename, "Rename symbol")
+
+  keymap("<leader>ca", "<cmd>Lspsaga code_action<cr>", "Code actions", { "n", "v" })
+  keymap("<leader>cl", function() vim.lsp.codelens.run() end, "Code lens")
+
+  keymap("gl", vim.diagnostic.open_float, "Show line diagnostics")
+  keymap("[d", function() vim.diagnostic.jump({ count = -1 }) end, "Next diagnostic")
+  keymap("]d", function() vim.diagnostic.jump({ count = 1 }) end, "Prev diagnostic")
+  keymap("<leader>dt", function() require("plugins.lsp.diagnostics").toggle() end, "Toggle diagnostics")
+end
+
+M.on_attach = function(client, bufnr)
+  M.setup_keymaps(bufnr)
 
   if client.server_capabilities.documentHighlightProvider then
     vim.api.nvim_create_autocmd({ "CursorHold" }, {
@@ -34,6 +64,17 @@ M.on_attach = function(client, bufnr)
     })
   end
 
+  if client.server_capabilities.hoverProvider then
+    require("lsp_signature").on_attach({
+      bind         = true,
+      doc_lines    = 0,
+      hint_enable  = false,
+      handler_opts = {
+        border = "rounded"
+      }
+    }, bufnr)
+  end
+
   -- if client.server_capabilities.inlayHintProvider then
   --   vim.lsp.inlay_hint.enable(bufnr, true)
   -- end
@@ -45,36 +86,6 @@ M.on_attach = function(client, bufnr)
   --     callback = vim.lsp.codelens.refresh,
   --   })
   -- end
-
-  local keymap = function(bind, cmd, desc, mode)
-    mode = mode or "n"
-    vim.keymap.set(mode, bind, cmd, { noremap = true, silent = true, buffer = bufnr, desc = desc })
-  end
-
-  keymap("K", vim.lsp.buf.hover, "Peek hover doc")
-  keymap("<C-k>", "<cmd>Lspsaga hover_doc ++keep<cr>", "Toggle hover doc")
-
-  keymap("gd", vim.lsp.buf.definition, "Go to definition")
-  keymap("gh", vim.lsp.buf.type_definition, "Go to type definition")
-  keymap("gr", vim.lsp.buf.references, "List references")
-  keymap("gi", vim.lsp.buf.implementation, "List implementations")
-
-  keymap("gD", "<cmd>Lspsaga peek_definition<cr>", "Peek definition")
-  keymap("gH", "<cmd>Lspsaga peek_type_definition<cr>", "Peek type definition")
-
-  keymap("gI", vim.lsp.buf.incoming_calls, "List incoming calls")
-  keymap("gO", vim.lsp.buf.outgoing_calls, "List outgoing calls")
-
-  keymap("gl", vim.diagnostic.open_float, "Line diagnostics")
-  keymap("[d", function() vim.diagnostic.jump({ count = -1 }) end, "Next diagnostic")
-  keymap("]d", function() vim.diagnostic.jump({ count =  1 }) end, "Prev diagnostic")
-
-  keymap("<leader>r", vim.lsp.buf.rename, "Rename symbol")
-
-  keymap("<leader>ca", "<cmd>Lspsaga code_action<cr>", "Code actions", { "n", "v" })
-  keymap("<leader>cl", function() vim.lsp.codelens.run() end, "Code lens")
-
-  keymap("<leader>dt", function() require("plugins.lsp.diagnostics").toggle() end, "Toggle diagnostics")
 end
 
 M.base_opts = {
