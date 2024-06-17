@@ -3,14 +3,15 @@
 /* ------------- GENERAL ------------- */
 
 * {
-  font-family: Ubuntu;
+  font-family: UbuntuMono Nerd Font;
   font-weight: 700;
+  font-size: 22px;
 }
 
 window#waybar {
   background: linear-gradient(
-    rgba(20, 22, 26, 0.2) 20%,
-    rgba(20, 22, 26, 0.1) 40%,
+    rgba(20, 22, 26, 0.24) 20%,
+    rgba(20, 22, 26, 0.12) 40%,
     rgba(20, 22, 26, 0.0) 100%
   );
 }
@@ -19,8 +20,11 @@ window#waybar {
 /* ------------- CLOCK ------------- */
 
 #clock {
+  font-family: Ubuntu;
+  font-weight: 800;
+
   padding-top: 4px;
-  font-size: 20px;
+  font-size: 22px;
   color: @foreground;
 }
 
@@ -32,8 +36,7 @@ window#waybar {
 }
 
 #workspaces button {
-  font-size: 20px;
-  padding: 0 20px 0 14px;
+  padding: 0 24px 0 17px;
   margin: 0 3px;
 
   border-radius: 4px;
@@ -64,8 +67,7 @@ window#waybar {
 
 /* ------------- AUDIO ------------- */
 
-#custom-volumeIcon,
-#custom-volumeBar {
+#custom-volumeIcon, #custom-volumeBar {
   margin-top: 2px;
   padding-top: 2px;
   padding-bottom: 2px;
@@ -74,7 +76,6 @@ window#waybar {
 #custom-volumeIcon {
   padding-left: 16px;
   padding-right: 24px;
-  font-size: 20px;
 
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
@@ -91,7 +92,6 @@ window#waybar {
   padding-right: 16px;
   margin-right: 8px;
 
-  font-family: UbuntuMono Nerd Font;
   font-size: 16px;
 
   border-top-right-radius: 4px;
@@ -107,7 +107,7 @@ window#waybar {
 
 /* ------------- CPU/MEM/DISK ------------- */
 
-#cpu, #memory, #disk {
+#cpu, #memory, #disk, #network {
   margin-top: 2px;
   margin-right: 6px;
 
@@ -116,8 +116,15 @@ window#waybar {
 
   border-radius: 4px;
 
-  font-size: 20px;
-
   color: @blue;
   background-color: @background;
+}
+
+#cpu:hover, #memory:hover, #disk:hover, #network:hover {
+  transition-duration: .2s;
+  box-shadow: inherit;
+  text-shadow: inherit;
+  border-color: @magenta;
+  background: @magenta;
+  color: @background;
 }

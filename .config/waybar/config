@@ -1,5 +1,5 @@
 {
-  "start_hidden": true,
+  "start_hidden": false,
   "layer": "bottom",
   "position": "top",
   "height": 30,
@@ -13,6 +13,7 @@
     "cpu",
     "memory",
     "disk",
+    "network",
     "custom/volumeIcon",
     "custom/volumeBar",
     "tray"
@@ -42,17 +43,23 @@
   },
 
   "cpu": {
-    "format": "   {usage:2}%",
-    "interval": 2
+    "format": " {usage:3}%",
+    "interval": 1
   },
 
   "memory": {
-    "format": "   {used}G",
-    "interval": 2
+    "format": " {used:5.1f}G",
+    "interval": 1
   },
 
   "disk": {
-    "format": "   {free}",
+    "format": " {free:>10}",
+    "interval": 10
+  },
+
+  "network": {
+    "format": "󰖟  {ifname}   {bandwidthUpBits:<9}  {bandwidthDownBits:<9}",
+    "interval": 1
   },
 
   "custom/volumeIcon": {
