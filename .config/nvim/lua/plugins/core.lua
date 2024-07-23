@@ -4,27 +4,29 @@ return {
   {
     "folke/which-key.nvim",
     keys = { "<leader>", "<C-s>", "g", "z" },
-    config = function()
+    opts = {
+      icons = {
+        mappings = false
+      },
+      spec = {
+        { "<C-s>",     group = "Search" },
+        { "<leader>g", group = "Git" },
+        { "<leader>c", group = "Code" },
+        { "<leader>t", group = "Tests" },
+        { "<leader>d", group = "Diagnostics" },
+        { "<leader>D", group = "Debugger" },
+      },
+    },
+    config = function(_, opts)
       local whichkey = require("which-key")
-      whichkey.setup()
-
-      whichkey.register({
-        ["<C-s>"]     = { name = "Search",      _ = "which_key_ignore" },
-        ["<leader>g"] = { name = "Git",         _ = "which_key_ignore" },
-        ["<leader>c"] = { name = "Code",        _ = "which_key_ignore" },
-        ["<leader>t"] = { name = "Tests",       _ = "which_key_ignore" },
-        ["<leader>d"] = { name = "Diagnostics", _ = "which_key_ignore" },
-        ["<leader>D"] = { name = "Debugger",    _ = "which_key_ignore" },
-      })
+      whichkey.setup(opts)
 
       local ignore_list = {
         "ge", "gg", "gi", "gn", "gN", "gv", "g~", "g%"
       }
 
       for _, ignored in ipairs(ignore_list) do
-        whichkey.register({
-          [ignored] = "which_key_ignore"
-        })
+        whichkey.add({ { ignored, hidden = true } })
       end
     end
   },
