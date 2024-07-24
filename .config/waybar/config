@@ -44,12 +44,12 @@
 
   "cpu": {
     "format": " {usage:3}%",
-    "interval": 1
+    "interval": 2
   },
 
   "memory": {
     "format": " {used:5.1f}G",
-    "interval": 1
+    "interval": 2
   },
 
   "disk": {
@@ -58,8 +58,8 @@
   },
 
   "network": {
-    "format": "󰖟  {ifname}   {bandwidthUpBits:<9}  {bandwidthDownBits:<9}",
-    "interval": 1
+    "format": "󰖟  {ifname} {bandwidthUpBits:>9}  {bandwidthDownBits:>9} ",
+    "interval": 2
   },
 
   "custom/volumeIcon": {
