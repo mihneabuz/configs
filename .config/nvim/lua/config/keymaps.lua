@@ -15,6 +15,11 @@ keymap("n", "<C-j>", "<C-w>j", "Navigate window down")
 keymap("n", "<C-k>", "<C-w>k", "Navigate window up")
 keymap("n", "<C-l>", "<C-w>l", "Navigate window right")
 
+keymap("t", "<C-h>", "<C-w>h", "Navigate window left")
+keymap("t", "<C-j>", "<C-w>j", "Navigate window down")
+keymap("t", "<C-k>", "<C-w>k", "Navigate window up")
+keymap("t", "<C-l>", "<C-w>l", "Navigate window right")
+
 -- window resizing
 keymap("n", "<S-Up>", "<cmd>resize -2<cr>", "Decrease window vertical size")
 keymap("n", "<S-Down>", "<cmd>resize +2<cr>", "Increase window vertical size")
