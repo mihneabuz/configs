@@ -12,8 +12,8 @@
 #window {
   margin: 0px;
   border-radius: 10px;
-  font-family: "Ubuntu";
-  font-size: 20px;
+  font-family: Ubuntu;
+  font-size: 20;
   background: rgba(40, 44, 56, 0.8);
 }
 

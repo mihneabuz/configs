@@ -1,9 +1,9 @@
 mod audio;
 mod util;
 
-use std::process;
 use std::env;
 use std::io;
+use std::process;
 
 fn main() -> io::Result<()> {
     let args = env::args().collect::<Vec<_>>();
@@ -14,7 +14,7 @@ fn main() -> io::Result<()> {
     match args[1].as_str() {
         "volume" => audio::volume()?,
         "muted" => audio::muted()?,
-        _ => process::exit(1)
+        _ => process::exit(1),
     }
 
     Ok(())

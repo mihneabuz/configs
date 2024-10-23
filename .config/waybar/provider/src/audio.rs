@@ -30,16 +30,17 @@ fn get_output() -> io::Result<(f32, bool)> {
 
 pub fn volume() -> io::Result<()> {
     let (mut value, muted) = get_output()?;
-
-    if value > 1.0 {
-        value = 1.0;
-    }
+    value = value.min(1.0);
 
     let filled = (MAX_CHARS as f32 * value) as usize;
     let empty = MAX_CHARS - filled;
 
     util::ResultBuilder::new()
-        .with_text(&format!("{}{}", &FULL_BAR.substring(0, filled), " ".repeat(empty)))
+        .with_text(&format!(
+            "{}{}",
+            &FULL_BAR.substring(0, filled),
+            " ".repeat(empty)
+        ))
         .with_alt(if muted { "off" } else { "on" })
         .with_class(if muted { "muted" } else { "active" })
         .build()

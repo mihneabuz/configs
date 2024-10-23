@@ -2,17 +2,18 @@ local M = {}
 
 M.default_opts = {
   async = false,
-  formatters = {},
-  lsp_fallback = true,
+  lsp_format = "last",
+  stop_after_first = true,
+  formatters = { "trim_whitespace" }
 }
 
 M.opts_by_ft = {
   rust = vim.tbl_extend("force", M.default_opts, {
-    lsp_fallback = "always",
+    lsp_fallback = "prefer",
   }),
 
   javascript = vim.tbl_extend("force", M.default_opts, {
-    formatters = { { "prettierd", "prettier" } },
+    formatters = { "prettierd", "prettier" },
   }),
 }
 
@@ -20,6 +21,7 @@ M.duplicated_ft = {
   typescript = "javascript",
   javascriptreact = "javascript",
   typescriptreact = "javascript",
+  html = "javascript"
 }
 
 M.get = function(filetype)

@@ -1,5 +1,4 @@
 use serde::Serialize;
-use serde_json;
 
 #[derive(Serialize)]
 pub struct Result<'a> {
@@ -10,12 +9,12 @@ pub struct Result<'a> {
 }
 
 impl Result<'_> {
-    pub fn to_string(&self) -> String {
+    pub fn to_json(&self) -> String {
         serde_json::to_string(self).unwrap()
     }
 
     pub fn print(self) {
-        println!("{}", self.to_string());
+        println!("{}", self.to_json());
     }
 }
 
@@ -28,11 +27,11 @@ pub struct ResultBuilder<'a> {
 
 impl<'a> ResultBuilder<'a> {
     pub fn new() -> Self {
-        ResultBuilder{
+        ResultBuilder {
             text: None,
             alt: None,
             class: None,
-            percentage: None
+            percentage: None,
         }
     }
 
@@ -51,17 +50,12 @@ impl<'a> ResultBuilder<'a> {
         self
     }
 
-    pub fn with_percentage(mut self, value: u8) -> Self {
-        self.percentage.replace(value);
-        self
-    }
-
     pub fn build(self) -> Result<'a> {
         Result {
             text: self.text.unwrap_or_default(),
             alt: self.alt.unwrap_or_default(),
             class: self.class.unwrap_or_default(),
-            percentage: self.percentage.unwrap_or_default()
+            percentage: self.percentage.unwrap_or_default(),
         }
     }
 }
