@@ -5,7 +5,7 @@
 window {
   font-family: CaskaydiaCove Nerd Font;
   font-weight: 700;
-  font-size: 22px;
+  font-size: 17px;
   background: rgba(0, 0, 0, 0);
 }
 
@@ -16,7 +16,7 @@ tooltip {
 tooltip label {
   font-family: Ubuntu;
   font-weight: 700;
-  font-size: 24px;
+  font-size: 17px;
   color: #bfc6d2;
 }
 
@@ -86,7 +86,7 @@ tooltip label {
   margin-right: 3px;
 
   font-family: CaskaydiaCove Nerd Font;
-  font-size: 0.72em;
+  font-size: 0.6em;
 
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;

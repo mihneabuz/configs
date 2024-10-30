@@ -2,7 +2,7 @@
   "start_hidden": false,
   "layer": "bottom",
   "position": "top",
-  "height": 30,
+  "height": 26,
 
   "modules-left": [
     "hyprland/workspaces"
@@ -27,9 +27,11 @@
       "2": "",
       "3": "󰈹",
       "4": "󰇮",
+      "5": "",
+      "6": "󰊻"
     },
     "persistent-workspaces": {
-      "*": 4
+      "*": 6
     },
     "on-click": "activate",
     "active-only": false,

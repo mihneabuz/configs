@@ -61,3 +61,16 @@ if status is-interactive
   set -gx STARSHIP_LOG error
   starship init fish | source
 end
+
+set -gx P4PORT ssl:robuh-cm-coreos1.buh.is.keysight.com:1999
+set -gx P4USER mihnbuza
+set -gx P4CLIENT mihnbuza_5cd
+set -gx P4EDITOR nvim
+set -gx P4DIFF diff
+set -gx P4AUTHOR "Mihnea Buzatu"
+
+set -gx TARBALLS /home/mihnea/Perforce/mihnbuza_5cd/ixia_tarballs
+set -gx TARBALL $TARBALLS
+
+alias p4 "p4 -d (pwd -P)"
+alias pkgget "/home/mihnea/Perforce/mihnbuza_5cd/aptixia/pkgget/pkgget.py"
