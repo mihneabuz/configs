@@ -9,6 +9,6 @@ show_all=true
 print_command=true
 layer=overlay
 insensitive=true
-prompt=Search...
+prompt=
 allow_markup=true
 allow_images=true
