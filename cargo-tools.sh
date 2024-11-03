@@ -1,3 +1,10 @@
 #!/bin/bash
 
-cargo install cargo-nextest cargo-tarpaulin clock-tui thokr
+cargo install \
+  cargo-nextest \
+  cargo-tarpaulin \
+  cargo-audit \
+  cargo-watch \
+  cargo-expand \
+  clock-tui \
+  thokr
