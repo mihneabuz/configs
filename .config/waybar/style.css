@@ -11,12 +11,13 @@ window {
 
 tooltip {
   background: #22272e;
+  opacity: 0.95;
 }
 
 tooltip label {
-  font-family: Ubuntu;
+  font-family: CaskaydiaCove Nerd Font;
   font-weight: 700;
-  font-size: 17px;
+  font-size: 19px;
   color: #bfc6d2;
 }
 
@@ -24,11 +25,14 @@ tooltip label {
 /* ------------- CLOCK ------------- */
 
 #clock {
-  font-family: Ubuntu;
-  padding-top: 2px;
-  color: @foreground;
-}
+  margin: 1px 3px;
+  padding: 0 1em;
 
+  border-radius: 5px;
+
+  color: @blue;
+  background-color: @background;
+}
 
 /* ------------- WORKSPACES ------------- */
 
@@ -108,11 +112,9 @@ tooltip label {
 #battery {
   margin-top: 1px;
   margin-right: 6px;
+  padding: 0 12px;
 
   font-size: 0.9em;
-
-  padding-right: 12px;
-  padding-left: 12px;
 
   border-radius: 5px;
 
@@ -124,8 +126,10 @@ tooltip label {
 #memory:hover,
 #disk:hover,
 #network:hover,
-#battery:hover {
+#battery:hover,
+#clock:hover {
   transition-duration: .2s;
+
   background: @blue;
   color: @background;
 }
