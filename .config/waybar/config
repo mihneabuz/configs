@@ -5,10 +5,8 @@
   "height": 30,
 
   "modules-left": [
+    "clock",
     "hyprland/workspaces"
-  ],
-  "modules-center": [
-    "clock"
   ],
   "modules-right": [
     "cpu",
@@ -40,7 +38,20 @@
     "interval": 30,
     "timezone": "Europe/Bucharest",
     "format": "{:%b %d - %a %H:%M}",
-    "tooltip": false,
+    "tooltip-format": "{calendar}",
+    "calendar": {
+      "mode"          : "year",
+      "mode-mon-col"  : 3,
+      "weeks-pos"     : "right",
+      "on-scroll"     : 1,
+      "format": {
+          "months":     "<span color='#61afef'><b>{}</b></span>",
+          "days":       "<span color='#dce3ff'><b>{}</b></span>",
+          "weeks":      "<span color='#56b6c2'><b>W{}</b></span>",
+          "weekdays":   "<span color='#c678dd'><b>{}</b></span>",
+          "today":      "<span color='#e06c75'><b><u>{}</u></b></span>"
+          }
+      },
   },
 
   "cpu": {
