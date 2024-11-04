@@ -85,7 +85,7 @@ return {
         Field         = " ",
         File          = " ",
         Folder        = " ",
-        Function      = " ",
+        Function      = "󰡱 ",
         Interface     = " ",
         Key           = " ",
         Keyword       = " ",
@@ -105,7 +105,7 @@ return {
         Text          = "󰉿 ",
         TypeParameter = " ",
         Unit          = " ",
-        Value         = "󰉿 ",
+        Value         = "󰎠 ",
         Variable      = "󰀫 ",
       }
 
@@ -113,7 +113,7 @@ return {
         if kind_icon[item.kind] then
           item.kind = kind_icon[item.kind]
         else
-          item.kind = "?"
+          item.kind = "? "
         end
 
         item.abbr = string.sub(item.abbr, 1, 50)

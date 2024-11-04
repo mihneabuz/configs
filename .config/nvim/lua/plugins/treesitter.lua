@@ -12,13 +12,9 @@ return {
         "cpp",
         "c_sharp",
         "css",
-        "cuda",
-        "d",
-        "dart",
         "dockerfile",
         "fish",
         "go",
-        "graphql",
         "haskell",
         "hcl",
         "html",
@@ -27,18 +23,11 @@ return {
         "json",
         "lua",
         "make",
-        "php",
-        "prisma",
         "python",
-        "ruby",
         "rust",
-        "scala",
-        "solidity",
         "toml",
         "typescript",
         "tsx",
-        "vim",
-        "vimdoc",
         "yaml",
         "markdown",
         "markdown_inline",
@@ -130,13 +119,5 @@ return {
         return newVirtText
       end
     }
-  },
-
-  {
-    "mizlan/iswap.nvim",
-    keys = {
-      { "gs", "<cmd>ISwapNodeWith<cr>", desc = "Swap parameter" }
-    },
-    config = true
   },
 }
