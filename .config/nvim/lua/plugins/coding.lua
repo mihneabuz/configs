@@ -34,6 +34,7 @@ return {
       local luasnip = require("luasnip")
 
       local kind = require("cmp.types").lsp.CompletionItemKind
+      local default_priority = 7;
       local kind_priority = {
         [kind.Keyword]     = 20,
 
@@ -41,18 +42,22 @@ return {
         [kind.Variable]    = 15,
         [kind.Property]    = 15,
         [kind.Value]       = 15,
+        [kind.Reference]   = 15,
 
         [kind.Constructor] = 10,
         [kind.Method]      = 10,
         [kind.Function]    = 10,
         [kind.Operator]    = 10,
 
+        [kind.Constant]    = 9,
+
         [kind.Class]       = 8,
         [kind.Interface]   = 8,
         [kind.Struct]      = 8,
         [kind.Enum]        = 8,
         [kind.EnumMember]  = 8,
-        [kind.Constant]    = 8,
+
+        [kind.Module]      = 6,
 
         [kind.Snippet]     = 5,
 
@@ -64,20 +69,20 @@ return {
         local kind1 = entry1:get_kind()
         local kind2 = entry2:get_kind()
         if kind1 ~= kind2 then
-          local prio1 = kind_priority[kind1] or 0
-          local prio2 = kind_priority[kind2] or 0
+          local prio1 = kind_priority[kind1] or default_priority
+          local prio2 = kind_priority[kind2] or default_priority
           return prio1 > prio2
         end
       end
 
       local kind_icon = {
-        Array         = " ",
+        Array         = "[]",
         Boolean       = "󰔢 ",
         Class         = "󰠱 ",
         Color         = " ",
         Control       = " ",
         Collapsed     = " ",
-        Constant      = "󰏿 ",
+        Constant      = " ",
         Constructor   = " ",
         Enum          = " ",
         EnumMember    = " ",
@@ -92,9 +97,9 @@ return {
         Method        = " ",
         Module        = " ",
         Namespace     = " ",
-        Null          = " ",
+        Null          = "󰟢 ",
         Number        = "󰎠 ",
-        Object        = " ",
+        Object        = "{}",
         Operator      = "󰆕 ",
         Package       = " ",
         Property      = " ",
@@ -103,10 +108,10 @@ return {
         String        = " ",
         Struct        = " ",
         Text          = "󰉿 ",
-        TypeParameter = " ",
+        TypeParameter = " ",
         Unit          = " ",
         Value         = "󰎠 ",
-        Variable      = "󰀫 ",
+        Variable      = "󰫧 ",
       }
 
       local format = function(_, item)
