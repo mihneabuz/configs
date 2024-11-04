@@ -103,7 +103,7 @@
   },
 
   "custom/volume": {
-    "exec": "~/.config/waybar/provider/provider volume",
+    "exec": "~/.config/waybar/provider/provider",
     "return-type": "json",
     "format": "{}",
     "tooltip": false,
