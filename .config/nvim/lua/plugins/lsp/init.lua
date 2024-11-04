@@ -72,8 +72,6 @@ return {
       lightbulb = {
         enable = false,
         enable_in_insert = false,
-        sign = false,
-        virtual_text = false,
       },
       symbol_in_winbar = {
         enable = false,
@@ -94,7 +92,7 @@ return {
     end
   },
   {
-    "mihneabuz/lsp_signature.nvim",
+    "ray-x/lsp_signature.nvim",
     lazy = true
   },
 

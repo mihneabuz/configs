@@ -5,7 +5,6 @@ pub struct Result<'a> {
     text: &'a str,
     alt: &'a str,
     class: &'a str,
-    percentage: u8,
 }
 
 impl Result<'_> {
@@ -22,7 +21,6 @@ pub struct ResultBuilder<'a> {
     text: Option<&'a str>,
     alt: Option<&'a str>,
     class: Option<&'a str>,
-    percentage: Option<u8>,
 }
 
 impl<'a> ResultBuilder<'a> {
@@ -31,7 +29,6 @@ impl<'a> ResultBuilder<'a> {
             text: None,
             alt: None,
             class: None,
-            percentage: None,
         }
     }
 
@@ -55,7 +52,6 @@ impl<'a> ResultBuilder<'a> {
             text: self.text.unwrap_or_default(),
             alt: self.alt.unwrap_or_default(),
             class: self.class.unwrap_or_default(),
-            percentage: self.percentage.unwrap_or_default(),
         }
     }
 }
