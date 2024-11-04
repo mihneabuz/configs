@@ -27,8 +27,7 @@ return {
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-cmdline",
       "hrsh7th/cmp-nvim-lua",
-      "saadparwaiz1/cmp_luasnip",
-      "onsails/lspkind.nvim"
+      "saadparwaiz1/cmp_luasnip"
     },
     opts = function()
       local cmp = require("cmp")
@@ -71,10 +70,63 @@ return {
         end
       end
 
+      local kind_icon = {
+        Array         = " ",
+        Boolean       = "󰔢 ",
+        Class         = "󰠱 ",
+        Color         = " ",
+        Control       = " ",
+        Collapsed     = " ",
+        Constant      = "󰏿 ",
+        Constructor   = " ",
+        Enum          = " ",
+        EnumMember    = " ",
+        Event         = " ",
+        Field         = " ",
+        File          = " ",
+        Folder        = " ",
+        Function      = " ",
+        Interface     = " ",
+        Key           = " ",
+        Keyword       = " ",
+        Method        = " ",
+        Module        = " ",
+        Namespace     = " ",
+        Null          = " ",
+        Number        = "󰎠 ",
+        Object        = " ",
+        Operator      = "󰆕 ",
+        Package       = " ",
+        Property      = " ",
+        Reference     = " ",
+        Snippet       = " ",
+        String        = " ",
+        Struct        = " ",
+        Text          = "󰉿 ",
+        TypeParameter = " ",
+        Unit          = " ",
+        Value         = "󰉿 ",
+        Variable      = "󰀫 ",
+      }
+
+      local format = function(_, item)
+        if kind_icon[item.kind] then
+          item.kind = kind_icon[item.kind]
+        else
+          item.kind = "?"
+        end
+
+        item.abbr = string.sub(item.abbr, 1, 50)
+        item.menu = nil
+
+        return item
+      end
+
       return {
         completion = {
           completeopt = "menu,menuone,noinsert",
         },
+        preselect = cmp.PreselectMode.Item,
         snippet = {
           expand = function(args)
             luasnip.lsp_expand(args.body)
@@ -103,19 +155,11 @@ return {
           { name = "nvim_lua", priority = 40 },
           { name = "luasnip",  priority = 30 },
           { name = "path",     priority = 20 },
-          { name = "buffer",   priority = 10 },
+          { name = "buffer",   priority = 10, keyword_length = 3, },
         }),
         formatting = {
           fields = { "kind", "abbr" },
-          format = require("lspkind").cmp_format({
-            mode = "symbol",
-            elipsis_char = "…",
-            before = function(_, item)
-              item.abbr = string.sub(item.abbr, 1, 50)
-              item.menu = nil
-              return item
-            end
-          })
+          format = format,
         },
         sorting = {
           comparators = {
@@ -123,6 +167,12 @@ return {
             cmp.config.compare.offset,
             cmp.config.compare.exact,
             cmp.config.compare.length,
+          },
+        },
+        window = {
+          documentation = {
+            max_width = 100,
+            max_height = 18,
           },
         },
         experimental = {

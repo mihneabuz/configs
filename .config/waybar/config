@@ -3,8 +3,13 @@
   "layer": "bottom",
   "position": "top",
   "height": 30,
+  "margin-top": 2,
+  "margin-right": 6,
+  "margin-left": 6,
+  "spacing": 6,
 
   "modules-left": [
+    "custom/icon",
     "clock",
     "hyprland/workspaces"
   ],
@@ -14,25 +19,8 @@
     "disk",
     "network",
     "battery",
-    "custom/volumeIcon",
-    "custom/volumeBar",
+    "custom/volume",
   ],
-
-  "hyprland/workspaces": {
-    "format": "{icon}",
-    "format-icons": {
-      "1": "󰍹",
-      "2": "",
-      "3": "󰈹",
-      "4": "󰇮",
-    },
-    "persistent-workspaces": {
-      "*": 4
-    },
-    "on-click": "activate",
-    "active-only": false,
-    "all-outputs": true
-  },
 
   "clock": {
     "interval": 30,
@@ -52,6 +40,27 @@
           "today":      "<span color='#e06c75'><b><u>{}</u></b></span>"
           }
       },
+  },
+
+  "custom/icon": {
+    "format": "",
+    "tooltip": false
+  },
+
+  "hyprland/workspaces": {
+    "format": "{icon}",
+    "format-icons": {
+      "1": "󰍹",
+      "2": "",
+      "3": "󰈹",
+      "4": "󰇮",
+    },
+    "persistent-workspaces": {
+      "*": 4
+    },
+    "on-click": "activate",
+    "active-only": false,
+    "all-outputs": true
   },
 
   "cpu": {
@@ -93,30 +102,13 @@
     "max-length": 25
   },
 
-  "custom/volumeIcon": {
-    "exec": "~/.config/waybar/provider/provider muted",
-    "return-type": "json",
-    "format": "{icon}",
-    "format-icons": {
-      "on": "",
-      "off": "",
-    },
-    "tooltip": false,
-    "signal": 7,
-    "interval": 10,
-    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle; pkill -RTMIN+8 waybar; pkill -RTMIN+7 waybar"
-  },
-  "custom/volumeBar": {
+  "custom/volume": {
     "exec": "~/.config/waybar/provider/provider volume",
     "return-type": "json",
     "format": "{}",
     "tooltip": false,
     "signal": 8,
     "interval": 10,
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle; pkill -RTMIN+8 waybar"
   },
-
-  "tray": {
-    "icon-size": 21,
-    "spacing": 10
-  }
 }
