@@ -12,7 +12,6 @@ return {
         { "<C-s>",     group = "Search" },
         { "<leader>g", group = "Git" },
         { "<leader>c", group = "Code" },
-        { "<leader>t", group = "Tests" },
         { "<leader>d", group = "Diagnostics" },
         { "<leader>D", group = "Debugger" },
       },
