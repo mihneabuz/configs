@@ -12,17 +12,11 @@ return {
       },
     },
     opts = {
-      add_blank_line_at_top = true,
-      close_if_last_window = true,
+      add_blank_line_at_top = false,
       popup_border_style = "rounded",
       use_popups_for_input = false,
       enable_modified_markers = false,
-      enable_opened_markers = false,
       filesystem = {
-        bind_to_cwd = false,
-        follow_current_file = {
-          enabled = true,
-        },
         use_libuv_file_watcher = true,
       },
       window = {
@@ -31,14 +25,6 @@ return {
           ["<space>"] = "none",
           ["l"] = "open",
           ["h"] = "close_node"
-        },
-      },
-      default_component_configs = {
-        indent = {
-          with_expanders = true,
-          expander_collapsed = "",
-          expander_expanded = "",
-          expander_highlight = "NeoTreeExpander",
         },
       },
     },

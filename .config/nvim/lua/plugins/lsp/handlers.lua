@@ -40,8 +40,8 @@ M.setup_keymaps = function(bufnr)
   keymap("<leader>cl", function() vim.lsp.codelens.run() end, "Code lens")
 
   keymap("gl", vim.diagnostic.open_float, "Show line diagnostics")
-  keymap("[d", function() vim.diagnostic.jump({ count = -1 }) end, "Next diagnostic")
-  keymap("]d", function() vim.diagnostic.jump({ count = 1 }) end, "Prev diagnostic")
+  keymap("[d", function() vim.diagnostic.goto_next() end, "Next diagnostic")
+  keymap("]d", function() vim.diagnostic.goto_prev() end, "Prev diagnostic")
   keymap("<leader>dt", function() require("plugins.lsp.diagnostics").toggle() end, "Toggle diagnostics")
 end
 
