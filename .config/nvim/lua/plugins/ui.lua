@@ -24,6 +24,15 @@ return {
         max_prefix_length       = 12,
         enforce_regular_tabs    = false,
         diagnostics             = false,
+        show_buffer_icons       = true,
+        show_buffer_close_icons = false,
+        show_close_icon         = false,
+        show_tab_indicators     = false,
+        persist_buffer_sort     = true,
+        separator_style         = {},
+        always_show_bufferline  = false,
+        left_trunc_marker       = '',
+        right_trunc_marker      = '',
         offsets                 = {
           {
             filetype = "neo-tree",
@@ -32,19 +41,10 @@ return {
             text_align = "left",
           },
         },
-        show_buffer_icons       = true,
-        show_buffer_close_icons = false,
-        show_close_icon         = false,
-        show_tab_indicators     = false,
-        persist_buffer_sort     = true,
-        separator_style         = {},
-        always_show_bufferline  = false,
         custom_areas            = {
           right = function()
             local total = #vim.api.nvim_list_tabpages()
-            if total < 2 then
-              return {}
-            end
+            if total < 2 then return {} end
 
             return { {
               text = "" .. vim.api.nvim_get_current_tabpage() .. "  " .. total .. " ",

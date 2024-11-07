@@ -13,7 +13,7 @@ return {
         { "<leader>g", group = "Git" },
         { "<leader>c", group = "Code" },
         { "<leader>d", group = "Diagnostics" },
-        { "<leader>D", group = "Debugger" },
+        { "<leader>u", group = "Debug" },
       },
     },
     config = function(_, opts)

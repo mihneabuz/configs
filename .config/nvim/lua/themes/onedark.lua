@@ -112,6 +112,11 @@ return {
         bold = true,
         italic = true,
       },
+
+      trunc_marker = {
+        fg = { attribute = "fg", highlight = "lualine_c_normal" },
+        bg = { attribute = "bg", highlight = "lualine_c_normal" },
+      }
     }
   end
 }

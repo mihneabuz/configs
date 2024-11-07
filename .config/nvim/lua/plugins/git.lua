@@ -55,8 +55,8 @@ return {
       vim.g.mergetool_layout = "mr"
       vim.g.mergetool_prefer_revision = "local"
 
-      require("which-key").register({
-        ["<leader>m"] = { name = "Mergetool", _ = "which_key_ignore" },
+      require("which-key").add({
+        { "<leader>m", group = "Mergetool" }
       })
 
       local function keymap(mode, l, r, desc)
@@ -65,6 +65,8 @@ return {
 
       keymap("n", "<leader>mg", "<cmd>diffget<cr>", "Diff get")
       keymap("n", "<leader>mp", "<cmd>diffput<cr>", "Diff put")
+
+      keymap("n", "<leader>mm", "<cmd>MergetoolToggle<cr>", "Complete merge")
     end
   },
 }
