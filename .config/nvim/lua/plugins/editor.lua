@@ -1,4 +1,17 @@
 return {
+  -- remove buffer
+  {
+    "echasnovski/mini.bufremove",
+    keys = {
+      {
+        "<C-q>",
+        function() require("mini.bufremove").delete() end,
+        desc = "Close buffer"
+      }
+    },
+    version = '*',
+    config = true
+  },
 
   -- file explorer
   {
@@ -12,11 +25,15 @@ return {
       },
     },
     opts = {
+      close_if_last_window = true,
       add_blank_line_at_top = false,
       popup_border_style = "rounded",
       use_popups_for_input = false,
       enable_modified_markers = false,
       filesystem = {
+        follow_current_file = {
+          enabled = true,
+        },
         use_libuv_file_watcher = true,
       },
       window = {

@@ -6,9 +6,6 @@ end
 -- disable command line window
 keymap("n", "q<cmd>", "<nop>")
 
--- close buffer
-keymap("n", "<C-q>", "<cmd>bd<cr>")
-
 -- window navigation
 keymap("n", "<C-h>", "<C-w>h", "Navigate window left")
 keymap("n", "<C-j>", "<C-w>j", "Navigate window down")
