@@ -1,4 +1,4 @@
-vim.o.guifont = "CaskaydiaCove_Nerd_Font:h17:w-0.2"
+vim.o.guifont = "CaskaydiaCove_Nerd_Font:h13:w-0.2"
 
 local foreground = vim.api.nvim_get_hl_by_name("Normal", true).foreground
 local background = require("themes").default.background
