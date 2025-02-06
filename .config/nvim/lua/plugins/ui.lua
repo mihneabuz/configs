@@ -62,9 +62,6 @@ return {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
     opts = function()
-      local function pad(str, len)
-        return str .. string.rep(" ", len - string.len(str))
-      end
 
       local diagnostics = {
         "diagnostics",
@@ -93,12 +90,12 @@ return {
         }
       }
 
+      local mode_fmt = function(mode)
+        return mode .. string.rep(" ", 7 - string.len(mode))
+      end
+
       local mark = function()
-        local marked = require("grapple").exists({ buffer = 0 })
-        if marked then
-          return " "
-        end
-        return ""
+        return require("grapple").exists({ buffer = 0 }) and " " or ""
       end
 
       local lsp = function()
@@ -109,8 +106,7 @@ return {
 
         local names = {}
         for i = #clients, 1, -1 do
-          ---@diagnostic disable: undefined-field
-          names[#names + 1] = clients[i].name
+          names[#names + 1] = clients[i]["name"]
         end
 
         return string.format(" LSP [%s]", table.concat(names, ", "))
@@ -132,7 +128,7 @@ return {
           },
         },
         sections = {
-          lualine_a = { { "mode", fmt = function(s) return pad(s, 7) end } },
+          lualine_a = { { "mode", fmt = mode_fmt } },
           lualine_b = { diagnostics, "branch", "diff" },
           lualine_c = { filetype, filename, mark },
           lualine_x = { lsp },
