@@ -1,5 +1,3 @@
----@diagnostic disable: different-requires
-
 return {
   {
     "navarasu/onedark.nvim",
