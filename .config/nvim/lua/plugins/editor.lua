@@ -197,15 +197,6 @@ return {
     config = true,
   },
 
-  -- motion
-  {
-    "smoka7/hop.nvim",
-    keys = {
-      { "<leader>f", "<cmd>HopWord<cr>", desc = "Hop" }
-    },
-    config = true
-  },
-
   -- rgb colors
   {
     "norcalli/nvim-colorizer.lua",
