@@ -24,7 +24,7 @@ yay -S hyprland \
   nemo \
   grim \
   slurp \
-  firefox-nightly-bin \
+  librewolf-bin \
   thunderbird \
   ttf-ubuntu-font-family \
   ttf-ubuntu-nerd \

@@ -209,8 +209,4 @@ return {
       vim.cmd.ColorizerToggle()
     end,
   },
-
-  -- makes some plugins dot-repeatable
-  { "tpope/vim-repeat", event = "VeryLazy" },
-
 }
