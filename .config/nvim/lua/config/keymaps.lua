@@ -33,6 +33,10 @@ keymap("n", "<leader>h", "<cmd>noh<cr>", "Clear Highlight")
 -- better search
 keymap("n", "*", "*N")
 
+-- better indenting
+keymap("v", "<", "<gv")
+keymap("v", ">", ">gv")
+
 -- highlights under cursor
 keymap("n", "<leader>u", vim.show_pos, "Show highlight under cursor")
 

@@ -3,7 +3,6 @@ require("config.keymaps")
 require("config.autocmds")
 require("config.bootstrap")
 
----@diagnostic disable: undefined-field
-if vim.g.neovide then
+if vim.g["neovide"] ~= nil then
   require("config.neovide")
 end
