@@ -1,5 +1,4 @@
 return {
-
   -- installer
   {
     "williamboman/mason.nvim",
@@ -9,15 +8,12 @@ return {
     },
     opts = {
       ui = {
-        border = "rounded",
-        height = 0.8
+        border = "rounded"
       }
     }
   },
   {
     "williamboman/mason-lspconfig.nvim",
-    lazy = true,
-    dependencies = { "mason.nvim" },
     opts = {
       ensure_installed = {
         "lua_ls",
@@ -31,44 +27,24 @@ return {
   {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
-    dependencies = {
-      "mason-lspconfig.nvim",
-      "hrsh7th/cmp-nvim-lsp",
-    },
     config = function()
       require("plugins.lsp.diagnostics").init()
-
-      vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-        border = "rounded",
-      })
-
-      vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-        border = "rounded",
-      })
 
       require("mason-lspconfig").setup_handlers({
         require("plugins.lsp.handlers").setup
       })
 
-      vim.lsp.set_log_level("off")
+      vim.lsp.log.set_level("off")
     end,
   },
 
   -- lsp additions
   {
     "glepnir/lspsaga.nvim",
-    cmd = "Lspsaga",
+    keys = {
+      { "<leader>ca", "<cmd>Lspsaga code_action<cr>", desc = "Code actions" }
+    },
     opts = {
-      finder = {
-        max_height = 0.5,
-        min_width = 10,
-        keys = {
-          expand_or_jump = "l",
-        },
-      },
-      outline = {
-        min_width = 16
-      },
       lightbulb = {
         enable = false,
         enable_in_insert = false,
@@ -83,13 +59,6 @@ return {
         border = "rounded",
       }
     },
-    config = function(_, opts)
-      -- hack to set correct background
-      local old = vim.api.nvim_get_hl_by_name("Normal", true)
-      vim.api.nvim_set_hl(0, "Normal", { link = "NormalFloat" })
-      require("lspsaga").setup(opts)
-      vim.api.nvim_set_hl(0, "Normal", old)
-    end
   },
   {
     "ray-x/lsp_signature.nvim",

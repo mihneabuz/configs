@@ -3,7 +3,7 @@ return {
 
   {
     "folke/which-key.nvim",
-    keys = { "<leader>", "<C-s>", "g", "z" },
+    event = "VeryLazy",
     opts = {
       icons = {
         mappings = false
@@ -13,7 +13,7 @@ return {
         { "<leader>g", group = "Git" },
         { "<leader>c", group = "Code" },
         { "<leader>d", group = "Diagnostics" },
-        { "<leader>u", group = "Debug" },
+        { "gx",        desc = "Open URI under cursor" }
       },
     },
     config = function(_, opts)
@@ -21,7 +21,7 @@ return {
       whichkey.setup(opts)
 
       local ignore_list = {
-        "ge", "gg", "gi", "gn", "gN", "gv", "g~", "g%"
+        "ge", "gg", "gn", "gN", "gv", "g%"
       }
 
       for _, ignored in ipairs(ignore_list) do

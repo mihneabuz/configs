@@ -1,53 +1,39 @@
 local M = {}
 
 M.init = function()
-  M.opts = {
-    underline = true,
+  vim.diagnostic.config({
+    underline = function() return M.enabled end,
     virtual_text = false,
-    signs = {
-      text = {
-        [vim.diagnostic.severity.HINT]  = "",
-        [vim.diagnostic.severity.INFO]  = "",
-        [vim.diagnostic.severity.WARN]  = "",
-        [vim.diagnostic.severity.ERROR] = "",
-      },
-      numhl = {
-        [vim.diagnostic.severity.HINT]  = "DiagnosticSignHint",
-        [vim.diagnostic.severity.INFO]  = "DiagnosticSignInfo",
-        [vim.diagnostic.severity.WARN]  = "DiagnosticSignWarn",
-        [vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
-      },
-    },
+    virtual_lines = false,
+    signs = function()
+      return M.enabled and {
+        text = {
+          [vim.diagnostic.severity.HINT]  = "",
+          [vim.diagnostic.severity.INFO]  = "",
+          [vim.diagnostic.severity.WARN]  = "",
+          [vim.diagnostic.severity.ERROR] = "",
+        }
+      }
+    end,
     float = {
-      focusable = false,
-      style = "minimal",
       border = "rounded",
       source = "always",
-      header = "",
-      prefix = "",
     },
-    update_in_insert = true,
+    update_in_insert = false,
     severity_sort = true,
-  }
+  })
 
   M.enable()
 end
 
 M.enable = function()
-  vim.diagnostic.config(vim.deepcopy(M.opts))
   M.enabled = true
+  vim.diagnostic.show();
 end
 
 M.disable = function()
-  vim.diagnostic.config({
-    virtual_text = false,
-    update_in_insert = false,
-    underline = false,
-    severity_sort = false,
-    float = false,
-    signs = false
-  })
   M.enabled = false
+  vim.diagnostic.hide();
 end
 
 M.toggle = function()

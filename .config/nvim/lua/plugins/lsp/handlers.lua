@@ -1,12 +1,6 @@
 local M = {}
 
-M.capabilities = vim.tbl_deep_extend(
-  "force",
-  vim.lsp.protocol.make_client_capabilities(),
-  require("cmp_nvim_lsp").default_capabilities()
-)
-
-M.setup_keymaps = function(bufnr)
+M.on_attach = function(client, bufnr)
   local keymap = function(bind, cmd, desc, mode)
     local opts = { noremap = true, silent = true, buffer = bufnr, desc = desc }
     vim.keymap.set(mode or "n", bind, cmd, opts)
@@ -19,36 +13,25 @@ M.setup_keymaps = function(bufnr)
     end
   }
 
-  keymap("K", vim.lsp.buf.hover, "Peek hover doc")
-  keymap("<C-k>", "<cmd>Lspsaga hover_doc ++keep<cr>", "Toggle hover doc")
+  local preview_opts = {
+    border = "rounded",
+    max_width = 82,
+  }
 
+  keymap("K", function() vim.lsp.buf.hover(preview_opts) end, "Hover doc")
+
+  keymap("gl", vim.diagnostic.open_float, "Show line diagnostics")
   keymap("gd", vim.lsp.buf.definition, "Go to definition")
   keymap("gh", vim.lsp.buf.type_definition, "Go to type definition")
 
-  keymap("gD", "<cmd>Lspsaga peek_definition<cr>", "Peek definition")
-  keymap("gH", "<cmd>Lspsaga peek_type_definition<cr>", "Peek type definition")
+  keymap("grr", function() vim.lsp.buf.references(nil, list_opts) end, "List references")
+  keymap("gri", function() vim.lsp.buf.implementation(list_opts) end, "List implementations")
+  keymap("grn", vim.lsp.buf.rename, "Rename symbol")
+  keymap("gO", function() vim.lsp.buf.document_symbol(list_opts) end, "List document symbols")
 
-  keymap("gr", function() vim.lsp.buf.references(nil, list_opts) end, "List references")
-  keymap("gi", function() vim.lsp.buf.implementation(list_opts) end, "List implementations")
-
-  keymap("gI", vim.lsp.buf.incoming_calls, "List incoming calls")
-  keymap("gO", vim.lsp.buf.outgoing_calls, "List outgoing calls")
-
-  keymap("<leader>r", vim.lsp.buf.rename, "Rename symbol")
-
-  keymap("<leader>ca", "<cmd>Lspsaga code_action<cr>", "Code actions", { "n", "v" })
-  keymap("<leader>cl", function() vim.lsp.codelens.run() end, "Code lens")
-
-  keymap("gl", vim.diagnostic.open_float, "Show line diagnostics")
-  keymap("]d", function() vim.diagnostic.goto_next() end, "Next diagnostic")
-  keymap("[d", function() vim.diagnostic.goto_prev() end, "Prev diagnostic")
   keymap("<leader>dt", function() require("plugins.lsp.diagnostics").toggle() end, "Toggle diagnostics")
-end
 
-M.on_attach = function(client, bufnr)
-  M.setup_keymaps(bufnr)
-
-  if client.server_capabilities.documentHighlightProvider then
+  if client:supports_method("textDocument/highlight") then
     vim.api.nvim_create_autocmd({ "CursorHold" }, {
       buffer = bufnr,
       callback = function()
@@ -64,7 +47,7 @@ M.on_attach = function(client, bufnr)
     })
   end
 
-  if client.server_capabilities.hoverProvider then
+  if client:supports_method("textDocument/hover") then
     require("lsp_signature").on_attach({
       doc_lines    = 0,
       hint_enable  = false,
@@ -74,21 +57,27 @@ M.on_attach = function(client, bufnr)
     }, bufnr)
   end
 
-  -- if client.server_capabilities.inlayHintProvider then
-  --   vim.lsp.inlay_hint.enable(bufnr, true)
+  -- if client:supports_method("textDocument/completion") then
+  --   vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = true })
   -- end
 
-  -- if client.server_capabilities.codeLensProvider then
+  -- if client:supports_method("textDocument/inlayHint") then
+  --   vim.lsp.inlay_hint.enable(true, { bufnr })
+  -- end
+
+  -- if client:supports_method("textDocument/codeLens") then
   --   vim.lsp.codelens.refresh()
+  --
   --   vim.api.nvim_create_autocmd({ "BufEnter", "InsertLeave" }, {
   --     buffer = bufnr,
   --     callback = vim.lsp.codelens.refresh,
   --   })
+  --
+  --   keymap("grl", vim.lsp.codelens.run, "Code lens", { "n", "v" })
   -- end
 end
 
 M.base_opts = {
-  capabilities = M.capabilities,
   on_attach = M.on_attach,
 }
 
@@ -128,11 +117,9 @@ M.setup_manual_server = function(server_name)
     return
   end
 
-  local base_opts = require("plugins.lsp.handlers").base_opts
-
-  local success = M.manual[server_name]().setup(base_opts)
+  local success = M.manual[server_name]().setup(M.base_opts)
   if not success then
-    require("lspconfig")[server_name].setup(base_opts)
+    require("lspconfig")[server_name].setup(M.base_opts)
     require("lspconfig.configs")[server_name].launch()
   end
 end

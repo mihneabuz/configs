@@ -62,7 +62,6 @@ return {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
     opts = function()
-
       local diagnostics = {
         "diagnostics",
         sources          = { "nvim_diagnostic" },
