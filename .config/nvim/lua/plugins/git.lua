@@ -1,6 +1,4 @@
 return {
-
-  -- git signs and commands
   {
     "lewis6991/gitsigns.nvim",
     event = { "BufReadPre", "BufNewFile" },
@@ -46,7 +44,6 @@ return {
     },
   },
 
-  -- mergetool
   {
     "samoshkin/vim-mergetool",
     cmd = { "MergetoolStart", "MergetoolStop", "MergetoolToggle" },

@@ -1,171 +1,82 @@
+---@diagnostic disable: undefined-global
+
 return {
-  -- remove buffer
   {
-    "echasnovski/mini.bufremove",
+    "folke/snacks.nvim",
     keys = {
-      {
-        "<C-q>",
-        function() require("mini.bufremove").delete() end,
-        desc = "Close buffer"
-      }
-    },
-    version = '*',
-    config = true
-  },
+      { "<C-q>",     function() Snacks.bufdelete() end,        desc = "Close buffer" },
+      { "<leader>e", function() Snacks.explorer() end,         desc = "File explorer" },
 
-  -- file explorer
-  {
-    "nvim-neo-tree/neo-tree.nvim",
-    cmd = "Neotree",
-    keys = {
-      {
-        "<leader>e",
-        function() require("neo-tree.command").execute({ toggle = true }) end,
-        desc = "File explorer",
-      },
+      { "<C-s>o",    function() Snacks.picker.pickers() end,   desc = "Pickers" },
+      { "<C-s>f",    function() Snacks.picker.files() end,     desc = "Files" },
+      { "<C-s>g",    function() Snacks.picker.grep() end,      desc = "Grep" },
+      { "<C-s>r",    function() Snacks.picker.recent() end,    desc = "Recents" },
+      { "<C-s>p",    function() Snacks.picker.projects() end,  desc = "Projects" },
+      { "<C-s>l",    function() Snacks.picker.git_log() end,   desc = "Commits" },
+      { "<C-s>h",    function() Snacks.picker.help() end,      desc = "Help" },
+      { "<C-s>c",    function() Snacks.picker.commands() end,  desc = "Commands" },
+      { "gG",        function() Snacks.picker.grep_word() end, desc = "Search word under cursor" },
     },
+    priority = 1000,
+    lazy = false,
     opts = {
-      close_if_last_window = true,
-      add_blank_line_at_top = false,
-      popup_border_style = "rounded",
-      use_popups_for_input = false,
-      enable_modified_markers = false,
-      filesystem = {
-        follow_current_file = {
-          enabled = true,
+      bigfile = { enabled = true },
+      bufdelete = { enabled = true },
+      dashboard = {
+        enabled = true,
+        width = 40,
+        preset = {
+          keys = {
+            { icon = " ", key = "e", desc = "New File", action = ":ene | startinsert" },
+            { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
+            { icon = " ", key = "r", desc = "Recents", action = ":lua Snacks.dashboard.pick('oldfiles')" },
+            { icon = " ", key = "s", desc = "Restore", action = ":lua require('persistence').load()" },
+            { text = {} },
+            { icon = " ", key = "c", desc = "Config", action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})" },
+            { icon = "󰒲 ", key = "l", desc = "Lazy", action = ":Lazy" },
+            { icon = " ", key = "m", desc = "Mason", action = ":Mason" },
+            { text = {} },
+            { icon = " ", key = "h", desc = "Health", action = ":checkhealth" },
+            { icon = " ", key = "q", desc = "Quit", action = ":qa" },
+          },
         },
-        use_libuv_file_watcher = true,
-      },
-      window = {
-        width = 48,
-        mappings = {
-          ["<space>"] = "none",
-          ["l"] = "open",
-          ["h"] = "close_node"
-        },
-      },
-    },
-    config = function(_, opts)
-      require("neo-tree").setup(opts)
-      vim.api.nvim_create_autocmd("TermClose", {
-        pattern = "*lazygit",
-        callback = function()
-          if package.loaded["neo-tree.sources.git_status"] then
-            require("neo-tree.sources.git_status").refresh()
-          end
-        end,
-      })
-    end,
-  },
-
-  -- fuzzy finder
-  {
-    "nvim-telescope/telescope.nvim",
-    cmd = "Telescope",
-    version = false,
-    dependencies = { "ahmedkhalf/project.nvim" },
-    keys = {
-      { "gG",     "<cmd>Telescope grep_string<cr>",     desc = "Search word under cursor" },
-      { "<C-s>t", "<cmd>Telescope<cr>",                 desc = "Telescope" },
-      { "<C-s>h", "<cmd>Telescope help_tags<cr>",       desc = "Help" },
-      { "<C-s>f", "<cmd>Telescope find_files<cr>",      desc = "Files" },
-      { "<C-s>g", "<cmd>Telescope live_grep<cr>",       desc = "Grep files" },
-      { "<C-s>r", "<cmd>Telescope oldfiles<cr>",        desc = "Recent files" },
-      { "<C-s>c", "<cmd>Telescope commands<cr>",        desc = "Commands" },
-      { "<C-s>o", "<cmd>Telescope keymaps<cr>",         desc = "Git commits" },
-      { "<C-s>k", "<cmd>Telescope keymaps<cr>",         desc = "Keymaps" },
-      { "<C-s>v", "<cmd>Telescope command_history<cr>", desc = "Command history" },
-      { "<C-s>d", "<cmd>Telescope diagnostics<cr>",     desc = "Diagnostics" },
-      {
-        "<C-s>s",
-        function()
-          require("telescope.builtin").lsp_dynamic_workspace_symbols({
-            symbols = {
-              "Class",
-              "Function",
-              "Method",
-              "Constructor",
-              "Interface",
-              "Module",
-              "Struct",
-              "Trait",
-              "Field",
-              "Property",
-            },
-          })
-        end,
-        desc = "Symbols",
-      },
-    },
-    opts = {
-      defaults = {
-        prompt_prefix = " ",
-        selection_caret = " ",
-      },
-    },
-    config = function(_, opts)
-      local telescope = require("telescope")
-
-      opts.defaults.mappings = {
-        i = {
-          ["<C-k>"] = require("telescope.actions").move_selection_previous,
-          ["<C-j>"] = require("telescope.actions").move_selection_next,
-          ["<C-l>"] = require("telescope.actions").cycle_history_next,
-          ["<C-h>"] = require("telescope.actions").cycle_history_prev,
-          ["<C-.>"] = require("telescope.actions").preview_scrolling_down,
-          ["<C-,>"] = require("telescope.actions").preview_scrolling_up,
-          ["<C-a>"] = function(...)
-            require("telescope.actions").send_to_qflist(...)
-            require("trouble").open("qflist")
-          end,
-          ["<C-s>"] = function(...)
-            require("telescope.actions").send_selected_to_qflist(...)
-            require("trouble").open("qflist")
+        formats = {
+          key = function(item)
+            return { { "[" .. item.key .. "]", hl = "@function" } }
           end,
         },
-      }
+        sections = {
+          { section = "header", padding = 2 },
+          { icon = " ", title = "Projects", section = "projects", indent = 2, padding = 2 },
+          { icon = " ", title = "Actions", section = "keys", indent = 2, padding = 2, gap = 0 },
+          { section = "startup" },
+        },
+      },
+      explorer = {
+        enabled = true,
+        replace_netrw = true,
+      },
+      input = { enabled = true },
+      notify = { enabled = true },
+      picker = {
+        enabled = true,
+        sources = {
+          explorer = {
 
-      telescope.setup(opts)
-      telescope.load_extension("projects")
-    end
-  },
-
-  -- project root
-  {
-    "ahmedkhalf/project.nvim",
-    event = "VeryLazy",
-    main = "project_nvim",
-    config = true
-  },
-
-  -- session management
-  {
-    "folke/persistence.nvim",
-    event = "BufReadPre",
-    opts = {
-      options = { "buffers", "curdir", "tabpages", "winsize", "help", "globals" }
+          }
+        },
+        icons = {
+          diagnostics = require("themes").icons.diagnostics
+        }
+      },
+      quickfile = { enabled = true },
+      -- terminal = { enabled = true }
     },
-    keys = {
-      { "<leader>s", function() require("persistence").load({ last = true }) end, desc = "Restore session" },
-    },
   },
 
-  -- marking and navigation
-  {
-    "cbochs/grapple.nvim",
-    keys = {
-      { "<leader>N", function() require("grapple").toggle() end,         desc = "Toogle mark" },
-      { "<leader>n", function() require("grapple").open_tags() end,      desc = "Show marks" },
-      { "[n",        function() require("grapple").cycle_forward() end,  desc = "Prev mark" },
-      { "]n",        function() require("grapple").cycle_backward() end, desc = "Next mark" },
-    },
-    config = true,
-  },
-
-  -- todo comments
   {
     "folke/todo-comments.nvim",
-    cmd = { "TodoTrouble", "TodoTelescope" },
+    cmd = { "TodoTrouble" },
     event = { "BufReadPost", "BufNewFile" },
     opts = {
       keywords = {
@@ -183,21 +94,55 @@ return {
     },
   },
 
-  -- surround
   {
-    "kylechui/nvim-surround",
-    event = { "BufReadPost", "BufNewFile" },
-    config = true
+    "folke/trouble.nvim",
+    cmd = "Trouble",
+    keys = {
+      {
+        "<leader>dd",
+        "<cmd>Trouble diagnostics toggle<cr>",
+        desc = "Buffer diagnostics"
+      },
+      {
+        "<leader>dw",
+        "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+        desc = "Workspace diagnostics"
+      },
+    },
+    opts = {
+      auto_close = true,
+      use_diagnostic_signs = true
+    },
   },
 
-  -- highlight ranges
+  {
+    "folke/persistence.nvim",
+    event = "BufReadPre",
+    opts = {
+      options = { "buffers", "curdir", "tabpages", "winsize", "help", "globals" }
+    },
+    keys = {
+      { "<leader>s", function() require("persistence").load({ last = true }) end, desc = "Restore session" },
+    },
+  },
+
+  {
+    "cbochs/grapple.nvim",
+    keys = {
+      { "<leader>N", function() require("grapple").toggle() end,         desc = "Toogle mark" },
+      { "<leader>n", function() require("grapple").open_tags() end,      desc = "Show marks" },
+      { "[n",        function() require("grapple").cycle_forward() end,  desc = "Prev mark" },
+      { "]n",        function() require("grapple").cycle_backward() end, desc = "Next mark" },
+    },
+    config = true,
+  },
+
   {
     "winston0410/range-highlight.nvim",
     event = { "CmdlineEnter" },
     config = true,
   },
 
-  -- rgb colors
   {
     "norcalli/nvim-colorizer.lua",
     event = { "BufReadPre", "BufNewFile" },
@@ -209,4 +154,29 @@ return {
       vim.cmd.ColorizerToggle()
     end,
   },
+
+  {
+    "akinsho/toggleterm.nvim",
+    keys = {
+      { [[<C-\>]], "<cmd>ToggleTerm direction=float<cr>",      desc = "Open terminal float", mode = { "n", "t" } },
+      { [[<C-]>]], "<cmd>ToggleTerm direction=horizontal<cr>", desc = "Open terminal split", mode = { "n", "t" } },
+    },
+    cmd = "ToggleTerm",
+    opts = {
+      size = 20,
+      hide_numbers = true,
+      shading_factor = "2",
+      direction = "float",
+      shell = "fish -C fish_default_key_bindings",
+      float_opts = {
+        border = "rounded",
+        winblend = 0,
+      },
+      highlights = {
+        NormalFloat = { link = "NormalFloat" },
+        FloatBorder = { link = "FloatBorder" },
+      },
+    }
+  },
+
 }

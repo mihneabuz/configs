@@ -7,6 +7,7 @@ return {
       fg = "#b2b9c6",
     },
     highlights = {
+      ["Special"] = { fg = "$blue", fmt = "bold" },
       ["MatchParen"] = { fg = "$yellow", fmt = "bold" },
       ["NormalFloat"] = { bg = "$bg0" },
       ["FloatBorder"] = { bg = "$bg0" },

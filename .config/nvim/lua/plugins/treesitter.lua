@@ -1,5 +1,4 @@
 return {
-
   {
     "nvim-treesitter/nvim-treesitter",
     version = false,
@@ -68,4 +67,16 @@ return {
       require("nvim-treesitter.configs").setup(opts)
     end,
   },
+
+  {
+    "kylechui/nvim-surround",
+    event = { "BufReadPost", "BufNewFile" },
+    config = true
+  },
+
+  {
+    "folke/ts-comments.nvim",
+    event = "VeryLazy",
+    config = true
+  }
 }

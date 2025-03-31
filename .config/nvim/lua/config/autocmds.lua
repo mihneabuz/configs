@@ -46,11 +46,9 @@ autocmd("FileType", {
   group = "HighlightTraillingWhitespace",
   callback = function(ev)
     local ignored = {
-      "alpha",
       "lazy",
       "mason",
       "grapple",
-      "TelescopePrompt",
       "PlenaryTestPopup",
       "help",
       "lspinfo",
@@ -60,7 +58,6 @@ autocmd("FileType", {
       "startuptime",
       "tsplayground",
       "checkhealth",
-      "neo-tree",
       "filesystem"
     }
 

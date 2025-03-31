@@ -1,6 +1,4 @@
 return {
-
-  -- bufferline
   {
     "akinsho/bufferline.nvim",
     version = false,
@@ -33,14 +31,6 @@ return {
         always_show_bufferline  = false,
         left_trunc_marker       = '',
         right_trunc_marker      = '',
-        offsets                 = {
-          {
-            filetype = "neo-tree",
-            text = "Neo-tree",
-            highlight = "BufferLineFill",
-            text_align = "left",
-          },
-        },
         custom_areas            = {
           right = function()
             local total = #vim.api.nvim_list_tabpages()
@@ -57,7 +47,6 @@ return {
     }
   },
 
-  -- statusline
   {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
@@ -142,97 +131,8 @@ return {
     end,
   },
 
-  -- dashboard
   {
-    "goolord/alpha-nvim",
-    event = "VimEnter",
-    opts = function()
-      local dashboard = require("alpha.themes.dashboard")
-      local version = vim.version()
-
-      dashboard.section.header.opts.hl = "@field";
-      dashboard.section.header.val = {
-        "                                                     ",
-        "                                                     ",
-        "                                                     ",
-        "                                                     ",
-        "  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ ",
-        "  ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║ ",
-        "  ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║ ",
-        "  ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║ ",
-        "  ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║ ",
-        "  ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ ",
-        "                                                     ",
-        "                                                     ",
-        string.format(
-          "                        %d.%d.%d                        ",
-          version.major, version.minor, version.patch
-        ),
-        "                                                     ",
-        "                                                     ",
-        "                                                     ",
-      }
-
-      local function button(key, label, cmd, hl)
-        local b = dashboard.button(key, label, cmd)
-        b.opts.hl = { { hl or "@string", 0, 5 } }
-        b.opts.hl_shortcut = "@keyword"
-        return b
-      end
-
-      dashboard.section.buttons.val = {
-        button("e", "   New file", "<cmd>ene<cr>"),
-        button("f", "   Finder", "<cmd>Telescope find_files<cr>"),
-        button("t", "   File Tree", "<cmd>ene<cr><cmd>Neotree toggle<cr>"),
-        button("o", "   Restore", "<cmd>lua require('persistence').load()<cr>"),
-        button("r", "   Recents", "<cmd>Telescope oldfiles<cr>"),
-        button("p", "   Projects", "<cmd>Telescope projects<cr>"),
-        { type = "padding", val = 0 },
-        button("s", "   Settings", "<cmd>e $MYVIMRC<cr>", "@function"),
-        button("l", " 󰒲  Lazy", "<cmd>Lazy<cr>", "@function"),
-        button("m", "   Mason", "<cmd>Mason<cr>", "@function"),
-        button("u", "   Update", "<cmd>Lazy sync<cr>", "@function"),
-        { type = "padding", val = 0 },
-        button("h", "   Health", "<cmd>checkhealth<cr>", "DiagnosticError"),
-        button("q", "   Quit", "<cmd>qa<cr>", "DiagnosticError"),
-      }
-
-      return dashboard
-    end,
-    config = function(_, dashboard)
-      if vim.o.filetype == "lazy" then
-        vim.cmd.close()
-        vim.api.nvim_create_autocmd("User", {
-          pattern = "AlphaReady",
-          callback = function()
-            require("lazy").show()
-          end,
-        })
-      end
-
-      require("alpha").setup(dashboard.opts)
-
-      vim.api.nvim_create_autocmd("User", {
-        pattern = "LazyVimStarted",
-        callback = function()
-          local stats = require("lazy").stats()
-          local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-
-          dashboard.section.footer.val = {
-            "",
-            "",
-            "⚡ Loaded " .. stats.count .. " plugins in " .. ms .. "ms ⚡",
-          }
-
-          pcall(vim.cmd.AlphaRedraw)
-        end,
-      })
-    end,
-  },
-
-  -- icons
-  { "nvim-tree/nvim-web-devicons", lazy = true },
-
-  -- ui components
-  { "MunifTanjim/nui.nvim",        lazy = true },
+    "eandrju/cellular-automaton.nvim",
+    cmd = "CellularAutomaton"
+  }
 }

@@ -1,5 +1,4 @@
 return {
-  -- installer
   {
     "williamboman/mason.nvim",
     cmd = "Mason",
@@ -14,16 +13,9 @@ return {
   },
   {
     "williamboman/mason-lspconfig.nvim",
-    opts = {
-      ensure_installed = {
-        "lua_ls",
-        "rust_analyzer",
-        "jsonls",
-      },
-    },
+    config = true
   },
 
-  -- lspconfig
   {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
@@ -38,31 +30,14 @@ return {
     end,
   },
 
-  -- lsp additions
-  {
-    "glepnir/lspsaga.nvim",
-    keys = {
-      { "<leader>ca", "<cmd>Lspsaga code_action<cr>", desc = "Code actions" }
-    },
-    opts = {
-      lightbulb = {
-        enable = false,
-        enable_in_insert = false,
-      },
-      symbol_in_winbar = {
-        enable = false,
-      },
-      beacon = {
-        enable = false
-      },
-      ui = {
-        border = "rounded",
-      }
-    },
-  },
   {
     "ray-x/lsp_signature.nvim",
     lazy = true
+  },
+  {
+    'Chaitanyabsprip/fastaction.nvim',
+    lazy = true,
+    config = true,
   },
 
   -- rust

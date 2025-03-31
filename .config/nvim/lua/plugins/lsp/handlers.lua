@@ -26,8 +26,12 @@ M.on_attach = function(client, bufnr)
 
   keymap("grr", function() vim.lsp.buf.references(nil, list_opts) end, "List references")
   keymap("gri", function() vim.lsp.buf.implementation(list_opts) end, "List implementations")
-  keymap("grn", vim.lsp.buf.rename, "Rename symbol")
   keymap("gO", function() vim.lsp.buf.document_symbol(list_opts) end, "List document symbols")
+
+  keymap("grn", vim.lsp.buf.rename, "Rename symbol")
+  keymap("<leader>r", vim.lsp.buf.rename, "Rename symbol")
+
+  keymap("<leader>ca", function() require("fastaction").code_action() end, "Code actions", { 'n', 'x' })
 
   keymap("<leader>dt", function() require("plugins.lsp.diagnostics").toggle() end, "Toggle diagnostics")
 
