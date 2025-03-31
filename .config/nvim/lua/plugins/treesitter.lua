@@ -68,12 +68,4 @@ return {
       require("nvim-treesitter.configs").setup(opts)
     end,
   },
-
-  {
-    "AckslD/nvim-trevJ.lua",
-    keys = {
-      { "<leader>J", function() require("trevj").format_at_cursor() end, desc = "Expand line" },
-    },
-    config = true
-  },
 }
