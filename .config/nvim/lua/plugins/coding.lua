@@ -29,7 +29,7 @@ return {
       "hrsh7th/cmp-nvim-lua",
       "saadparwaiz1/cmp_luasnip"
     },
-    opts = function()
+    config = function()
       local cmp = require("cmp")
       local luasnip = require("luasnip")
 
@@ -127,7 +127,7 @@ return {
         return item
       end
 
-      return {
+      require("cmp").setup({
         completion = {
           completeopt = "menu,menuone,noinsert",
         },
@@ -185,7 +185,7 @@ return {
             hl_group = "LspCodeLens",
           },
         },
-      }
+      })
     end,
   },
 
