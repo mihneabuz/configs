@@ -18,8 +18,6 @@ yay -S hyprland \
   wireplumber \
   wofi \
   kitty \
-  htop \
-  lazygit \
   neovide \
   nemo \
   grim \
