@@ -1,5 +1,3 @@
-local M = {}
-
 local root_fn = require("lspconfig").util.root_pattern("Cargo.toml")
 local root_dir = root_fn(vim.fn.getcwd())
 
@@ -64,33 +62,8 @@ local function setup_tailwind()
   })
 end
 
-local function setup_ferris()
-  require("ferris").setup()
-
-  local function ferris_keymap(mode, key, fn, desc)
-    vim.keymap.set(mode, key, "", {
-      callback = function() require("ferris.methods." .. fn)() end,
-      desc = desc,
-      silent = true,
-    })
-  end
-
-  ferris_keymap("n", "<leader>w", "reload_workspace", "Reload cargo workspace")
-  ferris_keymap("n", "gw", "open_documentation", "Go to documentation")
-  ferris_keymap("n", "gm", "view_memory_layout", "Show memory layout")
+if should_setup_tailwind() then
+  setup_tailwind()
 end
 
-M.setup = function(base_opts)
-  setup_ferris()
-
-  local opts = vim.tbl_extend("force", base_opts, extra_opts())
-  require("lspconfig")["rust_analyzer"].setup(opts)
-
-  if should_setup_tailwind() then
-    setup_tailwind()
-  end
-
-  return true
-end
-
-return M
+return extra_opts()

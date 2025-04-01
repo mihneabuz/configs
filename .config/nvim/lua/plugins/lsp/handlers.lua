@@ -1,3 +1,5 @@
+---@diagnostic disable: undefined-global
+
 local M = {}
 
 M.on_attach = function(client, bufnr)
@@ -23,6 +25,7 @@ M.on_attach = function(client, bufnr)
   keymap("gl", vim.diagnostic.open_float, "Show line diagnostics")
   keymap("gd", vim.lsp.buf.definition, "Go to definition")
   keymap("gh", vim.lsp.buf.type_definition, "Go to type definition")
+  keymap("gr", Snacks.picker.lsp_references, "Show references")
 
   keymap("grr", function() vim.lsp.buf.references(nil, list_opts) end, "List references")
   keymap("gri", function() vim.lsp.buf.implementation(list_opts) end, "List implementations")
@@ -35,7 +38,7 @@ M.on_attach = function(client, bufnr)
 
   keymap("<leader>dt", function() require("plugins.lsp.diagnostics").toggle() end, "Toggle diagnostics")
 
-  if client:supports_method("textDocument/highlight") then
+  if client:supports_method("textDocument/documentHighlight") then
     vim.api.nvim_create_autocmd({ "CursorHold" }, {
       buffer = bufnr,
       callback = function()
@@ -82,19 +85,16 @@ M.on_attach = function(client, bufnr)
 end
 
 M.base_opts = {
-  on_attach = M.on_attach,
-}
-
-M.manual = {
-  ["rust_analyzer"] = function() return require("plugins.lsp.lang.rust") end,
+  on_attach = M.on_attach
 }
 
 M.automatic = {
-  ["clangd"]   = function() return require("plugins.lsp.settings.clangd") end,
-  ["jsonls"]   = function() return require("plugins.lsp.settings.jsonls") end,
-  ["lua_ls"]   = function() return require("plugins.lsp.settings.lua") end,
-  ["emmet_ls"] = function() return require("plugins.lsp.settings.emmet") end,
-  ["pylsp"]    = function() return require("plugins.lsp.settings.pylsp") end,
+  ["clangd"]        = function() return require("plugins.lsp.settings.clangd") end,
+  ["jsonls"]        = function() return require("plugins.lsp.settings.jsonls") end,
+  ["lua_ls"]        = function() return require("plugins.lsp.settings.lua") end,
+  ["emmet_ls"]      = function() return require("plugins.lsp.settings.emmet") end,
+  ["pylsp"]         = function() return require("plugins.lsp.settings.pylsp") end,
+  ["rust_analyzer"] = function() return require("plugins.lsp.settings.rust_analyzer") end
 }
 
 M.extra_opts = function(server)
@@ -107,25 +107,8 @@ M.extra_opts = function(server)
 end
 
 M.setup = function(server)
-  if M.manual[server] then
-    return
-  end
-
   local opts = vim.tbl_deep_extend("force", M.extra_opts(server), M.base_opts)
-
   require("lspconfig")[server].setup(opts)
-end
-
-M.setup_manual_server = function(server_name)
-  if not pcall(require, "lspconfig") then
-    return
-  end
-
-  local success = M.manual[server_name]().setup(M.base_opts)
-  if not success then
-    require("lspconfig")[server_name].setup(M.base_opts)
-    require("lspconfig.configs")[server_name].launch()
-  end
 end
 
 return M

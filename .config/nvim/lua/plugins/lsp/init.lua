@@ -34,20 +34,13 @@ return {
     "ray-x/lsp_signature.nvim",
     lazy = true
   },
+
   {
     'Chaitanyabsprip/fastaction.nvim',
     lazy = true,
     config = true,
   },
 
-  -- rust
-  {
-    "vxpm/ferris.nvim",
-    ft = "rust",
-    config = function()
-      require("plugins.lsp.handlers").setup_manual_server("rust_analyzer")
-    end
-  },
   {
     "saecki/crates.nvim",
     event = { "BufRead Cargo.toml" },

@@ -60,9 +60,9 @@ return {
       notify = { enabled = true },
       picker = {
         enabled = true,
-        sources = {
-          explorer = {
-
+        formatters = {
+          file = {
+            truncate = 72
           }
         },
         icons = {
