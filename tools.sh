@@ -1,3 +1,31 @@
 #!/bin/bash
 
-sudo pacman -S base-devel curl wget nodejs npm python neovim fish starship ruby go rustup lf zip unzip tree highlight fzf ripgrep tree-sitter-cli zoxide
+set -e
+
+pacman -S \
+  base-devel \
+  curl \
+  wget \
+  zip \
+  unzip \
+  git \
+  python \
+  python-pip \
+  nodejs \
+  npm \
+  go \
+  rustup \
+  neovim \
+  fish \
+  starship \
+  lf \
+  tree \
+  highlight \
+  fd \
+  fzf \
+  ripgrep \
+  htop \
+  lazygit \
+  tree-sitter-cli
+
+rustup default stable
