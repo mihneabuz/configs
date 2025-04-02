@@ -1,8 +1,14 @@
 if [ "$(tty)" = "/dev/tty1" ]
-  set -gx GTK_THEME Adwaita:dark
+  set -gx GDK_BACKEND "wayland,x11,*"
+  gsettings set org.gnome.desktop.interface gtk-theme "Adwaita-dark"
+  gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"
+  gsettings set org.gnome.desktop.interface font-name "Ubuntu 11"
+
+  set -gx QT_QPA_PLATFORM "wayland;xcb"
   set -gx QT_STYLE_OVERRIDE adwaita
-  set -gx _JAVA_AWT_WM_NONREPARENTING 1
+
   set -gx XCURSOR_SIZE 24
+  set -gx _JAVA_AWT_WM_NONREPARENTING 1
 
   if [ "$(lsmod | grep nvidia_drm)" ];
     set -gx LIBVA_DRIVER_NAME nvidia

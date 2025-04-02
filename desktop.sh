@@ -16,10 +16,12 @@ yay -S hyprland \
   pipewire-jack \
   pipewire-pulse \
   wireplumber \
-  wofi \
+  pavucontrol \
+  dunst \
+  neofetch \
+  rofi-wayland \
   kitty \
   neovide \
-  nemo \
   grim \
   slurp \
   librewolf-bin \
@@ -30,5 +32,14 @@ yay -S hyprland \
   noto-fonts \
   noto-fonts-emoji \
   wl-clipboard \
-  dunst \
-  neofetch
+  nautilus \
+  file-roller \
+  gnome-autoar \
+  gnome-mplayer \
+  gnome-calculator \
+  gnome-calendar \
+  gnome-disk-utility \
+  gnome-maps \
+  gnome-mplayer \
+  gnome-themes-extra \
+  remmina
