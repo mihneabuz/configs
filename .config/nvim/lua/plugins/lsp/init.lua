@@ -18,7 +18,7 @@ return {
 
   {
     "neovim/nvim-lspconfig",
-    event = { "BufReadPre", "BufNewFile" },
+    event = "VeryLazy",
     config = function()
       require("plugins.lsp.diagnostics").init()
 
@@ -28,11 +28,6 @@ return {
 
       vim.lsp.log.set_level("off")
     end,
-  },
-
-  {
-    "ray-x/lsp_signature.nvim",
-    lazy = true
   },
 
   {

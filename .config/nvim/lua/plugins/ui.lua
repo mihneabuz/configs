@@ -134,5 +134,7 @@ return {
   {
     "eandrju/cellular-automaton.nvim",
     cmd = "CellularAutomaton"
-  }
+  },
+
+  { "nvim-tree/nvim-web-devicons", lazy = true },
 }
