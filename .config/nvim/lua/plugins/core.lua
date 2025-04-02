@@ -29,9 +29,4 @@ return {
       end
     end
   },
-
-  -- dependencies
-  { "nvim-lua/plenary.nvim",       lazy = true },
-  { "winston0410/cmd-parser.nvim", lazy = true },
-  { "nvim-tree/nvim-web-devicons", lazy = true },
 }

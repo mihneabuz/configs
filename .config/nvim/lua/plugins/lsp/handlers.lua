@@ -54,16 +54,6 @@ M.on_attach = function(client, bufnr)
     })
   end
 
-  if client:supports_method("textDocument/hover") then
-    require("lsp_signature").on_attach({
-      doc_lines    = 0,
-      hint_enable  = false,
-      handler_opts = {
-        border = "rounded"
-      }
-    }, bufnr)
-  end
-
   -- if client:supports_method("textDocument/completion") then
   --   vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = true })
   -- end
@@ -84,10 +74,6 @@ M.on_attach = function(client, bufnr)
   -- end
 end
 
-M.base_opts = {
-  on_attach = M.on_attach
-}
-
 M.automatic = {
   ["clangd"]        = function() return require("plugins.lsp.settings.clangd") end,
   ["jsonls"]        = function() return require("plugins.lsp.settings.jsonls") end,
@@ -107,7 +93,13 @@ M.extra_opts = function(server)
 end
 
 M.setup = function(server)
-  local opts = vim.tbl_deep_extend("force", M.extra_opts(server), M.base_opts)
+  local base = {
+    on_attach = M.on_attach,
+    capabilities = require('blink.cmp').get_lsp_capabilities(),
+  }
+
+  local opts = vim.tbl_deep_extend("force", M.extra_opts(server), base)
+
   require("lspconfig")[server].setup(opts)
 end
 
