@@ -28,6 +28,7 @@ tooltip label {
   background-color: @background;
 }
 
+
 #workspaces button {
   padding: 0 1.3em 0 1.0em;
   margin-right: 6px;
@@ -51,6 +52,9 @@ tooltip label {
   background: @magenta;
   color: @background;
 }
+
+
+
 
 #cpu,
 #memory,
