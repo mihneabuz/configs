@@ -2,7 +2,7 @@ return {
   "saghen/blink.cmp",
   dependencies = { "rafamadriz/friendly-snippets" },
   version = "1.*",
-  lazy = true,
+  event = "InsertEnter",
   opts = {
     keymap = { preset = "default" },
     appearance = {
@@ -61,5 +61,4 @@ return {
       implementation = "prefer_rust_with_warning"
     }
   },
-  opts_extend = { "sources.default" }
 }

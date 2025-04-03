@@ -3,7 +3,7 @@ return {
     "akinsho/bufferline.nvim",
     version = false,
     event = "VeryLazy",
-    dependencies = { "lualine.nvim", },
+    dependencies = { "lualine.nvim" },
     keys = {
       { "<S-l>",     "<cmd>keepjumps BufferLineCycleNext<cr>",       desc = "Next buffer" },
       { "<S-h>",     "<cmd>keepjumps BufferLineCyclePrev<cr>",       desc = "Prev buffer" },
@@ -29,8 +29,8 @@ return {
         persist_buffer_sort     = true,
         separator_style         = {},
         always_show_bufferline  = false,
-        left_trunc_marker       = '',
-        right_trunc_marker      = '',
+        left_trunc_marker       = "",
+        right_trunc_marker      = "",
         custom_areas            = {
           right = function()
             local total = #vim.api.nvim_list_tabpages()
@@ -38,7 +38,6 @@ return {
 
             return { {
               text = "" .. vim.api.nvim_get_current_tabpage() .. "  " .. total .. " ",
-              fg = vim.api.nvim_get_hl_by_name("Keyword", true).foreground
             } }
           end,
         }
@@ -83,7 +82,9 @@ return {
       end
 
       local mark = function()
-        return require("grapple").exists({ buffer = 0 }) and " " or ""
+        return vim.bo.buftype ~= "nofile"
+            and require("grapple").exists({ buffer = 0 })
+            and " " or ""
       end
 
       local lsp = function()
@@ -123,10 +124,7 @@ return {
           lualine_y = { "location" },
           lualine_z = { time },
         },
-        extensions = {
-          "neo-tree",
-          "lazy",
-        },
+        extensions = { "lazy", },
       }
     end,
   },

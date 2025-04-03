@@ -69,14 +69,8 @@ return {
   },
 
   {
-    "kylechui/nvim-surround",
-    event = { "BufReadPost", "BufNewFile" },
-    config = true
-  },
-
-  {
     "folke/ts-comments.nvim",
     event = "VeryLazy",
-    config = true
+    opts = {},
   }
 }
