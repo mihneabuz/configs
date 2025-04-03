@@ -1,6 +1,6 @@
 configuration {
     modi: "drun";
-    font: "Ubuntu NerdFont 13";
+    font: "Ubuntu NerdFont 17";
     case-sensitive: false;
     show-icons: true;
     display-drun: " ";
@@ -90,7 +90,7 @@ element selected.normal {
     text-color:       @foreground;
 }
 element-icon {
-    size: 42px;
+    size: 52px;
     padding: 5px;
 }
 element-text {
