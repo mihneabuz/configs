@@ -6,7 +6,6 @@ return {
     keys = {
       { "<C-q>",     function() Snacks.bufdelete() end,        desc = "Close buffer" },
       { "<leader>e", function() Snacks.explorer() end,         desc = "File explorer" },
-
       { "<C-s>o",    function() Snacks.picker.pickers() end,   desc = "Pickers" },
       { "<C-s>f",    function() Snacks.picker.files() end,     desc = "Files" },
       { "<C-s>g",    function() Snacks.picker.grep() end,      desc = "Grep" },
@@ -70,14 +69,30 @@ return {
         }
       },
       quickfile = { enabled = true },
-      -- terminal = { enabled = true }
+      terminal = { enabled = true },
+      win = { enabled = true },
     },
   },
 
   {
+    "echasnovski/mini.nvim",
+    version = false,
+    event = "VeryLazy",
+    config = function()
+      require("mini.move").setup()
+      require("mini.pairs").setup()
+      require("mini.splitjoin").setup()
+      require("mini.surround").setup()
+    end
+  },
+
+  {
     "folke/todo-comments.nvim",
-    cmd = { "TodoTrouble" },
     event = { "BufReadPost", "BufNewFile" },
+    keys = {
+      { "]t", function() require("todo-comments").jump_next() end, desc = "Next todo" },
+      { "[t", function() require("todo-comments").jump_prev() end, desc = "Prev todo" },
+    },
     opts = {
       keywords = {
         FIX  = { icon = " ", color = "#ff5135", alt = { "BUG", "ISSUE" } },
@@ -87,10 +102,6 @@ return {
         NOTE = { icon = " ", color = "#bbfdbb", alt = { "INFO" } },
         DEL  = { icon = " ", color = "#aabbdd", alt = { "DELETE", "TRASH", "TEMP" } }
       }
-    },
-    keys = {
-      { "]t", function() require("todo-comments").jump_next() end, desc = "Next todo" },
-      { "[t", function() require("todo-comments").jump_prev() end, desc = "Prev todo" },
     },
   },
 
@@ -118,12 +129,10 @@ return {
   {
     "folke/persistence.nvim",
     event = "BufReadPre",
-    opts = {
-      options = { "buffers", "curdir", "tabpages", "winsize", "help", "globals" }
-    },
     keys = {
       { "<leader>s", function() require("persistence").load({ last = true }) end, desc = "Restore session" },
     },
+    opts = {},
   },
 
   {
@@ -134,13 +143,13 @@ return {
       { "[n",        function() require("grapple").cycle_forward() end,  desc = "Prev mark" },
       { "]n",        function() require("grapple").cycle_backward() end, desc = "Next mark" },
     },
-    config = true,
+    opts = {},
   },
 
   {
     "winston0410/range-highlight.nvim",
-    event = { "CmdlineEnter" },
-    config = true,
+    event = "CmdlineEnter",
+    opts = {},
   },
 
   {
@@ -154,29 +163,4 @@ return {
       vim.cmd.ColorizerToggle()
     end,
   },
-
-  {
-    "akinsho/toggleterm.nvim",
-    keys = {
-      { [[<C-\>]], "<cmd>ToggleTerm direction=float<cr>",      desc = "Open terminal float", mode = { "n", "t" } },
-      { [[<C-]>]], "<cmd>ToggleTerm direction=horizontal<cr>", desc = "Open terminal split", mode = { "n", "t" } },
-    },
-    cmd = "ToggleTerm",
-    opts = {
-      size = 20,
-      hide_numbers = true,
-      shading_factor = "2",
-      direction = "float",
-      shell = "fish -C fish_default_key_bindings",
-      float_opts = {
-        border = "rounded",
-        winblend = 0,
-      },
-      highlights = {
-        NormalFloat = { link = "NormalFloat" },
-        FloatBorder = { link = "FloatBorder" },
-      },
-    }
-  },
-
 }

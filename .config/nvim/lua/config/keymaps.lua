@@ -106,3 +106,53 @@ local function add_to_end(char)
 end
 keymap("n", "<leader>;", function() add_to_end(";") end, "Add `;` to end of line")
 keymap("n", "<leader>,", function() add_to_end(",") end, "Add `,` to end of line")
+
+local wins = {}
+local function toggle_win(name, opts)
+  if wins[name] == nil then
+    wins[name] = Snacks.win.new(opts)
+  else
+    wins[name]:toggle()
+  end
+
+  return wins[name]
+end
+
+local function toggle_term(name, exe, opts)
+  local win = toggle_win(name, opts)
+
+  if not win.closed then
+    if vim.bo.buftype ~= "terminal" then
+      vim.cmd.term(exe)
+      vim.bo.buflisted = false
+    end
+
+    vim.cmd.startinsert()
+  end
+end
+
+local function toggle_float_term()
+  toggle_term("float_term", "fish", {
+    border = "rounded"
+  })
+end
+
+local function toggle_split_term()
+  toggle_term("split_term", "fish", {
+    height = 20,
+    position = "bottom",
+    wo = {
+      winhighlight = ""
+    },
+  })
+end
+
+local function toggle_lazygit()
+  toggle_term("lazygit_term", "lazygit", {
+    border = "rounded"
+  })
+end
+
+keymap({ "n", "t" }, "<C-\\>", toggle_float_term, "Open floating terminal")
+keymap({ "n", "t" }, "<C-]>", toggle_split_term, "Open terminal")
+keymap({ "n", "t" }, "<C-[>", toggle_lazygit, "Open Lazygit")

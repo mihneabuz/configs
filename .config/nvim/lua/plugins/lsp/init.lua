@@ -13,7 +13,7 @@ return {
   },
   {
     "williamboman/mason-lspconfig.nvim",
-    config = true
+    opts = {},
   },
 
   {
@@ -33,7 +33,7 @@ return {
   {
     'Chaitanyabsprip/fastaction.nvim',
     lazy = true,
-    config = true,
+    opts = {},
   },
 
   {
