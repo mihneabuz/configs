@@ -1,17 +1,18 @@
+---@diagnostic disable: undefined-global
+
 local keymap = function(mode, lhs, rhs, desc)
   vim.keymap.set(mode, lhs, rhs, { noremap = true, silent = true, desc = desc })
 end
 
--- window navigation
-keymap("n", "<C-h>", "<C-w>h", "Navigate window left")
-keymap("n", "<C-j>", "<C-w>j", "Navigate window down")
-keymap("n", "<C-k>", "<C-w>k", "Navigate window up")
-keymap("n", "<C-l>", "<C-w>l", "Navigate window right")
+-- splits
+keymap("n", "<C-w>s", "<cmd>split<cr>", "Split window horizontal")
+keymap("n", "<C-w>v", "<cmd>vsplit<cr>", "Split window vertical")
 
-keymap("t", "<C-h>", "<C-w>h", "Navigate window left")
-keymap("t", "<C-j>", "<C-w>j", "Navigate window down")
-keymap("t", "<C-k>", "<C-w>k", "Navigate window up")
-keymap("t", "<C-l>", "<C-w>l", "Navigate window right")
+-- window navigation
+keymap({ "n", "t" }, "<C-h>", "<C-w>h", "Navigate window left")
+keymap({ "n", "t" }, "<C-j>", "<C-w>j", "Navigate window down")
+keymap({ "n", "t" }, "<C-k>", "<C-w>k", "Navigate window up")
+keymap({ "n", "t" }, "<C-l>", "<C-w>l", "Navigate window right")
 
 -- window resizing
 keymap("n", "<S-Up>", "<cmd>resize -2<cr>", "Decrease window vertical size")
@@ -19,13 +20,8 @@ keymap("n", "<S-Down>", "<cmd>resize +2<cr>", "Increase window vertical size")
 keymap("n", "<S-Left>", "<cmd>vertical resize -2<cr>", "Decrease window horizontal size")
 keymap("n", "<S-Right>", "<cmd>vertical resize +2<cr>", "Increase window horizontal size")
 
--- splits
-keymap("n", "<C-w>s", "<cmd>split<cr>", "Split window horizontal")
-keymap("n", "<C-w>v", "<cmd>vsplit<cr>", "Split window vertical")
-
 -- alt-s to leave insert/terminal mode
-keymap("i", "<A-s>", [[<C-\><C-n>]])
-keymap("t", "<A-s>", [[<C-\><C-n>]])
+keymap({ "i", "t" }, "<A-s>", [[<C-\><C-n>]])
 
 -- clear highlight
 keymap("n", "<leader>h", "<cmd>noh<cr>", "Clear Highlight")
@@ -43,53 +39,43 @@ keymap("n", "<leader>u", vim.show_pos, "Show highlight under cursor")
 -- Lazy
 keymap("n", "<leader>L", "<cmd>Lazy<cr>", "Open Lazy")
 
+local toggles = {}
+local toggle = function(name, enable, disable)
+  if toggles[name] then disable() else enable() end
+  toggles[name] = not toggles[name]
+end
+
 -- toggle relative number
-local relative = true
 local toggle_relative = function()
-  if relative then
-    vim.opt.relativenumber = false
-    relative = false
-  else
-    vim.opt.relativenumber = true
-    relative = true
-  end
+  toggle(
+    "relative",
+    function() vim.opt.relativenumber = false end,
+    function() vim.opt.relativenumber = true end
+  )
 end
 keymap("n", "<leader>R", toggle_relative, "Toggle relative numbers")
 
 -- toggle tab size
-local long = false
 local function set_tab(n)
-  vim.print(n)
   vim.opt.tabstop = n
   vim.opt.shiftwidth = n
 end
 local function toggle_tab()
-  if long then
-    set_tab(2)
-    long = false
-  else
-    set_tab(4)
-    long = true
-  end
+  toggle(
+    "tab_len",
+    function() set_tab(4) end,
+    function() set_tab(2) end
+  )
 end
 keymap("n", "<leader>T", toggle_tab, "Toggle tab width")
 
 -- toggle spell check
-local spell = false
-local function spellcheck()
-  vim.cmd([[setlocal spell spelllang=en_us]])
-  spell = true
-end
-local function nospellcheck()
-  vim.cmd([[setlocal nospell]])
-  spell = false
-end
 local function toggle_spellcheck()
-  if spell then
-    nospellcheck()
-  else
-    spellcheck()
-  end
+  toggle(
+    "spell",
+    function() vim.cmd([[setlocal spell spelllang=en_us]]) end,
+    function() vim.cmd([[setlocal nospell]]) end
+  )
 end
 keymap("n", "<leader>S", toggle_spellcheck, "Toggle spell check")
 
@@ -148,9 +134,7 @@ local function toggle_split_term()
 end
 
 local function toggle_lazygit()
-  toggle_term("lazygit_term", "lazygit", {
-    border = "rounded"
-  })
+  toggle_term("lazygit_term", "lazygit", {})
 end
 
 keymap({ "n", "t" }, "<C-\\>", toggle_float_term, "Open floating terminal")
