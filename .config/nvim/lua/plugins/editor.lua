@@ -5,6 +5,7 @@ return {
     "folke/snacks.nvim",
     keys = {
       { "<C-q>",     function() Snacks.bufdelete() end,        desc = "Close buffer" },
+      { "<leader>q", function() Snacks.bufdelete.other() end,  desc = "Close other buffers" },
       { "<leader>e", function() Snacks.explorer() end,         desc = "File explorer" },
       { "<C-s>o",    function() Snacks.picker.pickers() end,   desc = "Pickers" },
       { "<C-s>f",    function() Snacks.picker.files() end,     desc = "Files" },
@@ -66,7 +67,7 @@ return {
         },
         icons = {
           diagnostics = require("themes").icons.diagnostics
-        }
+        },
       },
       quickfile = { enabled = true },
       terminal = { enabled = true },

@@ -1,12 +1,11 @@
 vim.o.guifont = "CaskaydiaCove_Nerd_Font:h13:w-0.2"
 
-local foreground = vim.api.nvim_get_hl_by_name("Normal", true).foreground
-local background = require("themes").default.background
-
-vim.api.nvim_set_hl(0, "Normal", { bg = background, fg = foreground })
+local fg = vim.api.nvim_get_hl(0, { name = "Normal" }).fg
+local bg = require("themes").default.background
+vim.api.nvim_set_hl(0, "Normal", { bg = bg, fg = fg })
 
 ---@diagnostic disable: inject-field
-vim.g.neovide_transparency = 0.95
+vim.g.neovide_opacity = 0.95
 vim.g.neovide_refresh_rate = 120
 vim.g.neovide_refresh_rate_idle = 10
 vim.g.neovide_hide_mouse_when_typing = true

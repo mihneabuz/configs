@@ -34,11 +34,11 @@ return {
         custom_areas            = {
           right = function()
             local total = #vim.api.nvim_list_tabpages()
-            if total < 2 then return {} end
-
-            return { {
-              text = "" .. vim.api.nvim_get_current_tabpage() .. "  " .. total .. " ",
-            } }
+            return total < 2 and {}
+                or { {
+                  text = vim.api.nvim_get_current_tabpage() .. "  " .. total .. " ",
+                  fg = vim.api.nvim_get_hl(0, { name = "@function" }).fg
+                } }
           end,
         }
       },
