@@ -155,4 +155,4 @@ end
 
 keymap({ "n", "t" }, "<C-\\>", toggle_float_term, "Open floating terminal")
 keymap({ "n", "t" }, "<C-]>", toggle_split_term, "Open terminal")
-keymap({ "n", "t" }, "<C-[>", toggle_lazygit, "Open Lazygit")
+keymap({ "n", "t" }, "<C-'>", toggle_lazygit, "Open Lazygit")
