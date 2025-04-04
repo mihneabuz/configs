@@ -134,7 +134,7 @@ local function toggle_split_term()
 end
 
 local function toggle_lazygit()
-  toggle_term("lazygit_term", "lazygit", {})
+  toggle_term("lazygit_term", "lazygit")
 end
 
 keymap({ "n", "t" }, "<C-\\>", toggle_float_term, "Open floating terminal")

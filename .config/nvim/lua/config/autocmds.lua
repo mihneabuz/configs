@@ -34,3 +34,11 @@ autocmd("BufRead", {
     vim.cmd([[match DiagnosticUnderlineHint /\s\+$/]])
   end
 })
+
+-- close terminal on command exit
+autocmd("TermClose", {
+  group = augroup("AutoCloseTerminal", { clear = true }),
+  callback = function()
+    vim.api.nvim_input("<cr>")
+  end
+})
