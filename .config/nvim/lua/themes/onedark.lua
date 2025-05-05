@@ -16,6 +16,10 @@ return {
       ["DiagnosticVirtualTextWarn"] = { bg = "clear" },
       ["DiagnosticVirtualTextInfo"] = { bg = "clear" },
       ["DiagnosticVirtualTextHint"] = { bg = "clear" },
+      -- hacks
+      ["SnacksDashboardHeader"] = { fg = "$cyan" },
+      ["SnacksDashboardSpecial"] = { fg = "$yellow", fmt = "italic" },
+      ["SnacksDashboardFooter"] = { fg = "$yellow", fmt = "italic" },
     }
   },
 
