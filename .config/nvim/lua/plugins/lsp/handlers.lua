@@ -75,21 +75,16 @@ M.on_attach = function(client, bufnr)
 end
 
 M.automatic = {
-  ["clangd"]        = function() return require("plugins.lsp.settings.clangd") end,
-  ["jsonls"]        = function() return require("plugins.lsp.settings.jsonls") end,
-  ["lua_ls"]        = function() return require("plugins.lsp.settings.lua") end,
-  ["emmet_ls"]      = function() return require("plugins.lsp.settings.emmet") end,
-  ["pylsp"]         = function() return require("plugins.lsp.settings.pylsp") end,
-  ["rust_analyzer"] = function() return require("plugins.lsp.settings.rust_analyzer") end
+  ["clangd"]        = require("plugins.lsp.settings.clangd"),
+  ["jsonls"]        = require("plugins.lsp.settings.jsonls"),
+  ["lua_ls"]        = require("plugins.lsp.settings.lua"),
+  ["emmet_ls"]      = require("plugins.lsp.settings.emmet"),
+  ["pylsp"]         = require("plugins.lsp.settings.pylsp"),
+  ["rust_analyzer"] = require("plugins.lsp.settings.rust_analyzer")
 }
 
 M.extra_opts = function(server)
-  local extra = M.automatic[server]
-  if extra then
-    return extra()
-  end
-
-  return {}
+  return M.automatic[server] or {}
 end
 
 M.setup = function(server)
