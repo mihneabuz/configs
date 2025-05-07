@@ -1,4 +1,3 @@
----@diagnostic disable: different-requires
 local themes = require("themes")
 
 return {

@@ -1,4 +1,3 @@
----@diagnostic disable: inject-field
 vim.g.mapleader = " "
 vim.g.deprecation_warnings = false
 vim.g.loaded_python_provider = 0
@@ -55,6 +54,7 @@ opt.sidescrolloff = 8
 opt.signcolumn = "yes"
 opt.smartcase = true
 opt.smartindent = true
+opt.smoothscroll = true
 opt.spelllang = { "en" }
 opt.splitbelow = true
 opt.splitkeep = "screen"
@@ -67,12 +67,6 @@ opt.undolevels = 10000
 opt.updatetime = 200
 opt.virtualedit = "block"
 opt.wildmode = "longest:full,full"
+opt.winborder = "rounded"
 opt.winminwidth = 5
 opt.wrap = false
-
-if vim.fn.has("nvim-0.10") == 1 then
-  opt.smoothscroll = true
-  opt.foldmethod = "expr"
-else
-  opt.foldmethod = "indent"
-end

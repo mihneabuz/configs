@@ -1,4 +1,4 @@
----@diagnostic disable: undefined-global
+Snacks = {}
 
 return {
   {

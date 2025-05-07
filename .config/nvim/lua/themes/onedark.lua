@@ -10,8 +10,8 @@ return {
       ["Special"] = { fg = "$blue", fmt = "bold" },
       ["MatchParen"] = { fg = "$yellow", fmt = "bold" },
       ["NormalFloat"] = { bg = "$bg0" },
-      ["FloatBorder"] = { bg = "$bg0" },
-      ["Pmenu"] = { bg = "$bg0" },
+      ["FloatBorder"] = { bg = "$bg0", fg = "$bg3" },
+      ["Pmenu"] = { bg = "$bg0", fg = "$bg3" },
       ["DiagnosticVirtualTextError"] = { bg = "clear" },
       ["DiagnosticVirtualTextWarn"] = { bg = "clear" },
       ["DiagnosticVirtualTextInfo"] = { bg = "clear" },
@@ -20,6 +20,10 @@ return {
       ["SnacksDashboardHeader"] = { fg = "$cyan" },
       ["SnacksDashboardSpecial"] = { fg = "$yellow", fmt = "italic" },
       ["SnacksDashboardFooter"] = { fg = "$yellow", fmt = "italic" },
+      ["BlinkCmpDocBorder"] = { bg = "$bg0", fg = "$bg3" },
+      ["BlinkCmpDocSeparator"] = { bg = "$bg0", fg = "$bg3" },
+      ["BlinkCmpDocCursorLine"] = { bg = "$bg0", fg = "$bg3" },
+      ["BlinkCmpSignatureHelpBorder"] = { bg = "$bg0", fg = "$bg3" }
     }
   },
 
