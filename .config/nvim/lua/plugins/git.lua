@@ -11,9 +11,6 @@ return {
         changedelete = { text = "" },
         untracked    = { text = "▎" },
       },
-      preview_config = {
-        border = "rounded"
-      },
       sign_priority = 10,
       on_attach = function(buffer)
         local gs = require("gitsigns")
@@ -48,7 +45,6 @@ return {
     "samoshkin/vim-mergetool",
     cmd = { "MergetoolStart", "MergetoolStop", "MergetoolToggle" },
     config = function()
-      ---@diagnostic disable: inject-field
       vim.g.mergetool_layout = "mr"
       vim.g.mergetool_prefer_revision = "local"
 

@@ -4,7 +4,6 @@ local fg = vim.api.nvim_get_hl(0, { name = "Normal" }).fg
 local bg = require("themes").default.background
 vim.api.nvim_set_hl(0, "Normal", { bg = bg, fg = fg })
 
----@diagnostic disable: inject-field
 vim.g.neovide_opacity = 0.95
 vim.g.neovide_refresh_rate = 120
 vim.g.neovide_refresh_rate_idle = 10
@@ -14,13 +13,6 @@ vim.g.neovide_cursor_animation_length = 0.06
 vim.g.neovide_cursor_trail_size = 0.6
 vim.g.neovide_cursor_antialiasing = false
 vim.g.neovide_floating_blur = 0
-
-vim.keymap.set('n', '<D-s>', ':w<CR>')
-vim.keymap.set('v', '<D-c>', '"+y')
-vim.keymap.set('n', '<D-v>', '"+P')
-vim.keymap.set('v', '<D-v>', '"+P')
-vim.keymap.set('c', '<D-v>', '<C-R>+')
-vim.keymap.set('i', '<D-v>', '<ESC>l"+Pli')
 
 vim.api.nvim_create_autocmd("BufLeave", {
   callback = function()

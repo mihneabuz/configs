@@ -1,32 +1,19 @@
 return {
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     cmd = "Mason",
     keys = {
       { "<leader>M", "<cmd>Mason<cr>", desc = "Open Mason" }
     },
-    opts = {
-      ui = {
-        border = "rounded"
-      }
-    }
+    opts = {}
   },
-  {
-    "williamboman/mason-lspconfig.nvim",
-    opts = {},
-  },
+  { "mason-org/mason-lspconfig.nvim", },
 
   {
     "neovim/nvim-lspconfig",
-    event = "VeryLazy",
     config = function()
-      require("plugins.lsp.diagnostics").init()
-
-      require("mason-lspconfig").setup_handlers({
-        require("plugins.lsp.handlers").setup
-      })
-
-      vim.lsp.log.set_level("off")
+      require("mason-lspconfig").setup()
+      require("plugins.lsp.handlers").init()
     end,
   },
 

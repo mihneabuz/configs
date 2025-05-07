@@ -1,7 +1,5 @@
-local opts = {
+return {
   capabilities = {
     offsetEncoding = { "utf-16" }
   },
 }
-
-return opts
