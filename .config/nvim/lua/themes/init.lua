@@ -15,8 +15,8 @@ M.icons = {
   diagnostics = {
     HINT  = "",
     INFO  = "",
-    WARN  = "",
-    ERROR = "",
+    WARN  = "",
+    ERROR = "",
   },
   kinds = {
     Array         = "[]",

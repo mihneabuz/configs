@@ -63,18 +63,12 @@ M.on_attach = function(client, bufnr)
   keymap("gri", function() vim.lsp.buf.implementation(list_opts) end, "List implementations")
   keymap("gO", function() vim.lsp.buf.document_symbol(list_opts) end, "List document symbols")
 
-  if client:supports_method("textDocument/diagnostic") then
-    local toggle_diagnostics = function()
-      if vim.diagnostic.is_enabled() then
-        vim.diagnostic.enable(false)
-      else
-        vim.diagnostic.enable(true)
-      end
-    end
-
-    keymap("gl", vim.diagnostic.open_float, "Show line diagnostics")
-    keymap("<leader>dt", toggle_diagnostics, "Toggle diagnostics")
+  local toggle_diagnostics = function()
+    vim.diagnostic.enable(not vim.diagnostic.is_enabled())
   end
+
+  keymap("gl", vim.diagnostic.open_float, "Show line diagnostics")
+  keymap("<leader>dt", toggle_diagnostics, "Toggle diagnostics")
 
   if client:supports_method("textDocument/rename") then
     keymap("grn", vim.lsp.buf.rename, "Rename symbol")
