@@ -3,12 +3,11 @@ return {
     "akinsho/bufferline.nvim",
     version = false,
     event = "VeryLazy",
-    dependencies = { "lualine.nvim" },
     keys = {
-      { "<S-l>",     "<cmd>keepjumps BufferLineCycleNext<cr>",       desc = "Next buffer" },
-      { "<S-h>",     "<cmd>keepjumps BufferLineCyclePrev<cr>",       desc = "Prev buffer" },
-      { "<leader>B", "<cmd>keepjumps BufferLineSortByExtension<cr>", desc = "Sort buffers" },
-      { "<leader>b", "<cmd>keepjumps BufferLinePick<cr>",            desc = "Pick buffer" },
+      { "<S-l>",     "<cmd>BufferLineCycleNext<cr>",       desc = "Next buffer" },
+      { "<S-h>",     "<cmd>BufferLineCyclePrev<cr>",       desc = "Prev buffer" },
+      { "<leader>B", "<cmd>BufferLineSortByExtension<cr>", desc = "Sort buffers" },
+      { "<leader>b", "<cmd>BufferLinePick<cr>",            desc = "Pick buffer" },
     },
     opts = {
       options = {
@@ -50,11 +49,13 @@ return {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
     opts = function()
+      local icons = require("themes").icons.diagnostics
+
       local diagnostics = {
         "diagnostics",
         sources          = { "nvim_diagnostic" },
         sections         = { "error", "warn" },
-        symbols          = { error = " ", warn = " " },
+        symbols          = { error = icons.ERROR .. " ", warn = icons.WARN .. " " },
         colored          = false,
         update_in_insert = false,
         always_visible   = true,
@@ -89,20 +90,10 @@ return {
 
       local lsp = function()
         local clients = vim.lsp.get_clients({ bufnr = 0 })
-        if #clients == 0 then
-          return ""
-        end
-
-        local names = {}
-        for i = #clients, 1, -1 do
-          names[#names + 1] = clients[i]["name"]
-        end
-
-        return string.format(" LSP [%s]", table.concat(names, ", "))
-      end
-
-      local time = function()
-        return require("os").date(" %H:%M")
+        local names = vim.tbl_map(function(client) return client["name"] end, clients)
+        return #names > 0
+            and string.format(" LSP [%s]", table.concat(names, ", "))
+            or ""
       end
 
       return {
@@ -111,18 +102,18 @@ return {
           globalstatus         = true,
           always_divide_middle = true,
           component_separators = { left = "", right = "" },
-          section_separators   = { left = "", right = "" },
+          section_separators   = { left = "", right = "" },
           disabled_filetypes   = {
             statusline = { "dashboard", "alpha" }
           },
         },
         sections = {
           lualine_a = { { "mode", fmt = mode_fmt } },
-          lualine_b = { diagnostics, "branch", "diff" },
-          lualine_c = { filetype, filename, mark },
+          lualine_b = { diagnostics, "branch" },
+          lualine_c = { filetype, filename, mark, "diff" },
           lualine_x = { lsp },
-          lualine_y = { "location" },
-          lualine_z = { time },
+          lualine_y = { "encoding", "filesize" },
+          lualine_z = { "location" },
         },
         extensions = { "lazy", },
       }
