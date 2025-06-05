@@ -24,7 +24,7 @@ yay -S hyprland \
   neovide \
   grim \
   slurp \
-  librewolf-bin \
+  firefox \
   thunderbird \
   ttf-ubuntu-font-family \
   ttf-ubuntu-nerd \
