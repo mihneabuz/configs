@@ -1,6 +1,6 @@
 #!/bin/bash
 
-yay -S hyprland \
+pacman -S hyprland \
   hyprpaper \
   hypridle \
   hyprlock \
@@ -24,7 +24,7 @@ yay -S hyprland \
   neovide \
   grim \
   slurp \
-  librewolf-bin \
+  firefox \
   thunderbird \
   ttf-ubuntu-font-family \
   ttf-ubuntu-nerd \
