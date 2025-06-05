@@ -48,7 +48,7 @@ return {
       },
       background = {
         bg = { attribute = "bg", highlight = "lualine_c_normal" },
-        fg = { attribute = "fg", highlight = "lualine_c_normal" },
+        fg = { attribute = "fg", highlight = "Normal" },
       },
 
       duplicate = {
