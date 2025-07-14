@@ -12,7 +12,6 @@ return {
         { "<C-s>",     group = "Search" },
         { "<leader>g", group = "Git" },
         { "<leader>c", group = "Code" },
-        { "<leader>d", group = "Diagnostics" },
         { "gx",        desc = "Open URI under cursor" }
       },
     },
