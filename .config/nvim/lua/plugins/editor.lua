@@ -107,27 +107,6 @@ return {
   },
 
   {
-    "folke/trouble.nvim",
-    cmd = "Trouble",
-    keys = {
-      {
-        "<leader>dd",
-        "<cmd>Trouble diagnostics toggle<cr>",
-        desc = "Buffer diagnostics"
-      },
-      {
-        "<leader>dw",
-        "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-        desc = "Workspace diagnostics"
-      },
-    },
-    opts = {
-      auto_close = true,
-      use_diagnostic_signs = true
-    },
-  },
-
-  {
     "folke/persistence.nvim",
     event = "BufReadPre",
     keys = {

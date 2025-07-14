@@ -46,22 +46,15 @@ M.on_attach = function(client, bufnr)
     vim.keymap.set(mode or "n", bind, cmd, opts)
   end
 
-  local list_opts = {
-    on_list = function(what)
-      vim.fn.setqflist({}, ' ', what)
-      require("trouble").open("qflist")
-    end
-  }
-
   keymap("K", function() vim.lsp.buf.hover({ max_width = 82 }) end, "Hover doc")
 
   keymap("gd", vim.lsp.buf.definition, "Go to definition")
   keymap("gh", vim.lsp.buf.type_definition, "Go to type definition")
   keymap("gr", Snacks.picker.lsp_references, "Show references")
 
-  keymap("grr", function() vim.lsp.buf.references(nil, list_opts) end, "List references")
-  keymap("gri", function() vim.lsp.buf.implementation(list_opts) end, "List implementations")
-  keymap("gO", function() vim.lsp.buf.document_symbol(list_opts) end, "List document symbols")
+  keymap("grr", vim.lsp.buf.references, "List references")
+  keymap("gri", vim.lsp.buf.implementation, "List implementations")
+  keymap("gO", vim.lsp.buf.document_symbol, "List document symbols")
 
   local toggle_diagnostics = function()
     vim.diagnostic.enable(not vim.diagnostic.is_enabled())

@@ -38,6 +38,7 @@ return {
         auto_show = true,
         window = {
           min_width = 30,
+          max_width = 100,
           scrollbar = false,
           direction_priority = {
             menu_north = { "e", "w", "n" },
