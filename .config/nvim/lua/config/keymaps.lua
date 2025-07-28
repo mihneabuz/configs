@@ -3,14 +3,8 @@ local keymap = function(mode, lhs, rhs, desc)
 end
 
 -- splits
-keymap("n", "<C-w>s", "<cmd>split<cr>", "Split window horizontal")
-keymap("n", "<C-w>v", "<cmd>vsplit<cr>", "Split window vertical")
-
--- window navigation
-keymap({ "n", "t" }, "<C-h>", "<C-w>h", "Navigate window left")
-keymap({ "n", "t" }, "<C-j>", "<C-w>j", "Navigate window down")
-keymap({ "n", "t" }, "<C-k>", "<C-w>k", "Navigate window up")
-keymap({ "n", "t" }, "<C-l>", "<C-w>l", "Navigate window right")
+keymap("n", "<C-w><C-s>", "<cmd>split<cr>", "Split window horizontal")
+keymap("n", "<C-w><C-v>", "<cmd>vsplit<cr>", "Split window vertical")
 
 -- window resizing
 keymap("n", "<S-Up>", "<cmd>resize -2<cr>", "Decrease window vertical size")
@@ -30,9 +24,6 @@ keymap("n", "*", "*N")
 -- better indenting
 keymap("v", "<", "<gv")
 keymap("v", ">", ">gv")
-
--- highlights under cursor
-keymap("n", "<leader>u", vim.show_pos, "Show highlight under cursor")
 
 -- Lazy
 keymap("n", "<leader>L", "<cmd>Lazy<cr>", "Open Lazy")
@@ -77,20 +68,6 @@ local function toggle_spellcheck()
 end
 keymap("n", "<leader>S", toggle_spellcheck, "Toggle spell check")
 
--- insert , or ; at the end of line
-local function add_to_end(char)
-  local pos = vim.api.nvim_win_get_cursor(0)
-  local len = string.len(vim.api.nvim_call_function("getline", { pos[1] }))
-
-  local lineEnd = { pos[1], len }
-  vim.api.nvim_win_set_cursor(0, lineEnd)
-  vim.api.nvim_put({ char }, "c", true, false)
-
-  vim.api.nvim_win_set_cursor(0, pos)
-end
-keymap("n", "<leader>;", function() add_to_end(";") end, "Add `;` to end of line")
-keymap("n", "<leader>,", function() add_to_end(",") end, "Add `,` to end of line")
-
 local wins = {}
 local function toggle_win(name, opts)
   if wins[name] == nil then
@@ -121,20 +98,9 @@ local function toggle_float_term()
   })
 end
 
-local function toggle_split_term()
-  toggle_term("split_term", "fish", {
-    height = 20,
-    position = "bottom",
-    wo = {
-      winhighlight = ""
-    },
-  })
-end
-
 local function toggle_lazygit()
   toggle_term("lazygit_term", "lazygit")
 end
 
 keymap({ "n", "t" }, "<C-\\>", toggle_float_term, "Open floating terminal")
-keymap({ "n", "t" }, "<C-]>", toggle_split_term, "Open terminal")
 keymap({ "n", "t" }, "<C-'>", toggle_lazygit, "Open Lazygit")

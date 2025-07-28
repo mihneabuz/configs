@@ -4,8 +4,8 @@ return {
     version = false,
     event = "VeryLazy",
     keys = {
-      { "<S-l>",     "<cmd>BufferLineCycleNext<cr>",       desc = "Next buffer" },
-      { "<S-h>",     "<cmd>BufferLineCyclePrev<cr>",       desc = "Prev buffer" },
+      { "gn",        "<cmd>BufferLineCycleNext<cr>",       desc = "Next buffer" },
+      { "gp",        "<cmd>BufferLineCyclePrev<cr>",       desc = "Prev buffer" },
       { "<leader>B", "<cmd>BufferLineSortByExtension<cr>", desc = "Sort buffers" },
       { "<leader>b", "<cmd>BufferLinePick<cr>",            desc = "Pick buffer" },
     },

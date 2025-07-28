@@ -1,21 +1,14 @@
-Snacks = {}
-
 return {
   {
     "folke/snacks.nvim",
     keys = {
-      { "<C-q>",     function() Snacks.bufdelete() end,        desc = "Close buffer" },
-      { "<leader>q", function() Snacks.bufdelete.other() end,  desc = "Close other buffers" },
-      { "<leader>e", function() Snacks.explorer() end,         desc = "File explorer" },
-      { "<C-s>o",    function() Snacks.picker.pickers() end,   desc = "Pickers" },
-      { "<C-s>f",    function() Snacks.picker.files() end,     desc = "Files" },
-      { "<C-s>g",    function() Snacks.picker.grep() end,      desc = "Grep" },
-      { "<C-s>r",    function() Snacks.picker.recent() end,    desc = "Recents" },
-      { "<C-s>p",    function() Snacks.picker.projects() end,  desc = "Projects" },
-      { "<C-s>l",    function() Snacks.picker.git_log() end,   desc = "Commits" },
-      { "<C-s>h",    function() Snacks.picker.help() end,      desc = "Help" },
-      { "<C-s>c",    function() Snacks.picker.commands() end,  desc = "Commands" },
-      { "gG",        function() Snacks.picker.grep_word() end, desc = "Search word under cursor" },
+      { "<C-q>",     function() Snacks.bufdelete() end,       desc = "Close buffer" },
+      { "<leader>q", function() Snacks.bufdelete.other() end, desc = "Close other buffers" },
+      { "<leader>e", function() Snacks.explorer() end,        desc = "Open file explorer" },
+      { "<leader>o", function() Snacks.picker.pickers() end,  desc = "Open pickers" },
+      { "<leader>f", function() Snacks.picker.files() end,    desc = "Open file picker" },
+      { "<leader>/", function() Snacks.picker.grep() end,     desc = "Search in workspace" },
+      { "<leader>?", function() Snacks.picker.commands() end, desc = "Open command picker" },
     },
     priority = 1000,
     lazy = false,
@@ -30,7 +23,6 @@ return {
             { icon = " ", key = "e", desc = "New File", action = ":ene | startinsert" },
             { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.picker.files({ follow = true })" },
             { icon = " ", key = "r", desc = "Recents", action = ":lua Snacks.dashboard.pick('oldfiles')" },
-            { icon = " ", key = "s", desc = "Restore", action = ":lua require('persistence').load()" },
             { text = {} },
             { icon = " ", key = "c", desc = "Config", action = ":lua Snacks.picker.files({ cwd = vim.fn.stdpath('config') })" },
             { icon = "󰒲 ", key = "l", desc = "Lazy", action = ":Lazy" },
@@ -104,15 +96,6 @@ return {
         DEL  = { icon = " ", color = "#aabbdd", alt = { "DELETE", "TRASH", "TEMP" } }
       }
     },
-  },
-
-  {
-    "folke/persistence.nvim",
-    event = "BufReadPre",
-    keys = {
-      { "<leader>s", function() require("persistence").load({ last = true }) end, desc = "Restore session" },
-    },
-    opts = {},
   },
 
   {

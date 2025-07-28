@@ -41,6 +41,7 @@ if status is-interactive
   # alias
   alias vi  "nvim"
   alias vim "nvim"
+  alias hx  "helix"
   alias lg  "lazygit"
   alias lf  "lfcd"
   alias exa "exa -s type"
