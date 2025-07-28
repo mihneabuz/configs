@@ -46,7 +46,7 @@ M.on_attach = function(client, bufnr)
     vim.keymap.set(mode or "n", bind, cmd, opts)
   end
 
-  keymap("K", function() vim.lsp.buf.hover({ max_width = 82 }) end, "Hover doc")
+  keymap("<leader>k", function() vim.lsp.buf.hover({ max_width = 82 }) end, "Open hover doc")
 
   keymap("gd", vim.lsp.buf.definition, "Go to definition")
   keymap("gh", vim.lsp.buf.type_definition, "Go to type definition")
@@ -69,7 +69,7 @@ M.on_attach = function(client, bufnr)
   end
 
   if client:supports_method("textDocument/codeAction") then
-    keymap("<leader>ca", function() require("fastaction").code_action() end, "Code actions", { 'n', 'x' })
+    keymap("<leader>a", function() require("fastaction").code_action() end, "Code actions", { 'n', 'x' })
   end
 
   if client:supports_method("textDocument/documentHighlight") then
